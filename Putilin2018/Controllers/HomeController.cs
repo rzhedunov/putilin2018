@@ -15,14 +15,14 @@ namespace Putilin2018.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Страница описания моего приложения";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            //ViewBag.Message = "Мои контакты";
 
             return View();
         }
