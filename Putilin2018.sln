@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Putilin2018", "Putilin2018\Putilin2018.csproj", "{351C1DF7-61B0-471F-B4FF-7A4C8D7164EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Putilin2018.Tests", "Putilin2018.Tests\Putilin2018.Tests.csproj", "{A0A8423C-8D2A-400E-8B2B-434A48B95152}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{351C1DF7-61B0-471F-B4FF-7A4C8D7164EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{351C1DF7-61B0-471F-B4FF-7A4C8D7164EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{351C1DF7-61B0-471F-B4FF-7A4C8D7164EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{351C1DF7-61B0-471F-B4FF-7A4C8D7164EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0A8423C-8D2A-400E-8B2B-434A48B95152}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0A8423C-8D2A-400E-8B2B-434A48B95152}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0A8423C-8D2A-400E-8B2B-434A48B95152}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0A8423C-8D2A-400E-8B2B-434A48B95152}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
