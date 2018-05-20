@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Putilin2018
+namespace Putilin2018.Models
 {
     using System;
     using System.Collections.Generic;
