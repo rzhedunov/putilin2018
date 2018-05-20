@@ -1,0 +1,42 @@
+﻿@model Putilin2018.Models.Voditel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Voditel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.license_expire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.license_expire)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.categories)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.categories)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
