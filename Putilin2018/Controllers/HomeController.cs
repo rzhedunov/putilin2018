@@ -13,9 +13,15 @@ namespace Putilin2018.Controllers
             return View();
         }
 
+        public ActionResult Menu()
+        {
+            ViewBag.Message = "Меню приложения";
+            return View();
+        }
+
         public ActionResult About()
         {
-            ViewBag.Message = "Страница описания моего приложения";
+            ViewBag.Message = "О программе";
 
             return View();
         }
