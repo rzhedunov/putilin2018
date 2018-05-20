@@ -13,6 +13,7 @@ namespace Putilin2018.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Menu()
         {
             ViewBag.Message = "Меню приложения";
@@ -28,8 +29,6 @@ namespace Putilin2018.Controllers
 
         public ActionResult Contact()
         {
-            //ViewBag.Message = "Мои контакты";
-
             return View();
         }
     }

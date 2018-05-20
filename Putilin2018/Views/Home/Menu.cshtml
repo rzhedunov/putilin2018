@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Меню приложения:";
+}
+<h2>@ViewBag.Title</h2>
+@*<h3>@ViewBag.Message</h3>*@
+
+<div class="row">
+    <div class="col-md-4">
+
+        <h3>Основные действия:</h3>
+        <menu>
+            <li>Рейсы</li>
+            <li>Ремонты</li>
+            <li>Отчеты</li>
+        </menu>
+    </div>
+    <div class="col-md-4">
+        <h3>Справочники:</h3>
+        <menu>
+            <li>Группы задач</li>
+            <li>Задачи</li>
+            <li>Пункты регулярной доставки</li>
+            <li>@Html.ActionLink("Водители", "About", "Home")</li>
+            <li>Автопарк</li>
+            <li>Шаблон рейса</li>
+            <li>Получатели</li>
+        </menu>
+    </div>
+
+
+</div>
+
