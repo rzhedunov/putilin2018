@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Putilin2018.Models.Группы_задач>
+
+@{
+    ViewBag.Title = "Группы задач";
+}
+
+<h2>Группы задач</h2>
+
+<p>
+    @Html.ActionLink("Добавить", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Название_группы)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Примечание)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Название_группы)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Примечание)
+        </td>
+        <td>
+            @Html.ActionLink("Изменить", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Данные", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

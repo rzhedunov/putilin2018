@@ -17,7 +17,7 @@ namespace Putilin2018.Controllers
             return View();
         }
 
-        [Authorize]
+        //[Authorize]
         public ActionResult Menu()
         {
             ViewBag.Message = "Меню приложения";

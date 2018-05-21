@@ -1,0 +1,40 @@
+﻿@model Putilin2018.Models.Группы_задач
+
+@{
+    ViewBag.Title = "Удалить группу";
+}
+
+<h2>Удалить группу</h2>
+
+<h3>Вы действительно хотите удалить запись?</h3>
+<div>
+    <h4>Группы_задач</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Название_группы)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Название_группы)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Примечание)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Примечание)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Вернуться к списку", "Index")
+        </div>
+    }
+</div>
