@@ -26,5 +26,6 @@ namespace Putilin2018.Models
         }
     
         public virtual DbSet<Voditel> Voditel { get; set; }
+        public virtual DbSet<Группы_задач> Группы_задач { get; set; }
     }
 }

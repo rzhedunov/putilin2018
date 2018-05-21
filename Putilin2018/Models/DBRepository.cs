@@ -110,5 +110,76 @@ namespace Putilin2018.Models
             return res;
         }
         #endregion
+
+        #region Группы_задач
+        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        public List<Группы_задач> GetГруппы_задач()
+        {
+            var res = new List<Группы_задач>();
+            var key = "b_Группы_задач";
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (List<Группы_задач>)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Группы_задач.ToList();
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public Группы_задач GetГруппы_задач(int ID)
+        {
+            var res = new Группы_задач();
+            var key = "b_Группы_задач_Группы_задач" + ID;
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (Группы_задач)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Группы_задач.SingleOrDefault(x => x.Id == ID);
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public int SaveГруппы_задач(Группы_задач item)
+        {
+            if (item.Id == 0)
+            {
+                db.Группы_задач.Add(item); //Добавлена вместо AddObject
+                db.SaveChanges();
+            }
+            else
+            {
+                db.Группы_задач.Attach(db.Группы_задач.Single(x => x.Id == item.Id));
+                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                //db.Группы_задач.ApplyCurrentValues(item);
+                db.SaveChanges();
+            }
+            CacheManager.PurgeCacheItems("b_Группы_задач");
+            return item.Id;
+        }
+
+        public bool DeleteГруппы_задач(int id)
+        {
+            bool res = false;
+            var item = db.Группы_задач.FirstOrDefault(x => x.Id == id);
+            if (item == null)
+            {
+                db.Группы_задач.Remove(item);
+                db.SaveChanges();
+                res = true;
+            }
+            CacheManager.PurgeCacheItems("b_Группы_задач");
+            return res;
+        }
+        #endregion
     }
 }
