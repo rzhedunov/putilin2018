@@ -1,17 +1,17 @@
 ﻿@model Putilin2018.Models.Voditel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Параметры записи";
 }
 
-<h2>Details</h2>
+<h2>Данные водителя</h2>
 
 <div>
-    <h4>Voditel</h4>
+    <h4>Водитель</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.fio)
+            <label class="control-label col-md-2">ФИО</label>
         </dt>
 
         <dd>
@@ -19,7 +19,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.license_expire)
+            <label class="control-label col-md-2">Продлить права до</label>
         </dt>
 
         <dd>
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.categories)
+            <label class="control-label col-md-2">Категории</label>
         </dt>
 
         <dd>
@@ -37,6 +37,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Вернуться к списку", "Index")
 </p>

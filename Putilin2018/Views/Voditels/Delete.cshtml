@@ -1,18 +1,18 @@
 ﻿@model Putilin2018.Models.Voditel
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Удалить";
 }
 
-<h2>Delete</h2>
+<h2>Удаление</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Вы уверены, что хотите удалить запись?</h3>
 <div>
     <h4>Voditel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.fio)
+            <label class="control-label col-md-2">ФИО</label>
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.license_expire)
+            <label class="control-label col-md-2">Продлить права до</label>
         </dt>
 
         <dd>
@@ -28,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.categories)
+            <label class="control-label col-md-2">Категории</label>
         </dt>
 
         <dd>
@@ -41,8 +41,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Вернуться к списку", "Index")
         </div>
     }
 </div>

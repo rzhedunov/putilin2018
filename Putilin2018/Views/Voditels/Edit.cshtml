@@ -1,10 +1,10 @@
 ﻿@model Putilin2018.Models.Voditel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Редактировать";
 }
 
-<h2>Edit</h2>
+<h2>Редактировать</h2>
 
 
 @using (Html.BeginForm())
@@ -12,13 +12,13 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Voditel</h4>
+        <h4>Водитель</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.fio, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">ФИО</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.fio, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.fio, "", new { @class = "text-danger" })
@@ -26,7 +26,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.license_expire, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Продлить права до</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.license_expire, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.license_expire, "", new { @class = "text-danger" })
@@ -34,23 +34,26 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.categories, htmlAttributes: new { @class = "control-label col-md-2" })
+            @*@Html.LabelFor(model => model.categories, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2">Категории</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.categories, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.categories, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
+
     </div>
 }
+<div class="form-group">
+    @*<div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Сохранить" class="btn btn-default" />
+    </div>*@
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <div class="form-actions no-color">
+        <input type="submit" value="Сохранить" class="btn btn-default" /> |
+        @Html.ActionLink("Вернуться к списку", "Index")
+    </div>
 </div>
 
 @section Scripts {
