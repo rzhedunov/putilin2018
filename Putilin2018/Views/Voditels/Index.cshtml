@@ -1,27 +1,24 @@
 ﻿@model IEnumerable<Putilin2018.Models.Voditel>
 
 @{
-    ViewBag.Title = "Учет водителей";
+    ViewBag.Title = "Список";
 }
 
-<h2>Список водителей</h2>
+<h2>Список</h2>
 
 <p>
-    @Html.ActionLink("Добавить водителя", "Create")
+    @Html.ActionLink("Добавить", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @*@Html.DisplayNameFor(model => model.fio)*@
             <label class="control-label col-md-2">ФИО</label>
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.license_expire)*@
-            <label for="license_expire" class="control-label col-md-2">Срок действия прав до</label>
+            <label class="control-label col-md-2">Срок действия прав</label>
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.categories)*@
-            <label for="categories" class="control-label col-md-26">Категории</label>
+            <label class="control-label col-md-2">Категории</label>
         </th>
         <th></th>
     </tr>

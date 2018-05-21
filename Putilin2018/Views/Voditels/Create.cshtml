@@ -1,10 +1,10 @@
 ﻿@model Putilin2018.Models.Voditel
 
 @{
-    ViewBag.Title = "Добавить водителя";
+    ViewBag.Title = "Добавить";
 }
 
-<h2>Добавить водителя</h2>
+<h2>Добавить</h2>
 
 
 @using (Html.BeginForm()) 
@@ -16,7 +16,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            <label for="fio" class="control-label col-md-2">Фамилия</label>
+            <label class="control-label col-md-2">ФИО</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.fio, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.fio, "", new { @class = "text-danger" })
@@ -24,32 +24,32 @@
         </div>
 
         <div class="form-group">
-            <label for="license_expire" class="control-label col-md-2">Срок действия водительских прав</label>
+            <label class="control-label col-md-2">Срок действия прав</label>
             <div class="col-md-10">
                 @*@Html.EditorFor(model => model.license_expire, new { htmlAttributes = new { @class = "form-control" } })*@
-                @Html.EditorFor(model => model.license_expire, new { type = "datetime-local" })
+                @Html.EditorFor(model => model.license_expire, "{0:dd/MM/yyyy}", new { @class = "form-control", @type = "date" })
                 @Html.ValidationMessageFor(model => model.license_expire, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <label for="categories" class="control-label col-md-2">Водительские категории</label>
+            <label class="control-label col-md-2">Категории</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.categories, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.categories, new { htmlAttributes = new { @class = "form-control" }})
                 @Html.ValidationMessageFor(model => model.categories, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Создать" class="btn btn-default" />
+                <input type="submit" value="Добавить" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("К списку водителей", "Index")
+    @Html.ActionLink("Вернуться к списку", "Index")
 </div>
 
 @section Scripts {

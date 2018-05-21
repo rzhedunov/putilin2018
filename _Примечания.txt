@@ -1,4 +1,8 @@
+Простой label
+<label class="control-label col-md-2">ФИО</label>
+
 Для модели сущности
+using System.ComponentModel.DataAnnotations;
 [Display(Name = "The Display Name") DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yy H:mm:ss tt}"), DataType(DataType.Date)]
         public Nullable<System.DateTime> license_expire { get; set; }
         
@@ -21,3 +25,8 @@
             }
             return View(voditel);
         }
+        
+Обрезка текстового поля перед сохранением        
+тип_ТС.Название_типа = тип_ТС.Название_типа.Trim();
+
+@Html.TextBoxFor(model => model.BirthDate, new { type = "datetime-local"})        

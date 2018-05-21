@@ -11,12 +11,19 @@ namespace Putilin2018.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Voditel
     {
         public int Id { get; set; }
         public string fio { get; set; }
+
+        [Display(Name = "Срок действия прав")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
         public Nullable<System.DateTime> license_expire { get; set; }
+
         public string categories { get; set; }
     }
 }

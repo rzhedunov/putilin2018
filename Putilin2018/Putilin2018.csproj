@@ -287,11 +287,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Menu.cshtml" />
-    <Content Include="Views\Voditels\Create.cshtml" />
-    <Content Include="Views\Voditels\Delete.cshtml" />
-    <Content Include="Views\Voditels\Details.cshtml" />
-    <Content Include="Views\Voditels\Edit.cshtml" />
-    <Content Include="Views\Voditels\Index.cshtml" />
     <Content Include="Views\Группы_задач\Create.cshtml" />
     <Content Include="Views\Группы_задач\Delete.cshtml" />
     <Content Include="Views\Группы_задач\Details.cshtml" />
@@ -302,6 +297,11 @@
     <Content Include="Views\Тип_ТС\Details.cshtml" />
     <Content Include="Views\Тип_ТС\Edit.cshtml" />
     <Content Include="Views\Тип_ТС\Index.cshtml" />
+    <Content Include="Views\Voditels\Create.cshtml" />
+    <Content Include="Views\Voditels\Delete.cshtml" />
+    <Content Include="Views\Voditels\Details.cshtml" />
+    <Content Include="Views\Voditels\Edit.cshtml" />
+    <Content Include="Views\Voditels\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

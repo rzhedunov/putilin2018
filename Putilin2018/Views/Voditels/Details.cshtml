@@ -1,10 +1,10 @@
 ﻿@model Putilin2018.Models.Voditel
 
 @{
-    ViewBag.Title = "Параметры записи";
+    ViewBag.Title = "Данные";
 }
 
-<h2>Данные водителя</h2>
+<h2>Данные</h2>
 
 <div>
     <h4>Водитель</h4>
@@ -19,7 +19,7 @@
         </dd>
 
         <dt>
-            <label class="control-label col-md-2">Продлить права до</label>
+            <label class="control-label col-md-2">Срок действия прав</label>
         </dt>
 
         <dd>
@@ -37,6 +37,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Вернуться к списку", "Index")
 </p>
