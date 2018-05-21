@@ -29,4 +29,5 @@ using System.ComponentModel.DataAnnotations;
 Обрезка текстового поля перед сохранением        
 тип_ТС.Название_типа = тип_ТС.Название_типа.Trim();
 
-@Html.TextBoxFor(model => model.BirthDate, new { type = "datetime-local"})        
+@Html.TextBoxFor(model => model.BirthDate, new { type = "datetime-local"}) 
+       

@@ -11,12 +11,15 @@ namespace Putilin2018.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Voditel
+    using System.ComponentModel.DataAnnotations;
+
+    public partial class Пункт_доставки
     {
         public int Id { get; set; }
-        public string fio { get; set; }
-        public Nullable<System.DateTime> license_expire { get; set; }
-        public string categories { get; set; }
+        
+        [Display(Name = "Название пункта")]
+        public string Название_пункта { get; set; }
+        public string Адрес { get; set; }
+        public string Регулярность { get; set; }
     }
 }

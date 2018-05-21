@@ -22,6 +22,15 @@
           <Property Name="Название группы" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="Примечание" Type="nchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="Пункт доставки">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название пункта" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Адрес" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="Регулярность" Type="nchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Тип ТС">
           <Key>
             <PropertyRef Name="Id" />
@@ -32,6 +41,7 @@
         <EntityContainer Name="Хранилище MyDatabaseModelContainer">
           <EntitySet Name="Voditel" EntityType="Self.Voditel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Группы задач" EntityType="Self.Группы задач" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Пункт доставки" EntityType="Self.Пункт доставки" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Тип ТС" EntityType="Self.Тип ТС" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -55,6 +65,7 @@
           <EntitySet Name="Voditel" EntityType="Self.Voditel" />
           <EntitySet Name="Группы_задач" EntityType="MyDatabaseModel.Группы_задач" />
           <EntitySet Name="Тип_ТС" EntityType="MyDatabaseModel.Тип_ТС" />
+          <EntitySet Name="Пункт_доставки" EntityType="MyDatabaseModel.Пункт_доставки" />
         </EntityContainer>
         <EntityType Name="Группы_задач">
           <Key>
@@ -70,6 +81,15 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Название_типа" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Пункт_доставки">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название_пункта" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Адрес" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Регулярность" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -100,6 +120,16 @@
             <EntityTypeMapping TypeName="MyDatabaseModel.Тип_ТС">
               <MappingFragment StoreEntitySet="Тип ТС">
                 <ScalarProperty Name="Название_типа" ColumnName="Название типа" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Пункт_доставки">
+            <EntityTypeMapping TypeName="MyDatabaseModel.Пункт_доставки">
+              <MappingFragment StoreEntitySet="Пункт доставки">
+                <ScalarProperty Name="Регулярность" ColumnName="Регулярность" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+                <ScalarProperty Name="Название_пункта" ColumnName="Название пункта" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -175,6 +175,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\VoditelsController.cs" />
     <Compile Include="Controllers\Группы_задачController.cs" />
+    <Compile Include="Controllers\Пункт_доставкиController.cs" />
     <Compile Include="Controllers\Тип_ТСController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -203,6 +204,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Группы_задач.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Пункт_доставки.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Тип_ТС.cs">
@@ -302,6 +306,11 @@
     <Content Include="Views\Voditels\Details.cshtml" />
     <Content Include="Views\Voditels\Edit.cshtml" />
     <Content Include="Views\Voditels\Index.cshtml" />
+    <Content Include="Views\Пункт_доставки\Create.cshtml" />
+    <Content Include="Views\Пункт_доставки\Delete.cshtml" />
+    <Content Include="Views\Пункт_доставки\Details.cshtml" />
+    <Content Include="Views\Пункт_доставки\Edit.cshtml" />
+    <Content Include="Views\Пункт_доставки\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

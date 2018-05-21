@@ -251,5 +251,79 @@ namespace Putilin2018.Models
             return res;
         }
         #endregion
+
+        #region Пункт_доставки
+        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        public List<Пункт_доставки> GetПункт_доставки()
+        {
+            var res = new List<Пункт_доставки>();
+            var key = "b_Пункт_доставки";
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (List<Пункт_доставки>)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Пункт_доставки.ToList();
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public Пункт_доставки GetПункт_доставки(int ID)
+        {
+            var res = new Пункт_доставки();
+            var key = "b_Пункт_доставки_Пункт_доставки" + ID;
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (Пункт_доставки)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Пункт_доставки.SingleOrDefault(x => x.Id == ID);
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public int SaveПункт_доставки(Пункт_доставки item)
+        {
+            item.Название_пункта= item.Название_пункта.Trim();
+            item.Адрес= item.Адрес.Trim();
+            item.Регулярность= item.Регулярность.Trim();
+            if (item.Id == 0)
+            {
+                db.SaveChanges();
+            }
+            else
+            {
+                db.Пункт_доставки.Attach(db.Пункт_доставки.Single(x => x.Id == item.Id));
+                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            CacheManager.PurgeCacheItems("b_Пункт_доставки");
+            return item.Id;
+        }
+
+        public bool DeleteПункт_доставки(int id)
+        {
+            bool res = false;
+            var item = db.Пункт_доставки.FirstOrDefault(x => x.Id == id);
+            if (item == null)
+            {
+                db.Пункт_доставки.Remove(item);
+                db.SaveChanges();
+                res = true;
+            }
+            CacheManager.PurgeCacheItems("b_Пункт_доставки");
+            return res;
+        }
+        #endregion
+
+
     }
 }
