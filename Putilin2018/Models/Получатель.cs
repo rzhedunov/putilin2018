@@ -12,20 +12,14 @@ namespace Putilin2018.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Пункт_доставки
+    public partial class Получатель
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Пункт_доставки()
-        {
-            this.Получатель = new HashSet<Получатель>();
-        }
-    
         public int Id { get; set; }
-        public string Название_пункта { get; set; }
-        public string Адрес { get; set; }
-        public string Регулярность { get; set; }
+        public string ФИО { get; set; }
+        public string E_mail { get; set; }
+        public string Телефон { get; set; }
+        public int Пункт_доставкиID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Получатель> Получатель { get; set; }
+        public virtual Пункт_доставки Пункт_доставки { get; set; }
     }
 }
