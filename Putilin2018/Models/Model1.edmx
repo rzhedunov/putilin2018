@@ -22,9 +22,17 @@
           <Property Name="Название группы" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="Примечание" Type="nchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="Тип ТС">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название типа" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="Хранилище MyDatabaseModelContainer">
           <EntitySet Name="Voditel" EntityType="Self.Voditel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Группы задач" EntityType="Self.Группы задач" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Тип ТС" EntityType="Self.Тип ТС" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -46,6 +54,7 @@
         <EntityContainer Name="MyDatabaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Voditel" EntityType="Self.Voditel" />
           <EntitySet Name="Группы_задач" EntityType="MyDatabaseModel.Группы_задач" />
+          <EntitySet Name="Тип_ТС" EntityType="MyDatabaseModel.Тип_ТС" />
         </EntityContainer>
         <EntityType Name="Группы_задач">
           <Key>
@@ -54,6 +63,13 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Название_группы" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="Примечание" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Тип_ТС">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название_типа" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -76,6 +92,14 @@
               <MappingFragment StoreEntitySet="Группы задач">
                 <ScalarProperty Name="Примечание" ColumnName="Примечание" />
                 <ScalarProperty Name="Название_группы" ColumnName="Название группы" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Тип_ТС">
+            <EntityTypeMapping TypeName="MyDatabaseModel.Тип_ТС">
+              <MappingFragment StoreEntitySet="Тип ТС">
+                <ScalarProperty Name="Название_типа" ColumnName="Название типа" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

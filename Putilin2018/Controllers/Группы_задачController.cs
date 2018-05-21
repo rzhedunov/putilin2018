@@ -83,6 +83,8 @@ namespace Putilin2018.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(группы_задач).State = EntityState.Modified;
+                группы_задач.Название_группы = группы_задач.Название_группы.Trim();
+                группы_задач.Примечание= группы_задач.Примечание.Trim();
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

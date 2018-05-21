@@ -175,6 +175,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\VoditelsController.cs" />
     <Compile Include="Controllers\Группы_задачController.cs" />
+    <Compile Include="Controllers\Тип_ТСController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -202,6 +203,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Группы_задач.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Тип_ТС.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -293,6 +297,11 @@
     <Content Include="Views\Группы_задач\Details.cshtml" />
     <Content Include="Views\Группы_задач\Edit.cshtml" />
     <Content Include="Views\Группы_задач\Index.cshtml" />
+    <Content Include="Views\Тип_ТС\Create.cshtml" />
+    <Content Include="Views\Тип_ТС\Delete.cshtml" />
+    <Content Include="Views\Тип_ТС\Details.cshtml" />
+    <Content Include="Views\Тип_ТС\Edit.cshtml" />
+    <Content Include="Views\Тип_ТС\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

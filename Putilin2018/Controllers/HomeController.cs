@@ -21,7 +21,6 @@ namespace Putilin2018.Controllers
         public ActionResult Menu()
         {
             ViewBag.Message = "Меню приложения";
-            var z = db.GetVoditels(); 
             return View();
         }
 

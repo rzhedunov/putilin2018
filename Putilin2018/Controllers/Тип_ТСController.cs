@@ -10,109 +10,108 @@ using Putilin2018.Models;
 
 namespace Putilin2018.Controllers
 {
-    public class VoditelsController : Controller
+    public class Тип_ТСController : Controller
     {
         private MyDatabaseEntities db = new MyDatabaseEntities();
 
-        // GET: Voditels
+        // GET: Тип_ТС
         public ActionResult Index()
         {
-            return View(db.Voditel.ToList());
+            return View(db.Тип_ТС.ToList());
         }
 
-        // GET: Voditels/Details/5
+        // GET: Тип_ТС/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Voditel voditel = db.Voditel.Find(id);
-            if (voditel == null)
+            Тип_ТС тип_ТС = db.Тип_ТС.Find(id);
+            if (тип_ТС == null)
             {
                 return HttpNotFound();
             }
-            return View(voditel);
+            return View(тип_ТС);
         }
 
-        // GET: Voditels/Create
+        // GET: Тип_ТС/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Voditels/Create
+        // POST: Тип_ТС/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,fio,license_expire,categories")] Voditel voditel)
+        public ActionResult Create([Bind(Include = "Id,Название_типа")] Тип_ТС тип_ТС)
         {
             if (ModelState.IsValid)
             {
-                db.Voditel.Add(voditel);
+                db.Тип_ТС.Add(тип_ТС);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(voditel);
+            return View(тип_ТС);
         }
 
-        // GET: Voditels/Edit/5
+        // GET: Тип_ТС/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Voditel voditel = db.Voditel.Find(id);
-            if (voditel == null)
+            Тип_ТС тип_ТС = db.Тип_ТС.Find(id);
+            if (тип_ТС == null)
             {
                 return HttpNotFound();
             }
-            return View(voditel);
+            return View(тип_ТС);
         }
 
-        // POST: Voditels/Edit/5
+        // POST: Тип_ТС/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,fio,license_expire,categories")] Voditel voditel)
+        public ActionResult Edit([Bind(Include = "Id,Название_типа")] Тип_ТС тип_ТС)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(voditel).State = EntityState.Modified;
-                voditel.fio = voditel.fio.Trim();
-                voditel.categories = voditel.categories.Trim();
+                db.Entry(тип_ТС).State = EntityState.Modified;
+                тип_ТС.Название_типа = тип_ТС.Название_типа.Trim();
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(voditel);
+            return View(тип_ТС);
         }
 
-        // GET: Voditels/Delete/5
+        // GET: Тип_ТС/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Voditel voditel = db.Voditel.Find(id);
-            if (voditel == null)
+            Тип_ТС тип_ТС = db.Тип_ТС.Find(id);
+            if (тип_ТС == null)
             {
                 return HttpNotFound();
             }
-            return View(voditel);
+            return View(тип_ТС);
         }
 
-        // POST: Voditels/Delete/5
+        // POST: Тип_ТС/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Voditel voditel = db.Voditel.Find(id);
-            db.Voditel.Remove(voditel);
+            Тип_ТС тип_ТС = db.Тип_ТС.Find(id);
+            db.Тип_ТС.Remove(тип_ТС);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

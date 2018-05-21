@@ -181,5 +181,75 @@ namespace Putilin2018.Models
             return res;
         }
         #endregion
+
+        #region Тип_ТС
+        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        public List<Тип_ТС> GetТип_ТС()
+        {
+            var res = new List<Тип_ТС>();
+            var key = "b_Тип_ТС";
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (List<Тип_ТС>)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Тип_ТС.ToList();
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public Тип_ТС GetТип_ТС(int ID)
+        {
+            var res = new Тип_ТС();
+            var key = "b_Тип_ТС_Тип_ТС" + ID;
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (Тип_ТС)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Тип_ТС.SingleOrDefault(x => x.Id == ID);
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public int SaveТип_ТС(Тип_ТС item)
+        {
+            item.Название_типа = item.Название_типа.Trim();
+            if (item.Id == 0)
+            {
+                db.SaveChanges();
+            }
+            else
+            {
+                db.Тип_ТС.Attach(db.Тип_ТС.Single(x => x.Id == item.Id));
+                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            CacheManager.PurgeCacheItems("b_Тип_ТС");
+            return item.Id;
+        }
+
+        public bool DeleteТип_ТС(int id)
+        {
+            bool res = false;
+            var item = db.Тип_ТС.FirstOrDefault(x => x.Id == id);
+            if (item == null)
+            {
+                db.Тип_ТС.Remove(item);
+                db.SaveChanges();
+                res = true;
+            }
+            CacheManager.PurgeCacheItems("b_Тип_ТС");
+            return res;
+        }
+        #endregion
     }
 }

@@ -1,0 +1,23 @@
+Для модели сущности
+[Display(Name = "The Display Name") DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yy H:mm:ss tt}"), DataType(DataType.Date)]
+        public Nullable<System.DateTime> license_expire { get; set; }
+        
+Указание атрибута Datatype для поля будет генерировать input с type указанным атрибутом. 
+Поэтому, когда вы добавляете [DataType(DataType.Date)], создаваемый ввод будет выбором даты, 
+но если вы добавите [DataType(DataType.DateTime)], вход будет иметь тип datetime, 
+поэтому вы не получите отображаемого выбора. 
+
+При изменении текстовой записи не добавлять (пока) лишних символов, так как ASP.Net не обрезает прежний текст
+Надо ставить 
+        public ActionResult Edit([Bind(Include = "Id,fio,license_expire,categories")] Voditel voditel)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(voditel).State = EntityState.Modified;
+   ->             voditel.fio = voditel.fio.Trim();
+   ->             voditel.categories = voditel.categories.Trim();
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(voditel);
+        }
