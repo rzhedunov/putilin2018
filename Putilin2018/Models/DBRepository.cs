@@ -324,6 +324,76 @@ namespace Putilin2018.Models
         }
         #endregion
 
+        #region Получатель
+        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        public List<Получатель> GetПолучатель()
+        {
+            var res = new List<Получатель>();
+            var key = "b_Получатель";
 
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (List<Получатель>)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Получатель.ToList();
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public Получатель GetПолучатель(int ID)
+        {
+            var res = new Получатель();
+            var key = "b_Получатель_Получатель" + ID;
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (Получатель)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Получатель.SingleOrDefault(x => x.Id == ID);
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public int SaveПолучатель(Получатель item)
+        {
+            item.ФИО= item.ФИО.Trim();
+            item.E_mail= item.E_mail.Trim();
+            item.Телефон= item.Телефон.Trim();
+            if (item.Id == 0)
+            {
+                db.SaveChanges();
+            }
+            else
+            {
+                db.Получатель.Attach(db.Получатель.Single(x => x.Id == item.Id));
+                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            CacheManager.PurgeCacheItems("b_Получатель");
+            return item.Id;
+        }
+
+        public bool DeleteПолучатель(int id)
+        {
+            bool res = false;
+            var item = db.Получатель.FirstOrDefault(x => x.Id == id);
+            if (item == null)
+            {
+                db.Получатель.Remove(item);
+                db.SaveChanges();
+                res = true;
+            }
+            CacheManager.PurgeCacheItems("b_Получатель");
+            return res;
+        }
+        #endregion
     }
 }

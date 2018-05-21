@@ -11,11 +11,14 @@ namespace Putilin2018.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Получатель
     {
         public int Id { get; set; }
         public string ФИО { get; set; }
+
+        [Display(Name = "E-mail")]
         public string E_mail { get; set; }
         public string Телефон { get; set; }
         public int Пункт_доставкиID { get; set; }
