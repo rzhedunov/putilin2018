@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище MyDatabaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище zhedunov_v50caModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Voditel">
           <Key>
             <PropertyRef Name="Id" />
@@ -48,7 +48,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Название типа" Type="nchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Получател__Пункт__72C60C4A">
+        <Association Name="FK__Получател__Пункт__45BE5BA9">
           <End Role="Пункт доставки" Type="Self.Пункт доставки" Multiplicity="1" />
           <End Role="Получатель" Type="Self.Получатель" Multiplicity="*" />
           <ReferentialConstraint>
@@ -60,84 +60,70 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище MyDatabaseModelContainer">
+        <EntityContainer Name="Хранилище zhedunov_v50caModelContainer">
           <EntitySet Name="Voditel" EntityType="Self.Voditel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Группы задач" EntityType="Self.Группы задач" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Получатель" EntityType="Self.Получатель" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Пункт доставки" EntityType="Self.Пункт доставки" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Тип ТС" EntityType="Self.Тип ТС" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Получател__Пункт__72C60C4A" Association="Self.FK__Получател__Пункт__72C60C4A">
+          <AssociationSet Name="FK__Получател__Пункт__45BE5BA9" Association="Self.FK__Получател__Пункт__45BE5BA9">
             <End Role="Пункт доставки" EntitySet="Пункт доставки" />
             <End Role="Получатель" EntitySet="Получатель" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="MyDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="zhedunov_v50caModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Voditel">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fio" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" >
-            <Documentation>
-              <LongDescription>ФИО</LongDescription>
-            </Documentation>
-          </Property>
+          <Property Name="fio" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="license_expire" Type="DateTime" Precision="3" />
           <Property Name="categories" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="MyDatabaseEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Voditel" EntityType="Self.Voditel" />
-          <EntitySet Name="Группы_задач" EntityType="MyDatabaseModel.Группы_задач" />
-          <EntitySet Name="Тип_ТС" EntityType="MyDatabaseModel.Тип_ТС" />
-          <EntitySet Name="Пункт_доставки" EntityType="MyDatabaseModel.Пункт_доставки" />
-          <EntitySet Name="Получатель" EntityType="MyDatabaseModel.Получатель" />
-          <AssociationSet Name="FK__Получател__Пункт__72C60C4A" Association="MyDatabaseModel.FK__Получател__Пункт__72C60C4A">
-            <End Role="Пункт_доставки" EntitySet="Пункт_доставки" />
-            <End Role="Получатель" EntitySet="Получатель" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="Группы_задач">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Название_группы" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Название_группы" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Примечание" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Тип_ТС">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Название_типа" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Пункт_доставки">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Название_пункта" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="Адрес" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="Регулярность" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Получатель" Relationship="MyDatabaseModel.FK__Получател__Пункт__72C60C4A" FromRole="Пункт_доставки" ToRole="Получатель" />
         </EntityType>
         <EntityType Name="Получатель">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ФИО" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="E_mail" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="Телефон" Type="String" Nullable="false" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="ФИО" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="E_mail" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Телефон" Type="String" MaxLength="12" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Пункт_доставкиID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Пункт_доставки" Relationship="MyDatabaseModel.FK__Получател__Пункт__72C60C4A" FromRole="Получатель" ToRole="Пункт_доставки" />
+          <NavigationProperty Name="Пункт_доставки" Relationship="Self.FK__Получател__Пункт__45BE5BA9" FromRole="Получатель" ToRole="Пункт_доставки" />
         </EntityType>
-        <Association Name="FK__Получател__Пункт__72C60C4A">
-          <End Type="MyDatabaseModel.Пункт_доставки" Role="Пункт_доставки" Multiplicity="1" />
-          <End Type="MyDatabaseModel.Получатель" Role="Получатель" Multiplicity="*" />
+        <EntityType Name="Пункт_доставки">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название_пункта" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Адрес" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Регулярность" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Получатель" Relationship="Self.FK__Получател__Пункт__45BE5BA9" FromRole="Пункт_доставки" ToRole="Получатель" />
+        </EntityType>
+        <EntityType Name="Тип_ТС">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название_типа" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Получател__Пункт__45BE5BA9">
+          <End Role="Пункт_доставки" Type="Self.Пункт_доставки" Multiplicity="1" />
+          <End Role="Получатель" Type="Self.Получатель" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Пункт_доставки">
               <PropertyRef Name="Id" />
@@ -147,14 +133,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="MyDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Voditel" EntityType="Self.Voditel" />
+          <EntitySet Name="Группы_задач" EntityType="Self.Группы_задач" />
+          <EntitySet Name="Получатель" EntityType="Self.Получатель" />
+          <EntitySet Name="Пункт_доставки" EntityType="Self.Пункт_доставки" />
+          <EntitySet Name="Тип_ТС" EntityType="Self.Тип_ТС" />
+          <AssociationSet Name="FK__Получател__Пункт__45BE5BA9" Association="Self.FK__Получател__Пункт__45BE5BA9">
+            <End Role="Пункт_доставки" EntitySet="Пункт_доставки" />
+            <End Role="Получатель" EntitySet="Получатель" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище MyDatabaseModelContainer" CdmEntityContainer="MyDatabaseEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище zhedunov_v50caModelContainer" CdmEntityContainer="MyDatabaseEntities">
           <EntitySetMapping Name="Voditel">
-            <EntityTypeMapping TypeName="MyDatabaseModel.Voditel">
+            <EntityTypeMapping TypeName="zhedunov_v50caModel.Voditel">
               <MappingFragment StoreEntitySet="Voditel">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="fio" ColumnName="fio" />
@@ -164,40 +161,40 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Группы_задач">
-            <EntityTypeMapping TypeName="MyDatabaseModel.Группы_задач">
+            <EntityTypeMapping TypeName="zhedunov_v50caModel.Группы_задач">
               <MappingFragment StoreEntitySet="Группы задач">
-                <ScalarProperty Name="Примечание" ColumnName="Примечание" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Название_группы" ColumnName="Название группы" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Тип_ТС">
-            <EntityTypeMapping TypeName="MyDatabaseModel.Тип_ТС">
-              <MappingFragment StoreEntitySet="Тип ТС">
-                <ScalarProperty Name="Название_типа" ColumnName="Название типа" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Пункт_доставки">
-            <EntityTypeMapping TypeName="MyDatabaseModel.Пункт_доставки">
-              <MappingFragment StoreEntitySet="Пункт доставки">
-                <ScalarProperty Name="Регулярность" ColumnName="Регулярность" />
-                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
-                <ScalarProperty Name="Название_пункта" ColumnName="Название пункта" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Примечание" ColumnName="Примечание" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Получатель">
-            <EntityTypeMapping TypeName="MyDatabaseModel.Получатель">
+            <EntityTypeMapping TypeName="zhedunov_v50caModel.Получатель">
               <MappingFragment StoreEntitySet="Получатель">
-                <ScalarProperty Name="Пункт_доставкиID" ColumnName="Пункт доставкиID" />
-                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
-                <ScalarProperty Name="E_mail" ColumnName="E-mail" />
-                <ScalarProperty Name="ФИО" ColumnName="ФИО" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ФИО" ColumnName="ФИО" />
+                <ScalarProperty Name="E_mail" ColumnName="E-mail" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+                <ScalarProperty Name="Пункт_доставкиID" ColumnName="Пункт доставкиID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Пункт_доставки">
+            <EntityTypeMapping TypeName="zhedunov_v50caModel.Пункт_доставки">
+              <MappingFragment StoreEntitySet="Пункт доставки">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Название_пункта" ColumnName="Название пункта" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+                <ScalarProperty Name="Регулярность" ColumnName="Регулярность" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Тип_ТС">
+            <EntityTypeMapping TypeName="zhedunov_v50caModel.Тип_ТС">
+              <MappingFragment StoreEntitySet="Тип ТС">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Название_типа" ColumnName="Название типа" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

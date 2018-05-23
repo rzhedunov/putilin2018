@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5933c7bfe44949beaa55efd366d5c3ed" Name="Diagram1">
-        <EntityTypeShape EntityType="MyDatabaseModel.Voditel" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyDatabaseModel.Группы_задач" Width="1.625" PointX="3.375" PointY="0.75" />
-        <EntityTypeShape EntityType="MyDatabaseModel.Тип_ТС" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="MyDatabaseModel.Пункт_доставки" Width="2.125" PointX="3.375" PointY="3.75" />
-        <EntityTypeShape EntityType="MyDatabaseModel.Получатель" Width="1.5" PointX="6.75" PointY="3.625" />
-        <AssociationConnector Association="MyDatabaseModel.FK__Получател__Пункт__72C60C4A" />
+      <Diagram DiagramId="d1581be0e449400392cc28319fba55fa" Name="Diagram1">
+        <EntityTypeShape EntityType="zhedunov_v50caModel.Voditel" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="zhedunov_v50caModel.Группы_задач" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="zhedunov_v50caModel.Получатель" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="zhedunov_v50caModel.Пункт_доставки" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="zhedunov_v50caModel.Тип_ТС" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="zhedunov_v50caModel.FK__Получател__Пункт__45BE5BA9" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

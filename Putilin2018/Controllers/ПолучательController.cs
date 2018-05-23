@@ -15,6 +15,7 @@ namespace Putilin2018.Controllers
         private MyDatabaseEntities db = new MyDatabaseEntities();
 
         // GET: Получатель
+        [Authorize]
         public ActionResult Index()
         {
             var получатель = db.Получатель.Include(п => п.Пункт_доставки);

@@ -15,6 +15,7 @@ namespace Putilin2018.Controllers
         private MyDatabaseEntities db = new MyDatabaseEntities();
 
         // GET: Voditels
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.Voditel.ToList());
