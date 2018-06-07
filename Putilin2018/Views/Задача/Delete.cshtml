@@ -1,0 +1,50 @@
+﻿@model Putilin2018.Models.Задача
+
+@{
+    ViewBag.Title = "Удалить";
+}
+
+<h2>Удалить</h2>
+
+<h3>Вы уверены, что хотите удалить запись?</h3>
+<div>
+    <h4>Задача</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Название_задачи)*@
+            <label class="control-label col-md-2">Название задачи</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Название_задачи)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Группы_задач.Название_группы)*@
+            <label class="control-label col-md-2">Группа задач</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Группы_задач.Название_группы)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Примечание)*@
+            <label class="control-label col-md-2">Примечание</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Примечание)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Вернуться к списку", "Index")
+        </div>
+    }
+</div>

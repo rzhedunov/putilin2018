@@ -175,6 +175,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\VoditelsController.cs" />
     <Compile Include="Controllers\Группы_задачController.cs" />
+    <Compile Include="Controllers\ЗадачаController.cs" />
     <Compile Include="Controllers\ПолучательController.cs" />
     <Compile Include="Controllers\Пункт_доставкиController.cs" />
     <Compile Include="Controllers\Тип_ТСController.cs" />
@@ -205,6 +206,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Группы_задач.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Задача.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Получатель.cs">
@@ -249,6 +253,7 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\ToParking.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -320,6 +325,11 @@
     <Content Include="Views\Получатель\Details.cshtml" />
     <Content Include="Views\Получатель\Edit.cshtml" />
     <Content Include="Views\Получатель\Index.cshtml" />
+    <Content Include="Views\Задача\Create.cshtml" />
+    <Content Include="Views\Задача\Delete.cshtml" />
+    <Content Include="Views\Задача\Details.cshtml" />
+    <Content Include="Views\Задача\Edit.cshtml" />
+    <Content Include="Views\Задача\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

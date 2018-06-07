@@ -395,5 +395,78 @@ namespace Putilin2018.Models
             return res;
         }
         #endregion
+
+        //
+
+        #region Задача
+        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        public List<Задача> GetЗадача()
+        {
+            var res = new List<Задача>();
+            var key = "b_Задача";
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (List<Задача>)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Задача.ToList();
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public Задача GetЗадача(int ID)
+        {
+            var res = new Задача();
+            var key = "b_Задача_Задача" + ID;
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (Задача)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Задача.SingleOrDefault(x => x.Id == ID);
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public int SaveЗадача(Задача item)
+        {
+            item.Название_задачи = item.Название_задачи.Trim();
+            item.Примечание= item.Примечание.Trim();
+            if (item.Id == 0)
+            {
+                db.SaveChanges();
+            }
+            else
+            {
+                db.Задача.Attach(db.Задача.Single(x => x.Id == item.Id));
+                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            CacheManager.PurgeCacheItems("b_Задача");
+            return item.Id;
+        }
+
+        public bool DeleteЗадача(int id)
+        {
+            bool res = false;
+            var item = db.Задача.FirstOrDefault(x => x.Id == id);
+            if (item == null)
+            {
+                db.Задача.Remove(item);
+                db.SaveChanges();
+                res = true;
+            }
+            CacheManager.PurgeCacheItems("b_Задача");
+            return res;
+        }
+        #endregion
     }
 }

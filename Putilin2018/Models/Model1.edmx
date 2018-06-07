@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище zhedunov_v50caModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище zhedunov_v50caModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Voditel">
           <Key>
             <PropertyRef Name="Id" />
@@ -22,6 +22,15 @@
           <Property Name="Название группы" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="Примечание" Type="nchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="Задача">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название задачи" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Группа задачID" Type="int" Nullable="false" />
+          <Property Name="Примечание" Type="nchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="Получатель">
           <Key>
             <PropertyRef Name="Id" />
@@ -29,7 +38,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ФИО" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="E-mail" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="Телефон" Type="nchar" MaxLength="12" Nullable="false" />
+          <Property Name="Телефон" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="Пункт доставкиID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Пункт доставки">
@@ -48,6 +57,18 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Название типа" Type="nchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Задача__Группа з__540C7B00">
+          <End Role="Группы задач" Type="Self.Группы задач" Multiplicity="1" />
+          <End Role="Задача" Type="Self.Задача" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Группы задач">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Задача">
+              <PropertyRef Name="Группа задачID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Получател__Пункт__45BE5BA9">
           <End Role="Пункт доставки" Type="Self.Пункт доставки" Multiplicity="1" />
           <End Role="Получатель" Type="Self.Получатель" Multiplicity="*" />
@@ -63,16 +84,20 @@
         <EntityContainer Name="Хранилище zhedunov_v50caModelContainer">
           <EntitySet Name="Voditel" EntityType="Self.Voditel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Группы задач" EntityType="Self.Группы задач" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Задача" EntityType="Self.Задача" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Получатель" EntityType="Self.Получатель" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Пункт доставки" EntityType="Self.Пункт доставки" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Тип ТС" EntityType="Self.Тип ТС" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Задача__Группа з__540C7B00" Association="Self.FK__Задача__Группа з__540C7B00">
+            <End Role="Группы задач" EntitySet="Группы задач" />
+            <End Role="Задача" EntitySet="Задача" />
+          </AssociationSet>
           <AssociationSet Name="FK__Получател__Пункт__45BE5BA9" Association="Self.FK__Получател__Пункт__45BE5BA9">
             <End Role="Пункт доставки" EntitySet="Пункт доставки" />
             <End Role="Получатель" EntitySet="Получатель" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="zhedunov_v50caModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -92,6 +117,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Название_группы" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Примечание" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Задача" Relationship="zhedunov_v50caModel.FK__Задача__Группа_з__540C7B00" FromRole="Группы_задач" ToRole="Задача" />
         </EntityType>
         <EntityType Name="Получатель">
           <Key>
@@ -100,7 +126,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ФИО" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="E_mail" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Телефон" Type="String" MaxLength="12" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Телефон" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Пункт_доставкиID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Пункт_доставки" Relationship="Self.FK__Получател__Пункт__45BE5BA9" FromRole="Получатель" ToRole="Пункт_доставки" />
         </EntityType>
@@ -143,7 +169,34 @@
             <End Role="Пункт_доставки" EntitySet="Пункт_доставки" />
             <End Role="Получатель" EntitySet="Получатель" />
           </AssociationSet>
+          <EntitySet Name="Задача" EntityType="zhedunov_v50caModel.Задача" />
+          <AssociationSet Name="FK__Задача__Группа_з__540C7B00" Association="zhedunov_v50caModel.FK__Задача__Группа_з__540C7B00">
+            <End Role="Группы_задач" EntitySet="Группы_задач" />
+            <End Role="Задача" EntitySet="Задача" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Задача">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название_задачи" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Группа_задачID" Type="Int32" Nullable="false" />
+          <Property Name="Примечание" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Группы_задач" Relationship="zhedunov_v50caModel.FK__Задача__Группа_з__540C7B00" FromRole="Задача" ToRole="Группы_задач" />
+        </EntityType>
+        <Association Name="FK__Задача__Группа_з__540C7B00">
+          <End Type="zhedunov_v50caModel.Группы_задач" Role="Группы_задач" Multiplicity="1" />
+          <End Type="zhedunov_v50caModel.Задача" Role="Задача" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Группы_задач">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Задача">
+              <PropertyRef Name="Группа_задачID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -195,6 +248,16 @@
               <MappingFragment StoreEntitySet="Тип ТС">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Название_типа" ColumnName="Название типа" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Задача">
+            <EntityTypeMapping TypeName="zhedunov_v50caModel.Задача">
+              <MappingFragment StoreEntitySet="Задача">
+                <ScalarProperty Name="Примечание" ColumnName="Примечание" />
+                <ScalarProperty Name="Группа_задачID" ColumnName="Группа задачID" />
+                <ScalarProperty Name="Название_задачи" ColumnName="Название задачи" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

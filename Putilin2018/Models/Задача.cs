@@ -12,19 +12,13 @@ namespace Putilin2018.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Группы_задач
+    public partial class Задача
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Группы_задач()
-        {
-            this.Задача = new HashSet<Задача>();
-        }
-    
         public int Id { get; set; }
-        public string Название_группы { get; set; }
+        public string Название_задачи { get; set; }
+        public int Группа_задачID { get; set; }
         public string Примечание { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Задача> Задача { get; set; }
+        public virtual Группы_задач Группы_задач { get; set; }
     }
 }

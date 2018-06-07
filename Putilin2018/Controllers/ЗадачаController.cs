@@ -10,111 +10,112 @@ using Putilin2018.Models;
 
 namespace Putilin2018.Controllers
 {
-    public class Пункт_доставкиController : Controller
+    public class ЗадачаController : Controller
     {
         private MyDatabaseEntities db = new MyDatabaseEntities();
 
-        // GET: Пункт_доставки
-        //[Authorize]
+        // GET: Задача
         public ActionResult Index()
         {
-            return View(db.Пункт_доставки.ToList());
+            var задача = db.Задача.Include(з => з.Группы_задач);
+            return View(задача.ToList());
         }
 
-        // GET: Пункт_доставки/Details/5
+        // GET: Задача/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Пункт_доставки пункт_доставки = db.Пункт_доставки.Find(id);
-            if (пункт_доставки == null)
+            Задача задача = db.Задача.Find(id);
+            if (задача == null)
             {
                 return HttpNotFound();
             }
-            return View(пункт_доставки);
+            return View(задача);
         }
 
-        // GET: Пункт_доставки/Create
+        // GET: Задача/Create
         public ActionResult Create()
         {
+            ViewBag.Группа_задачID = new SelectList(db.Группы_задач, "Id", "Название_группы");
             return View();
         }
 
-        // POST: Пункт_доставки/Create
+        // POST: Задача/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Название_пункта,Адрес,Регулярность")] Пункт_доставки пункт_доставки)
+        public ActionResult Create([Bind(Include = "Id,Название_задачи,Группа_задачID,Примечание")] Задача задача)
         {
             if (ModelState.IsValid)
             {
-                db.Пункт_доставки.Add(пункт_доставки);
+                db.Задача.Add(задача);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(пункт_доставки);
+            ViewBag.Группа_задачID = new SelectList(db.Группы_задач, "Id", "Название_группы", задача.Группа_задачID);
+            return View(задача);
         }
 
-        // GET: Пункт_доставки/Edit/5
+        // GET: Задача/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Пункт_доставки пункт_доставки = db.Пункт_доставки.Find(id);
-            if (пункт_доставки == null)
+            Задача задача = db.Задача.Find(id);
+            if (задача == null)
             {
                 return HttpNotFound();
             }
-            return View(пункт_доставки);
+            ViewBag.Группа_задачID = new SelectList(db.Группы_задач, "Id", "Название_группы", задача.Группа_задачID);
+            return View(задача);
         }
 
-        // POST: Пункт_доставки/Edit/5
+        // POST: Задача/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Название_пункта,Адрес,Регулярность")] Пункт_доставки пункт_доставки)
+        public ActionResult Edit([Bind(Include = "Id,Название_задачи,Группа_задачID,Примечание")] Задача задача)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(пункт_доставки).State = EntityState.Modified;
-                пункт_доставки.Название_пункта= пункт_доставки.Название_пункта.Trim();
-                пункт_доставки.Адрес= пункт_доставки.Адрес.Trim();
-                пункт_доставки.Регулярность= пункт_доставки.Регулярность.Trim();
+                db.Entry(задача).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(пункт_доставки);
+            ViewBag.Группа_задачID = new SelectList(db.Группы_задач, "Id", "Название_группы", задача.Группа_задачID);
+            return View(задача);
         }
 
-        // GET: Пункт_доставки/Delete/5
+        // GET: Задача/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Пункт_доставки пункт_доставки = db.Пункт_доставки.Find(id);
-            if (пункт_доставки == null)
+            Задача задача = db.Задача.Find(id);
+            if (задача == null)
             {
                 return HttpNotFound();
             }
-            return View(пункт_доставки);
+            return View(задача);
         }
 
-        // POST: Пункт_доставки/Delete/5
+        // POST: Задача/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Пункт_доставки пункт_доставки = db.Пункт_доставки.Find(id);
-            db.Пункт_доставки.Remove(пункт_доставки);
+            Задача задача = db.Задача.Find(id);
+            db.Задача.Remove(задача);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

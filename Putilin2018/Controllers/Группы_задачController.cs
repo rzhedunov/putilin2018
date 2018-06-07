@@ -15,7 +15,7 @@ namespace Putilin2018.Controllers
         private MyDatabaseEntities db = new MyDatabaseEntities();
 
         // GET: Группы_задач
-        [Authorize]
+        //[Authorize]
         public ActionResult Index()
         {
             return View(db.Группы_задач.ToList());

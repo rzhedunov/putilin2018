@@ -15,7 +15,7 @@ namespace Putilin2018.Controllers
         private MyDatabaseEntities db = new MyDatabaseEntities();
 
         // GET: Тип_ТС
-        [Authorize]
+        //[Authorize]
         public ActionResult Index()
         {
             return View(db.Тип_ТС.ToList());
