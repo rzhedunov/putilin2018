@@ -396,8 +396,6 @@ namespace Putilin2018.Models
         }
         #endregion
 
-        //
-
         #region Задача
         [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
         public List<Задача> GetЗадача()
@@ -468,5 +466,80 @@ namespace Putilin2018.Models
             return res;
         }
         #endregion
+
+        #region Автомобиль
+        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        public List<Автомобиль> GetАвтомобиль()
+        {
+            var res = new List<Автомобиль>();
+            var key = "b_Автомобиль";
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (List<Автомобиль>)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Автомобиль.ToList();
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public Автомобиль GetАвтомобиль(int ID)
+        {
+            var res = new Автомобиль();
+            var key = "b_Автомобиль_Автомобиль" + ID;
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (Автомобиль)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Автомобиль.SingleOrDefault(x => x.Id == ID);
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public int SaveАвтомобиль(Автомобиль item)
+        {
+            item.Название_автомобиля = item.Название_автомобиля.Trim();
+            item.Госномер= item.Госномер.Trim();
+            item.Примечание = item.Примечание.Trim();
+            if (item.Id == 0)
+            {
+                db.SaveChanges();
+            }
+            else
+            {
+                db.Автомобиль.Attach(db.Автомобиль.Single(x => x.Id == item.Id));
+                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            CacheManager.PurgeCacheItems("b_Автомобиль");
+            return item.Id;
+        }
+
+        public bool DeleteАвтомобиль(int id)
+        {
+            bool res = false;
+            var item = db.Автомобиль.FirstOrDefault(x => x.Id == id);
+            if (item == null)
+            {
+                db.Автомобиль.Remove(item);
+                db.SaveChanges();
+                res = true;
+            }
+            CacheManager.PurgeCacheItems("b_Автомобиль");
+            return res;
+        }
+        #endregion
+
+
+
     }
 }

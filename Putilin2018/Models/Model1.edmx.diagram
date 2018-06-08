@@ -13,6 +13,8 @@
         <AssociationConnector Association="zhedunov_v50caModel.FK__Получател__Пункт__45BE5BA9" ManuallyRouted="false" />
         <EntityTypeShape EntityType="zhedunov_v50caModel.Задача" Width="1.5" PointX="7.125" PointY="3.5" />
         <AssociationConnector Association="zhedunov_v50caModel.FK__Задача__Группа_з__540C7B00" />
+        <EntityTypeShape EntityType="zhedunov_v50caModel.Автомобиль" Width="1.5" PointX="2.875" PointY="3.625" />
+        <AssociationConnector Association="zhedunov_v50caModel.FK__Автомобил__Тип_Т__56E8E7AB" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

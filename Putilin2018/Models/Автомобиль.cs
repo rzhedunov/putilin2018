@@ -12,18 +12,14 @@ namespace Putilin2018.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Тип_ТС
+    public partial class Автомобиль
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Тип_ТС()
-        {
-            this.Автомобиль = new HashSet<Автомобиль>();
-        }
-    
         public int Id { get; set; }
-        public string Название_типа { get; set; }
+        public string Название_автомобиля { get; set; }
+        public string Госномер { get; set; }
+        public string Примечание { get; set; }
+        public int Тип_ТСID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Автомобиль> Автомобиль { get; set; }
+        public virtual Тип_ТС Тип_ТС { get; set; }
     }
 }

@@ -31,5 +31,6 @@ namespace Putilin2018.Models
         public virtual DbSet<Пункт_доставки> Пункт_доставки { get; set; }
         public virtual DbSet<Тип_ТС> Тип_ТС { get; set; }
         public virtual DbSet<Задача> Задача { get; set; }
+        public virtual DbSet<Автомобиль> Автомобиль { get; set; }
     }
 }

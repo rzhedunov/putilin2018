@@ -14,6 +14,16 @@
           <Property Name="license_expire" Type="datetime" />
           <Property Name="categories" Type="nchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="Автомобиль">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название автомобиля" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Госномер" Type="nchar" MaxLength="20" />
+          <Property Name="Примечание" Type="nchar" MaxLength="100" />
+          <Property Name="Тип ТСID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Группы задач">
           <Key>
             <PropertyRef Name="Id" />
@@ -57,6 +67,18 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Название типа" Type="nchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Автомобил__Тип Т__56E8E7AB">
+          <End Role="Тип ТС" Type="Self.Тип ТС" Multiplicity="1" />
+          <End Role="Автомобиль" Type="Self.Автомобиль" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тип ТС">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Автомобиль">
+              <PropertyRef Name="Тип ТСID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Задача__Группа з__540C7B00">
           <End Role="Группы задач" Type="Self.Группы задач" Multiplicity="1" />
           <End Role="Задача" Type="Self.Задача" Multiplicity="*" />
@@ -83,11 +105,16 @@
         </Association>
         <EntityContainer Name="Хранилище zhedunov_v50caModelContainer">
           <EntitySet Name="Voditel" EntityType="Self.Voditel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Автомобиль" EntityType="Self.Автомобиль" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Группы задач" EntityType="Self.Группы задач" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Задача" EntityType="Self.Задача" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Получатель" EntityType="Self.Получатель" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Пункт доставки" EntityType="Self.Пункт доставки" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Тип ТС" EntityType="Self.Тип ТС" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Автомобил__Тип Т__56E8E7AB" Association="Self.FK__Автомобил__Тип Т__56E8E7AB">
+            <End Role="Тип ТС" EntitySet="Тип ТС" />
+            <End Role="Автомобиль" EntitySet="Автомобиль" />
+          </AssociationSet>
           <AssociationSet Name="FK__Задача__Группа з__540C7B00" Association="Self.FK__Задача__Группа з__540C7B00">
             <End Role="Группы задач" EntitySet="Группы задач" />
             <End Role="Задача" EntitySet="Задача" />
@@ -146,6 +173,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Название_типа" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Автомобиль" Relationship="zhedunov_v50caModel.FK__Автомобил__Тип_Т__56E8E7AB" FromRole="Тип_ТС" ToRole="Автомобиль" />
         </EntityType>
         <Association Name="FK__Получател__Пункт__45BE5BA9">
           <End Role="Пункт_доставки" Type="Self.Пункт_доставки" Multiplicity="1" />
@@ -174,6 +202,11 @@
             <End Role="Группы_задач" EntitySet="Группы_задач" />
             <End Role="Задача" EntitySet="Задача" />
           </AssociationSet>
+          <EntitySet Name="Автомобиль" EntityType="zhedunov_v50caModel.Автомобиль" />
+          <AssociationSet Name="FK__Автомобил__Тип_Т__56E8E7AB" Association="zhedunov_v50caModel.FK__Автомобил__Тип_Т__56E8E7AB">
+            <End Role="Тип_ТС" EntitySet="Тип_ТС" />
+            <End Role="Автомобиль" EntitySet="Автомобиль" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Задача">
           <Key>
@@ -194,6 +227,29 @@
             </Principal>
             <Dependent Role="Задача">
               <PropertyRef Name="Группа_задачID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Автомобиль">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название_автомобиля" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Госномер" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Примечание" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Тип_ТСID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Тип_ТС" Relationship="zhedunov_v50caModel.FK__Автомобил__Тип_Т__56E8E7AB" FromRole="Автомобиль" ToRole="Тип_ТС" />
+        </EntityType>
+        <Association Name="FK__Автомобил__Тип_Т__56E8E7AB">
+          <End Type="zhedunov_v50caModel.Тип_ТС" Role="Тип_ТС" Multiplicity="1" />
+          <End Type="zhedunov_v50caModel.Автомобиль" Role="Автомобиль" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тип_ТС">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Автомобиль">
+              <PropertyRef Name="Тип_ТСID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -257,6 +313,17 @@
                 <ScalarProperty Name="Примечание" ColumnName="Примечание" />
                 <ScalarProperty Name="Группа_задачID" ColumnName="Группа задачID" />
                 <ScalarProperty Name="Название_задачи" ColumnName="Название задачи" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Автомобиль">
+            <EntityTypeMapping TypeName="zhedunov_v50caModel.Автомобиль">
+              <MappingFragment StoreEntitySet="Автомобиль">
+                <ScalarProperty Name="Тип_ТСID" ColumnName="Тип ТСID" />
+                <ScalarProperty Name="Примечание" ColumnName="Примечание" />
+                <ScalarProperty Name="Госномер" ColumnName="Госномер" />
+                <ScalarProperty Name="Название_автомобиля" ColumnName="Название автомобиля" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -1,0 +1,57 @@
+﻿@model Putilin2018.Models.Автомобиль
+
+@{
+    ViewBag.Title = "Данные";
+}
+
+<h2>Данные</h2>
+
+<div>
+    <h4>Автомобиль</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Название_автомобиля)*@
+            <label class="control-label col-md-2">Название автомобиля</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Название_автомобиля)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Тип_ТС.Название_типа)*@
+            <label class="control-label col-md-2">Тип</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Тип_ТС.Название_типа)
+        </dd>
+
+        <dt>
+        @*    @Html.DisplayNameFor(model => model.Госномер)*@
+            <label class="control-label col-md-2">Госномер</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Госномер)
+        </dd>
+
+        <dt>
+          @*  @Html.DisplayNameFor(model => model.Примечание)*@
+            <label class="control-label col-md-2">Примечание</label>
+
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Примечание)
+        </dd>
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Вернуться к списку", "Index")
+</p>
