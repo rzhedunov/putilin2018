@@ -12,19 +12,17 @@ namespace Putilin2018.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Маршрут
+    public partial class Пункты_регулярного_маршрута
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Маршрут()
-        {
-            this.Пункты_регулярного_маршрута = new HashSet<Пункты_регулярного_маршрута>();
-        }
-    
         public int Id { get; set; }
-        public string Название_маршрута { get; set; }
+        public int МаршрутID { get; set; }
+        public int Пункт_доставкиID { get; set; }
+        public int ЗадачаID { get; set; }
+        public Nullable<System.TimeSpan> Время_плановое { get; set; }
         public string Примечание { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Пункты_регулярного_маршрута> Пункты_регулярного_маршрута { get; set; }
+        public virtual Задача Задача { get; set; }
+        public virtual Маршрут Маршрут { get; set; }
+        public virtual Пункт_доставки Пункт_доставки { get; set; }
     }
 }

@@ -31,7 +31,9 @@
         <td>
             @Html.ActionLink("Изменить", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Данные", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Удалить", "Delete", new { id=item.Id })
+            @Html.ActionLink("Удалить", "Delete", new { id = item.Id })|
+            @*@Html.ActionLink("Пункты", "GetByMarshroot", "Пункты_регулярного_маршрута", new { id = item.Id }, new { target = "_blank" })*@
+            @Html.ActionLink("Пункты", "Index", "Пункты_регулярного_маршрута", new { id=item.Id}, new { target = "_blank" } )
         </td>
     </tr>
 }

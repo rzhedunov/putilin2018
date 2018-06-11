@@ -18,6 +18,7 @@ namespace Putilin2018.Models
         public Пункт_доставки()
         {
             this.Получатель = new HashSet<Получатель>();
+            this.Пункты_регулярного_маршрута = new HashSet<Пункты_регулярного_маршрута>();
         }
     
         public int Id { get; set; }
@@ -27,5 +28,7 @@ namespace Putilin2018.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Получатель> Получатель { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Пункты_регулярного_маршрута> Пункты_регулярного_маршрута { get; set; }
     }
 }

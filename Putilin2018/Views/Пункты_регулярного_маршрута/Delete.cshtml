@@ -1,0 +1,64 @@
+﻿@model Putilin2018.Models.Пункты_регулярного_маршрута
+
+@{
+    ViewBag.Title = "Удалить";
+}
+
+<h2>Удалить</h2>
+
+<h3>Вы уверены, что хотите удалить запись?</h3>
+<div>
+    <h4>Пункты_регулярного_маршрута</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Время_плановое)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Время_плановое)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Примечание)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Примечание)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Задача.Название_задачи)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Задача.Название_задачи)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Маршрут.Название_маршрута)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Маршрут.Название_маршрута)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Пункт_доставки.Название_пункта)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Пункт_доставки.Название_пункта)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Вернуться к списку", "Index")
+        </div>
+    }
+</div>

@@ -180,6 +180,7 @@
     <Compile Include="Controllers\МаршрутController.cs" />
     <Compile Include="Controllers\ПолучательController.cs" />
     <Compile Include="Controllers\Пункт_доставкиController.cs" />
+    <Compile Include="Controllers\Пункты_регулярного_маршрутаController.cs" />
     <Compile Include="Controllers\Тип_ТСController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -223,6 +224,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Пункт_доставки.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Пункты_регулярного_маршрута.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Тип_ТС.cs">
@@ -348,6 +352,12 @@
     <Content Include="Views\Маршрут\Details.cshtml" />
     <Content Include="Views\Маршрут\Edit.cshtml" />
     <Content Include="Views\Маршрут\Index.cshtml" />
+    <Content Include="Views\Пункты_регулярного_маршрута\Create.cshtml" />
+    <Content Include="Views\Пункты_регулярного_маршрута\Delete.cshtml" />
+    <Content Include="Views\Пункты_регулярного_маршрута\Details.cshtml" />
+    <Content Include="Views\Пункты_регулярного_маршрута\Edit.cshtml" />
+    <Content Include="Views\Пункты_регулярного_маршрута\Index.cshtml" />
+    <Content Include="Views\Пункты_регулярного_маршрута\GetByMarshroot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -610,5 +610,78 @@ namespace Putilin2018.Models
         }
         #endregion
 
+        #region Пункты_регулярного_маршрута
+        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        public List<Пункты_регулярного_маршрута> GetПункты_регулярного_маршрута()
+        {
+            var res = new List<Пункты_регулярного_маршрута>();
+            var key = "b_Пункты_регулярного_маршрута";
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (List<Пункты_регулярного_маршрута>)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Пункты_регулярного_маршрута.ToList();
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public Пункты_регулярного_маршрута GetПункты_регулярного_маршрута(int ID)
+        {
+            var res = new Пункты_регулярного_маршрута();
+            var key = "b_Пункты_регулярного_маршрута_Пункты_регулярного_маршрута" + ID;
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (Пункты_регулярного_маршрута)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Пункты_регулярного_маршрута.SingleOrDefault(x => x.Id == ID);
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public int SaveПункты_регулярного_маршрута(Пункты_регулярного_маршрута item)
+        {
+            item.Примечание = item.Примечание.Trim();
+            if (item.Id == 0)
+            {
+                db.SaveChanges();
+            }
+            else
+            {
+                db.Пункты_регулярного_маршрута.Attach(db.Пункты_регулярного_маршрута.Single(x => x.Id == item.Id));
+                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            CacheManager.PurgeCacheItems("b_Пункты_регулярного_маршрута");
+            return item.Id;
+        }
+
+        public bool DeleteПункты_регулярного_маршрута(int id)
+        {
+            bool res = false;
+            var item = db.Пункты_регулярного_маршрута.FirstOrDefault(x => x.Id == id);
+            if (item == null)
+            {
+                db.Пункты_регулярного_маршрута.Remove(item);
+                db.SaveChanges();
+                res = true;
+            }
+            CacheManager.PurgeCacheItems("b_Пункты_регулярного_маршрута");
+            return res;
+        }
+        #endregion
+
+
+
+
     }
 }

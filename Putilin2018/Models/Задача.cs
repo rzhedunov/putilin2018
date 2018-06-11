@@ -14,11 +14,19 @@ namespace Putilin2018.Models
     
     public partial class Задача
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Задача()
+        {
+            this.Пункты_регулярного_маршрута = new HashSet<Пункты_регулярного_маршрута>();
+        }
+    
         public int Id { get; set; }
         public string Название_задачи { get; set; }
         public int Группа_задачID { get; set; }
         public string Примечание { get; set; }
     
         public virtual Группы_задач Группы_задач { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Пункты_регулярного_маршрута> Пункты_регулярного_маршрута { get; set; }
     }
 }
