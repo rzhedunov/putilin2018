@@ -539,7 +539,76 @@ namespace Putilin2018.Models
         }
         #endregion
 
+        #region Маршрут
+        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        public List<Маршрут> GetМаршрут()
+        {
+            var res = new List<Маршрут>();
+            var key = "b_Маршрут";
 
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (List<Маршрут>)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Маршрут.ToList();
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public Маршрут GetМаршрут(int ID)
+        {
+            var res = new Маршрут();
+            var key = "b_Маршрут_Маршрут" + ID;
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (Маршрут)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Маршрут.SingleOrDefault(x => x.Id == ID);
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public int SaveМаршрут(Маршрут item)
+        {
+            item.Название_маршрута = item.Название_маршрута.Trim();
+            item.Примечание = item.Примечание.Trim();
+            if (item.Id == 0)
+            {
+                db.SaveChanges();
+            }
+            else
+            {
+                db.Маршрут.Attach(db.Маршрут.Single(x => x.Id == item.Id));
+                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            CacheManager.PurgeCacheItems("b_Маршрут");
+            return item.Id;
+        }
+
+        public bool DeleteМаршрут(int id)
+        {
+            bool res = false;
+            var item = db.Маршрут.FirstOrDefault(x => x.Id == id);
+            if (item == null)
+            {
+                db.Маршрут.Remove(item);
+                db.SaveChanges();
+                res = true;
+            }
+            CacheManager.PurgeCacheItems("b_Маршрут");
+            return res;
+        }
+        #endregion
 
     }
 }

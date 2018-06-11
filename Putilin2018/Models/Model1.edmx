@@ -41,6 +41,14 @@
           <Property Name="Группа задачID" Type="int" Nullable="false" />
           <Property Name="Примечание" Type="nchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="Маршрут">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название маршрута" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Примечание" Type="nchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="Получатель">
           <Key>
             <PropertyRef Name="Id" />
@@ -108,6 +116,7 @@
           <EntitySet Name="Автомобиль" EntityType="Self.Автомобиль" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Группы задач" EntityType="Self.Группы задач" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Задача" EntityType="Self.Задача" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Маршрут" EntityType="Self.Маршрут" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Получатель" EntityType="Self.Получатель" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Пункт доставки" EntityType="Self.Пункт доставки" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Тип ТС" EntityType="Self.Тип ТС" Schema="dbo" store:Type="Tables" />
@@ -207,6 +216,7 @@
             <End Role="Тип_ТС" EntitySet="Тип_ТС" />
             <End Role="Автомобиль" EntitySet="Автомобиль" />
           </AssociationSet>
+          <EntitySet Name="Маршрут" EntityType="zhedunov_v50caModel.Маршрут" />
         </EntityContainer>
         <EntityType Name="Задача">
           <Key>
@@ -253,6 +263,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Маршрут">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название_маршрута" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Примечание" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -324,6 +342,15 @@
                 <ScalarProperty Name="Примечание" ColumnName="Примечание" />
                 <ScalarProperty Name="Госномер" ColumnName="Госномер" />
                 <ScalarProperty Name="Название_автомобиля" ColumnName="Название автомобиля" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Маршрут">
+            <EntityTypeMapping TypeName="zhedunov_v50caModel.Маршрут">
+              <MappingFragment StoreEntitySet="Маршрут">
+                <ScalarProperty Name="Примечание" ColumnName="Примечание" />
+                <ScalarProperty Name="Название_маршрута" ColumnName="Название маршрута" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

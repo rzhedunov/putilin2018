@@ -5,16 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d1581be0e449400392cc28319fba55fa" Name="Diagram1">
-        <EntityTypeShape EntityType="zhedunov_v50caModel.Voditel" Width="1.5" PointX="5" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="zhedunov_v50caModel.Группы_задач" Width="1.5" PointX="7.125" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="zhedunov_v50caModel.Получатель" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="zhedunov_v50caModel.Пункт_доставки" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="zhedunov_v50caModel.Тип_ТС" Width="1.5" PointX="2.875" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="zhedunov_v50caModel.Voditel" Width="1.5" PointX="8.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="zhedunov_v50caModel.Группы_задач" Width="1.5" PointX="10.875" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="zhedunov_v50caModel.Получатель" Width="1.5" PointX="4.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="zhedunov_v50caModel.Пункт_доставки" Width="1.5" PointX="4.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="zhedunov_v50caModel.Тип_ТС" Width="1.5" PointX="6.625" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="zhedunov_v50caModel.FK__Получател__Пункт__45BE5BA9" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="zhedunov_v50caModel.Задача" Width="1.5" PointX="7.125" PointY="3.5" />
+        <EntityTypeShape EntityType="zhedunov_v50caModel.Задача" Width="1.5" PointX="10.875" PointY="3.5" />
         <AssociationConnector Association="zhedunov_v50caModel.FK__Задача__Группа_з__540C7B00" />
-        <EntityTypeShape EntityType="zhedunov_v50caModel.Автомобиль" Width="1.5" PointX="2.875" PointY="3.625" />
+        <EntityTypeShape EntityType="zhedunov_v50caModel.Автомобиль" Width="1.5" PointX="6.625" PointY="3.625" />
         <AssociationConnector Association="zhedunov_v50caModel.FK__Автомобил__Тип_Т__56E8E7AB" />
+        <EntityTypeShape EntityType="zhedunov_v50caModel.Маршрут" Width="1.5" PointX="0.5" PointY="1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
