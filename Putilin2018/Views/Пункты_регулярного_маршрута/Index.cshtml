@@ -7,7 +7,7 @@
 <h2>Список</h2>
 
 <p>
-    @Html.ActionLink("Добавить", "Create")
+    @Html.ActionLink("Добавить", "Create", new {МаршрутID = @ViewBag.МаршрутID })
 </p>
 <table class="table">
     <tr>
@@ -47,12 +47,18 @@
             @Html.DisplayFor(modelItem => item.Пункт_доставки.Название_пункта)
         </td>
         <td>
-            @Html.ActionLink("Изменить", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Данные", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Удалить", "Delete", new { id=item.Id })
+            @Html.ActionLink("Изменить", "Edit", new { id = item.Id, МаршрутID = @ViewBag.МаршрутID }) |
+            @Html.ActionLink("Данные", "Details", new { id=item.Id, МаршрутID = @ViewBag.МаршрутID }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.Id, МаршрутID = @ViewBag.МаршрутID })
         </td>
     </tr>
 }
 
+
+
 </table>
 <p>@ViewBag.Message2</p>
+
+<p>
+    @Html.ActionLink("Вернуться к списку маршрутов", "Index", "Маршрут")
+</p>
