@@ -36,14 +36,6 @@ namespace Putilin2018.Controllers
             {
                 ViewBag.Message2 = "Нет пунктов назначения! ";
             }
-
-            //var пункты_регулярного_маршрута = db.Пункты_регулярного_маршрута.Include(п => п.Задача).Include(п => п.Маршрут).Include(п => п.Пункт_доставки);
-
-            //List<Пункты_регулярного_маршрута> пункты_регулярного_маршрута2 = new List<Пункты_регулярного_маршрута>();
-            //var пункты_регулярного_маршрута2 = db.Пункты_регулярного_маршрута.Where(x => x.Маршрут.Id.Equals(z)).ToList();
-            //ViewBag.Message = "Your application description page. " + db.GetStudents().Count.ToString();
-
-
             return View(пункты_регулярного_маршрута);
         }
 
@@ -109,7 +101,7 @@ namespace Putilin2018.Controllers
             }
             ViewBag.МаршрутID = МаршрутID;
             ViewBag.ЗадачаID = new SelectList(db.Задача, "Id", "Название_задачи", пункты_регулярного_маршрута.ЗадачаID);
-            ViewBag.МаршрутID = new SelectList(db.Маршрут, "Id", "Название_маршрута", пункты_регулярного_маршрута.МаршрутID);
+            //ViewBag.МаршрутID = new SelectList(db.Маршрут, "Id", "Название_маршрута", пункты_регулярного_маршрута.МаршрутID);
             ViewBag.Пункт_доставкиID = new SelectList(db.Пункт_доставки, "Id", "Название_пункта", пункты_регулярного_маршрута.Пункт_доставкиID);
             return View(пункты_регулярного_маршрута);
         }
@@ -119,16 +111,17 @@ namespace Putilin2018.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,МаршрутID,Пункт_доставкиID,ЗадачаID,Время_плановое,Примечание")] Пункты_регулярного_маршрута пункты_регулярного_маршрута)
+        public ActionResult Edit([Bind(Include = "Id,МаршрутID,Пункт_доставкиID,ЗадачаID,Время_плановое,Примечание")] Пункты_регулярного_маршрута пункты_регулярного_маршрута, int? МаршрутID)
         {
+            ViewBag.МаршрутID = МаршрутID;
             if (ModelState.IsValid)
             {
                 db.Entry(пункты_регулярного_маршрута).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                return RedirectToAction("Index", new { МаршрутID = @ViewBag.МаршрутID });
+            }            
             ViewBag.ЗадачаID = new SelectList(db.Задача, "Id", "Название_задачи", пункты_регулярного_маршрута.ЗадачаID);
-            ViewBag.МаршрутID = new SelectList(db.Маршрут, "Id", "Название_маршрута", пункты_регулярного_маршрута.МаршрутID);
+            //ViewBag.МаршрутID = new SelectList(db.Маршрут, "Id", "Название_маршрута", пункты_регулярного_маршрута.МаршрутID);
             ViewBag.Пункт_доставкиID = new SelectList(db.Пункт_доставки, "Id", "Название_пункта", пункты_регулярного_маршрута.Пункт_доставкиID);
             return View(пункты_регулярного_маршрута);
         }
@@ -140,24 +133,25 @@ namespace Putilin2018.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            ViewBag.МаршрутID = МаршрутID;
             Пункты_регулярного_маршрута пункты_регулярного_маршрута = db.Пункты_регулярного_маршрута.Find(id);
             if (пункты_регулярного_маршрута == null)
             {
                 return HttpNotFound();
-            }
-            ViewBag.МаршрутID = МаршрутID;
+            }            
             return View(пункты_регулярного_маршрута);
         }
 
         // POST: Пункты_регулярного_маршрута/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, int? МаршрутID)
         {
+            ViewBag.МаршрутID = МаршрутID;
             Пункты_регулярного_маршрута пункты_регулярного_маршрута = db.Пункты_регулярного_маршрута.Find(id);
             db.Пункты_регулярного_маршрута.Remove(пункты_регулярного_маршрута);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { МаршрутID = @ViewBag.МаршрутID });
         }
 
         protected override void Dispose(bool disposing)
