@@ -34,5 +34,6 @@ namespace Putilin2018.Models
         public virtual DbSet<Автомобиль> Автомобиль { get; set; }
         public virtual DbSet<Маршрут> Маршрут { get; set; }
         public virtual DbSet<Пункты_регулярного_маршрута> Пункты_регулярного_маршрута { get; set; }
+        public virtual DbSet<Рейс> Рейс { get; set; }
     }
 }

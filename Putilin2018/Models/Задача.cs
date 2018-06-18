@@ -18,6 +18,7 @@ namespace Putilin2018.Models
         public Задача()
         {
             this.Пункты_регулярного_маршрута = new HashSet<Пункты_регулярного_маршрута>();
+            this.Рейс = new HashSet<Рейс>();
         }
     
         public int Id { get; set; }
@@ -28,5 +29,7 @@ namespace Putilin2018.Models
         public virtual Группы_задач Группы_задач { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Пункты_регулярного_маршрута> Пункты_регулярного_маршрута { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Рейс> Рейс { get; set; }
     }
 }

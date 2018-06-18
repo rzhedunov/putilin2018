@@ -680,6 +680,75 @@ namespace Putilin2018.Models
         }
         #endregion
 
+        #region Рейс
+        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        public List<Рейс> GetРейс()
+        {
+            var res = new List<Рейс>();
+            var key = "b_Рейс";
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (List<Рейс>)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Рейс.ToList();
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public Рейс GetРейс(int ID)
+        {
+            var res = new Рейс();
+            var key = "b_Рейс_Рейс" + ID;
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (Рейс)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Рейс.SingleOrDefault(x => x.Id == ID);
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public int SaveРейс(Рейс item)
+        {
+            item.Примечание = item.Примечание.Trim();
+            if (item.Id == 0)
+            {
+                db.SaveChanges();
+            }
+            else
+            {
+                db.Рейс.Attach(db.Рейс.Single(x => x.Id == item.Id));
+                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            CacheManager.PurgeCacheItems("b_Рейс");
+            return item.Id;
+        }
+
+        public bool DeleteРейс(int id)
+        {
+            bool res = false;
+            var item = db.Рейс.FirstOrDefault(x => x.Id == id);
+            if (item == null)
+            {
+                db.Рейс.Remove(item);
+                db.SaveChanges();
+                res = true;
+            }
+            CacheManager.PurgeCacheItems("b_Рейс");
+            return res;
+        }
+        #endregion
 
 
 

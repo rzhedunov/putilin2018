@@ -21,6 +21,10 @@
         <AssociationConnector Association="zhedunov_v50caModel.FK__Пункты_ре__Маршр__5BAD9CC8" />
         <AssociationConnector Association="zhedunov_v50caModel.FK__Пункты_ре__Пункт__5CA1C101" ManuallyRouted="false" >
         </AssociationConnector>
+        <EntityTypeShape EntityType="zhedunov_v50caModel.Рейс" Width="1.5" PointX="13.125" PointY="1" />
+        <AssociationConnector Association="zhedunov_v50caModel.FK__Рейс__ВодительID__6CD828CA" />
+        <AssociationConnector Association="zhedunov_v50caModel.FK__Рейс__Автомобиль__6EC0713C" />
+        <AssociationConnector Association="zhedunov_v50caModel.FK__Рейс__ЗадачаID__6DCC4D03" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

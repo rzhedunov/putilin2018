@@ -79,6 +79,24 @@
           <Property Name="Время плановое" Type="time" Precision="7" />
           <Property Name="Примечание" Type="nchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="Рейс">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Номер путевого листа" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Дата рейса" Type="date" Nullable="false" />
+          <Property Name="Остаток ГСМ на въезде" Type="int" Nullable="false" />
+          <Property Name="Выдано ГСМ" Type="int" Nullable="false" />
+          <Property Name="Нач_спидометр" Type="int" Nullable="false" />
+          <Property Name="Норма" Type="int" Nullable="false" />
+          <Property Name="Пробег" Type="int" Nullable="false" />
+          <Property Name="Расход ГСМ" Type="int" Nullable="false" />
+          <Property Name="ВодительID" Type="int" Nullable="false" />
+          <Property Name="ЗадачаID" Type="int" Nullable="false" />
+          <Property Name="АвтомобильID" Type="int" Nullable="false" />
+          <Property Name="Примечание" Type="nchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="Тип ТС">
           <Key>
             <PropertyRef Name="Id" />
@@ -158,6 +176,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Рейс__Автомобиль__7C1A6C5A">
+          <End Role="Автомобиль" Type="Self.Автомобиль" Multiplicity="1" />
+          <End Role="Рейс" Type="Self.Рейс" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Автомобиль">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Рейс">
+              <PropertyRef Name="АвтомобильID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Рейс__ВодительID__7A3223E8">
+          <End Role="Voditel" Type="Self.Voditel" Multiplicity="1" />
+          <End Role="Рейс" Type="Self.Рейс" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Voditel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Рейс">
+              <PropertyRef Name="ВодительID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Рейс__ЗадачаID__7B264821">
+          <End Role="Задача" Type="Self.Задача" Multiplicity="1" />
+          <End Role="Рейс" Type="Self.Рейс" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Задача">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Рейс">
+              <PropertyRef Name="ЗадачаID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище zhedunov_v50caModelContainer">
           <EntitySet Name="Voditel" EntityType="Self.Voditel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Автомобиль" EntityType="Self.Автомобиль" Schema="dbo" store:Type="Tables" />
@@ -167,6 +221,7 @@
           <EntitySet Name="Получатель" EntityType="Self.Получатель" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Пункт доставки" EntityType="Self.Пункт доставки" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Пункты регулярного маршрута" EntityType="Self.Пункты регулярного маршрута" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Рейс" EntityType="Self.Рейс" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Тип ТС" EntityType="Self.Тип ТС" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Автомобил__Тип Т__56E8E7AB" Association="Self.FK__Автомобил__Тип Т__56E8E7AB">
             <End Role="Тип ТС" EntitySet="Тип ТС" />
@@ -192,6 +247,18 @@
             <End Role="Пункт доставки" EntitySet="Пункт доставки" />
             <End Role="Пункты регулярного маршрута" EntitySet="Пункты регулярного маршрута" />
           </AssociationSet>
+          <AssociationSet Name="FK__Рейс__Автомобиль__7C1A6C5A" Association="Self.FK__Рейс__Автомобиль__7C1A6C5A">
+            <End Role="Автомобиль" EntitySet="Автомобиль" />
+            <End Role="Рейс" EntitySet="Рейс" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Рейс__ВодительID__7A3223E8" Association="Self.FK__Рейс__ВодительID__7A3223E8">
+            <End Role="Voditel" EntitySet="Voditel" />
+            <End Role="Рейс" EntitySet="Рейс" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Рейс__ЗадачаID__7B264821" Association="Self.FK__Рейс__ЗадачаID__7B264821">
+            <End Role="Задача" EntitySet="Задача" />
+            <End Role="Рейс" EntitySet="Рейс" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -205,6 +272,7 @@
           <Property Name="fio" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="license_expire" Type="DateTime" Precision="3" />
           <Property Name="categories" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Рейс" Relationship="zhedunov_v50caModel.FK__Рейс__ВодительID__6CD828CA" FromRole="Voditel" ToRole="Рейс" />
         </EntityType>
         <EntityType Name="Группы_задач">
           <Key>
@@ -291,6 +359,19 @@
             <End Role="Пункт_доставки" EntitySet="Пункт_доставки" />
             <End Role="Пункты_регулярного_маршрута" EntitySet="Пункты_регулярного_маршрута" />
           </AssociationSet>
+          <EntitySet Name="Рейс" EntityType="zhedunov_v50caModel.Рейс" />
+          <AssociationSet Name="FK__Рейс__ВодительID__6CD828CA" Association="zhedunov_v50caModel.FK__Рейс__ВодительID__6CD828CA">
+            <End Role="Voditel" EntitySet="Voditel" />
+            <End Role="Рейс" EntitySet="Рейс" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Рейс__Автомобиль__6EC0713C" Association="zhedunov_v50caModel.FK__Рейс__Автомобиль__6EC0713C">
+            <End Role="Автомобиль" EntitySet="Автомобиль" />
+            <End Role="Рейс" EntitySet="Рейс" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Рейс__ЗадачаID__6DCC4D03" Association="zhedunov_v50caModel.FK__Рейс__ЗадачаID__6DCC4D03">
+            <End Role="Задача" EntitySet="Задача" />
+            <End Role="Рейс" EntitySet="Рейс" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Задача">
           <Key>
@@ -302,6 +383,7 @@
           <Property Name="Примечание" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Группы_задач" Relationship="zhedunov_v50caModel.FK__Задача__Группа_з__540C7B00" FromRole="Задача" ToRole="Группы_задач" />
           <NavigationProperty Name="Пункты_регулярного_маршрута" Relationship="zhedunov_v50caModel.FK__Пункты_ре__Задач__5D95E53A" FromRole="Задача" ToRole="Пункты_регулярного_маршрута" />
+          <NavigationProperty Name="Рейс" Relationship="zhedunov_v50caModel.FK__Рейс__ЗадачаID__6DCC4D03" FromRole="Задача" ToRole="Рейс" />
         </EntityType>
         <Association Name="FK__Задача__Группа_з__540C7B00">
           <End Type="zhedunov_v50caModel.Группы_задач" Role="Группы_задач" Multiplicity="1" />
@@ -325,6 +407,7 @@
           <Property Name="Примечание" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Name="Тип_ТСID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Тип_ТС" Relationship="zhedunov_v50caModel.FK__Автомобил__Тип_Т__56E8E7AB" FromRole="Автомобиль" ToRole="Тип_ТС" />
+          <NavigationProperty Name="Рейс" Relationship="zhedunov_v50caModel.FK__Рейс__Автомобиль__6EC0713C" FromRole="Автомобиль" ToRole="Рейс" />
         </EntityType>
         <Association Name="FK__Автомобил__Тип_Т__56E8E7AB">
           <End Type="zhedunov_v50caModel.Тип_ТС" Role="Тип_ТС" Multiplicity="1" />
@@ -394,6 +477,63 @@
             </Principal>
             <Dependent Role="Пункты_регулярного_маршрута">
               <PropertyRef Name="Пункт_доставкиID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Рейс">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Номер_путевого_листа" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Дата_рейса" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Остаток_ГСМ_на_въезде" Type="Int32" Nullable="false" />
+          <Property Name="Выдано_ГСМ" Type="Int32" Nullable="false" />
+          <Property Name="Нач_спидометр" Type="Int32" Nullable="false" />
+          <Property Name="Норма" Type="Int32" Nullable="false" />
+          <Property Name="Пробег" Type="Int32" Nullable="false" />
+          <Property Name="Расход_ГСМ" Type="Int32" Nullable="false" />
+          <Property Name="ВодительID" Type="Int32" Nullable="false" />
+          <Property Name="ЗадачаID" Type="Int32" Nullable="false" />
+          <Property Name="АвтомобильID" Type="Int32" Nullable="false" />
+          <Property Name="Примечание" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Voditel" Relationship="zhedunov_v50caModel.FK__Рейс__ВодительID__6CD828CA" FromRole="Рейс" ToRole="Voditel" />
+          <NavigationProperty Name="Автомобиль" Relationship="zhedunov_v50caModel.FK__Рейс__Автомобиль__6EC0713C" FromRole="Рейс" ToRole="Автомобиль" />
+          <NavigationProperty Name="Задача" Relationship="zhedunov_v50caModel.FK__Рейс__ЗадачаID__6DCC4D03" FromRole="Рейс" ToRole="Задача" />
+        </EntityType>
+        <Association Name="FK__Рейс__ВодительID__6CD828CA">
+          <End Type="zhedunov_v50caModel.Voditel" Role="Voditel" Multiplicity="1" />
+          <End Type="zhedunov_v50caModel.Рейс" Role="Рейс" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Voditel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Рейс">
+              <PropertyRef Name="ВодительID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Рейс__Автомобиль__6EC0713C">
+          <End Type="zhedunov_v50caModel.Автомобиль" Role="Автомобиль" Multiplicity="1" />
+          <End Type="zhedunov_v50caModel.Рейс" Role="Рейс" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Автомобиль">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Рейс">
+              <PropertyRef Name="АвтомобильID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Рейс__ЗадачаID__6DCC4D03">
+          <End Type="zhedunov_v50caModel.Задача" Role="Задача" Multiplicity="1" />
+          <End Type="zhedunov_v50caModel.Рейс" Role="Рейс" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Задача">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Рейс">
+              <PropertyRef Name="ЗадачаID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -489,6 +629,25 @@
                 <ScalarProperty Name="ЗадачаID" ColumnName="ЗадачаID" />
                 <ScalarProperty Name="Пункт_доставкиID" ColumnName="Пункт доставкиID" />
                 <ScalarProperty Name="МаршрутID" ColumnName="МаршрутID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Рейс">
+            <EntityTypeMapping TypeName="zhedunov_v50caModel.Рейс">
+              <MappingFragment StoreEntitySet="Рейс">
+                <ScalarProperty Name="Примечание" ColumnName="Примечание" />
+                <ScalarProperty Name="АвтомобильID" ColumnName="АвтомобильID" />
+                <ScalarProperty Name="ЗадачаID" ColumnName="ЗадачаID" />
+                <ScalarProperty Name="ВодительID" ColumnName="ВодительID" />
+                <ScalarProperty Name="Расход_ГСМ" ColumnName="Расход ГСМ" />
+                <ScalarProperty Name="Пробег" ColumnName="Пробег" />
+                <ScalarProperty Name="Норма" ColumnName="Норма" />
+                <ScalarProperty Name="Нач_спидометр" ColumnName="Нач_спидометр" />
+                <ScalarProperty Name="Выдано_ГСМ" ColumnName="Выдано ГСМ" />
+                <ScalarProperty Name="Остаток_ГСМ_на_въезде" ColumnName="Остаток ГСМ на въезде" />
+                <ScalarProperty Name="Дата_рейса" ColumnName="Дата рейса" />
+                <ScalarProperty Name="Номер_путевого_листа" ColumnName="Номер путевого листа" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

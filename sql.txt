@@ -1,0 +1,78 @@
+C:\Users\R20171220\Downloads\SQLEXPRADV_x64_RUS\
+
+CREATE TABLE [dbo].[Voditel] (
+    [Id]             INT        IDENTITY (1, 1) NOT NULL,
+    [fio]            NCHAR (50) NOT NULL,
+    [license_expire] DATETIME   NULL,
+    [categories]     NCHAR (10) DEFAULT ('ABCD') NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[Группы задач] (
+    [Id]              INT         IDENTITY (1, 1) NOT NULL,
+    [Название группы] NCHAR (50)  NOT NULL,
+    [Примечание]      NCHAR (100) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+CREATE TABLE [dbo].[Пункт доставки] (
+    [Id]              INT         IDENTITY (1, 1) NOT NULL,
+    [Название пункта] NCHAR (50)  NOT NULL,
+    [Адрес]           NCHAR (100) DEFAULT ('-') NOT NULL,
+    [Регулярность]    NCHAR (50)  DEFAULT ('-') NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+CREATE TABLE [dbo].[Получатель] (
+    [Id]               INT        IDENTITY (1, 1) NOT NULL,
+    [ФИО]              NCHAR (50) NOT NULL,
+    [E-mail]           NCHAR (50) NOT NULL,
+    [Телефон]          NCHAR (12) NOT NULL,
+    [Пункт доставкиID] INT        NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    FOREIGN KEY ([Пункт доставкиID]) REFERENCES [dbo].[Пункт доставки] ([Id])
+);
+
+CREATE TABLE [dbo].[Тип ТС] (
+    [Id]            INT        IDENTITY (1, 1) NOT NULL,
+    [Название типа] NCHAR (50) DEFAULT ('??? ') NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+CREATE TABLE [dbo].[Задача] (
+    [Id] INT IDENTITY (1, 1) NOT NULL,
+    [Название задачи] NCHAR (50)  NOT NULL,
+    [Группа задачID] INT  NOT NULL REFERENCES [dbo].[Группы задач],
+    [Примечание]      NCHAR (100) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)    
+);
+
+CREATE TABLE [dbo].[Автомобиль] (
+    [Id] INT IDENTITY (1, 1) NOT NULL,
+    [Название автомобиля] NCHAR (50)  NOT NULL,
+    [Госномер]      NCHAR (20) NULL,
+    [Примечание]      NCHAR (100) NULL,
+    [Тип ТСID] INT  NOT NULL REFERENCES [dbo].[Тип ТС],
+    PRIMARY KEY CLUSTERED ([Id] ASC)    
+);
+
+CREATE TABLE [dbo].[Маршрут] (
+    [Id] INT IDENTITY (1, 1) NOT NULL,
+    [Название маршрута] NCHAR (50)  NOT NULL,
+    [Примечание]      NCHAR (100) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)    
+);
+
+CREATE TABLE [dbo].[Пункты регулярного маршрута] (
+    [Id] INT IDENTITY (1, 1) NOT NULL,
+    [МаршрутID] INT  NOT NULL REFERENCES [dbo].[Маршрут],
+    [Пункт доставкиID] INT NOT NULL REFERENCES [dbo].[Пункт доставки],    
+    [ЗадачаID] INT NOT NULL REFERENCES [dbo].[Задача], 
+    [Время плановое]    
+    [Примечание]      NCHAR (100) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)    
+);
+

@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Putilin2018.Models.Рейс>
+
+@{
+    ViewBag.Title = "Список";
+}
+
+<h2>Список</h2>
+
+<p>
+    @Html.ActionLink("Добавить", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Номер_путевого_листа)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Дата_рейса)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Остаток_ГСМ_на_въезде)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Выдано_ГСМ)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Нач_спидометр)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Норма)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Пробег)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Расход_ГСМ)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Примечание)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Voditel.fio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Автомобиль.Название_автомобиля)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Задача.Название_задачи)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Номер_путевого_листа)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Дата_рейса)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Остаток_ГСМ_на_въезде)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Выдано_ГСМ)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Нач_спидометр)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Норма)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Пробег)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Расход_ГСМ)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Примечание)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Voditel.fio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Автомобиль.Название_автомобиля)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Задача.Название_задачи)
+        </td>
+        <td>
+            @Html.ActionLink("Изменить", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Данные", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,114 @@
+﻿@model Putilin2018.Models.Рейс
+
+@{
+    ViewBag.Title = "Данные";
+}
+
+<h2>Данные</h2>
+
+<div>
+    <h4>Рейс</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Номер_путевого_листа)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Номер_путевого_листа)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Дата_рейса)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Дата_рейса)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Остаток_ГСМ_на_въезде)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Остаток_ГСМ_на_въезде)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Выдано_ГСМ)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Выдано_ГСМ)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Нач_спидометр)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Нач_спидометр)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Норма)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Норма)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Пробег)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Пробег)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Расход_ГСМ)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Расход_ГСМ)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Примечание)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Примечание)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Voditel.fio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Voditel.fio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Автомобиль.Название_автомобиля)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Автомобиль.Название_автомобиля)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Задача.Название_задачи)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Задача.Название_задачи)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Вернуться к списку", "Index")
+</p>
