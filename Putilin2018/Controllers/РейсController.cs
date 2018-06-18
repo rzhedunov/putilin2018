@@ -39,6 +39,9 @@ namespace Putilin2018.Controllers
         // GET: Рейс/Create
         public ActionResult Create()
         {
+            ViewBag.RaceDate = "" + DateTime.Now.Year + "-" + (DateTime.Now.Month < 10 ? "0" : "") + DateTime.Now.Month + "-" + (DateTime.Now.Day < 10 ? "0" : "") + DateTime.Now.Day;
+            ViewBag.RaceDate2 = "" + (DateTime.Now.Day < 10 ? "0" : "") + DateTime.Now.Day + "." + (DateTime.Now.Month < 10 ? "0" : "") + DateTime.Now.Month + "." + DateTime.Now.Year;
+
             ViewBag.ВодительID = new SelectList(db.Voditel, "Id", "fio");
             ViewBag.АвтомобильID = new SelectList(db.Автомобиль, "Id", "Название_автомобиля");
             ViewBag.ЗадачаID = new SelectList(db.Задача, "Id", "Название_задачи");

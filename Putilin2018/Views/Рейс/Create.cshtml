@@ -6,6 +6,26 @@
 
 <h2>Добавить</h2>
 
+<script language="javascript">
+    var options = {
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric'
+    }
+
+    function getDate(str) {
+        var date = new Date(str);
+        return date.toLocaleString('ru', options)
+    }
+
+    function ChangeDate() {
+        var elem = document.getElementById('racedate');
+        var elem2 = document.getElementById('dp1');
+        //elem.textContent = elem2.value;
+        elem.textContent = getDate(elem2.value);
+        alert(textContent);
+    }
+</script>
 
 @using (Html.BeginForm()) 
 {
@@ -18,15 +38,31 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Номер_путевого_листа, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Номер_путевого_листа, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Номер_путевого_листа, new { htmlAttributes = new { @class = "form-control", @Value = "00" } })
                 @Html.ValidationMessageFor(model => model.Номер_путевого_листа, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Дата_рейса, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Дата_рейса, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Дата_рейса, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Дата_рейса, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <table border="0">
+                    <tr>
+                        <td width="40"><div id="racedate">@ViewBag.RaceDate2</div></td>
+                        <td>
+                            @Html.EditorFor(model => model.Дата_рейса, new { htmlAttributes = new { @id = "dp1", @class = "form-control", style = "width:70px;", @Value = ViewBag.RaceDate, @onChange = "ChangeDate();" } })
+                        </td>
+                    </tr>
+                </table>
                 @Html.ValidationMessageFor(model => model.Дата_рейса, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -34,7 +70,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Остаток_ГСМ_на_въезде, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Остаток_ГСМ_на_въезде, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Остаток_ГСМ_на_въезде, new { htmlAttributes = new { @class = "form-control", @Value = "0" } })
                 @Html.ValidationMessageFor(model => model.Остаток_ГСМ_на_въезде, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,7 +78,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Выдано_ГСМ, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Выдано_ГСМ, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Выдано_ГСМ, new { htmlAttributes = new { @class = "form-control", @Value = "0" } })
                 @Html.ValidationMessageFor(model => model.Выдано_ГСМ, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -50,7 +86,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Нач_спидометр, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Нач_спидометр, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Нач_спидометр, new { htmlAttributes = new { @class = "form-control", @Value = "0" } })
                 @Html.ValidationMessageFor(model => model.Нач_спидометр, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -58,7 +94,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Норма, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Норма, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Норма, new { htmlAttributes = new { @class = "form-control", @Value = "0" } })
                 @Html.ValidationMessageFor(model => model.Норма, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -66,7 +102,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Пробег, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Пробег, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Пробег, new { htmlAttributes = new { @class = "form-control", @Value = "0" } })
                 @Html.ValidationMessageFor(model => model.Пробег, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -74,7 +110,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Расход_ГСМ, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Расход_ГСМ, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Расход_ГСМ, new { htmlAttributes = new { @class = "form-control", @Value = "0" } })
                 @Html.ValidationMessageFor(model => model.Расход_ГСМ, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -106,7 +142,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Примечание, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Примечание, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Примечание, new { htmlAttributes = new { @class = "form-control", @Value = "-" } })
                 @Html.ValidationMessageFor(model => model.Примечание, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -50,7 +50,6 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Дата_рейса, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10" >  
-                @*@Html.DisplayFor(model => model.Дата_рейса, "{0:dd.MM.yyyy}", new { htmlAttributes = new { @class = "form-control", @id = "mydata" } })*@
                 <table border="0">
                     <tr>
                         <td width="40"><div id="racedate">@ViewBag.RaceDate2</div></td>
@@ -59,7 +58,6 @@
                         </td>
                     </tr>
                 </table>
-                @*@Html.TextBoxFor(model => model.Дата_рейса, "{0:dd.MM.yyyy}", new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.Дата_рейса, "", new { @class = "text-danger" })
             </div>
         </div>
