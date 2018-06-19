@@ -15,14 +15,34 @@ namespace Putilin2018.Controllers
         private MyDatabaseEntities db = new MyDatabaseEntities();
 
         // GET: Пункты_рейса
-        public ActionResult Index()
+        public ActionResult Index(int? РейсID)
         {
             var пункты_рейса = db.Пункты_рейса.Include(п => п.Задача).Include(п => п.Получатель).Include(п => п.Пункт_доставки).Include(п => п.Рейс);
+            if (РейсID != null && РейсID != 0)
+            {
+                пункты_рейса = пункты_рейса.Where(p => p.РейсID == РейсID);
+                ViewBag.РейсID = РейсID;
+            }
+            else
+            {
+                пункты_рейса = пункты_рейса.Where(p => p.РейсID == -1);
+            }
+
+            if (пункты_рейса.Count() > 0)
+            {
+                ViewBag.Message2 = "Всего пунктов в рейсе: " + пункты_рейса.Count().ToString();
+            }
+            else
+            {
+                ViewBag.Message2 = "Нет пунктов рейса! ";
+            }
+
+
             return View(пункты_рейса.ToList());
         }
 
         // GET: Пункты_рейса/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int? РейсID)
         {
             if (id == null)
             {
@@ -33,16 +53,18 @@ namespace Putilin2018.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.РейсID = РейсID;
             return View(пункты_рейса);
         }
 
         // GET: Пункты_рейса/Create
-        public ActionResult Create()
+        public ActionResult Create(int? РейсID)
         {
+            ViewBag.РейсID = РейсID;
             ViewBag.ЗадачаID = new SelectList(db.Задача, "Id", "Название_задачи");
             ViewBag.ПолучательID = new SelectList(db.Получатель, "Id", "ФИО");
             ViewBag.Пункт_доставкиID = new SelectList(db.Пункт_доставки, "Id", "Название_пункта");
-            ViewBag.РейсID = new SelectList(db.Рейс, "Id", "Номер_путевого_листа");
+            //ViewBag.РейсID = new SelectList(db.Рейс, "Id", "Номер_путевого_листа");
             return View();
         }
 
@@ -51,24 +73,25 @@ namespace Putilin2018.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,РейсID,Пункт_доставкиID,ПолучательID,ЗадачаID,Время_плановое,УсловныйКод,Время_фактическое,Примечание")] Пункты_рейса пункты_рейса)
+        public ActionResult Create([Bind(Include = "Id,РейсID,Пункт_доставкиID,ПолучательID,ЗадачаID,Время_плановое,УсловныйКод,Время_фактическое,Примечание")] Пункты_рейса пункты_рейса, int? РейсID)
         {
+            ViewBag.РейсID = РейсID;
             if (ModelState.IsValid)
             {
                 db.Пункты_рейса.Add(пункты_рейса);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { РейсID = @ViewBag.РейсID });
             }
 
             ViewBag.ЗадачаID = new SelectList(db.Задача, "Id", "Название_задачи", пункты_рейса.ЗадачаID);
             ViewBag.ПолучательID = new SelectList(db.Получатель, "Id", "ФИО", пункты_рейса.ПолучательID);
             ViewBag.Пункт_доставкиID = new SelectList(db.Пункт_доставки, "Id", "Название_пункта", пункты_рейса.Пункт_доставкиID);
-            ViewBag.РейсID = new SelectList(db.Рейс, "Id", "Номер_путевого_листа", пункты_рейса.РейсID);
+            //ViewBag.РейсID = new SelectList(db.Рейс, "Id", "Номер_путевого_листа", пункты_рейса.РейсID);
             return View(пункты_рейса);
         }
 
         // GET: Пункты_рейса/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, int? РейсID)
         {
             if (id == null)
             {
@@ -79,10 +102,11 @@ namespace Putilin2018.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.РейсID = РейсID;
             ViewBag.ЗадачаID = new SelectList(db.Задача, "Id", "Название_задачи", пункты_рейса.ЗадачаID);
             ViewBag.ПолучательID = new SelectList(db.Получатель, "Id", "ФИО", пункты_рейса.ПолучательID);
             ViewBag.Пункт_доставкиID = new SelectList(db.Пункт_доставки, "Id", "Название_пункта", пункты_рейса.Пункт_доставкиID);
-            ViewBag.РейсID = new SelectList(db.Рейс, "Id", "Номер_путевого_листа", пункты_рейса.РейсID);
+            //ViewBag.РейсID = new SelectList(db.Рейс, "Id", "Номер_путевого_листа", пункты_рейса.РейсID);
             return View(пункты_рейса);
         }
 
@@ -91,28 +115,30 @@ namespace Putilin2018.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,РейсID,Пункт_доставкиID,ПолучательID,ЗадачаID,Время_плановое,УсловныйКод,Время_фактическое,Примечание")] Пункты_рейса пункты_рейса)
+        public ActionResult Edit([Bind(Include = "Id,РейсID,Пункт_доставкиID,ПолучательID,ЗадачаID,Время_плановое,УсловныйКод,Время_фактическое,Примечание")] Пункты_рейса пункты_рейса, int? РейсID)
         {
+            ViewBag.РейсID = РейсID;
             if (ModelState.IsValid)
             {
                 db.Entry(пункты_рейса).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { РейсID = @ViewBag.РейсID });
             }
             ViewBag.ЗадачаID = new SelectList(db.Задача, "Id", "Название_задачи", пункты_рейса.ЗадачаID);
             ViewBag.ПолучательID = new SelectList(db.Получатель, "Id", "ФИО", пункты_рейса.ПолучательID);
             ViewBag.Пункт_доставкиID = new SelectList(db.Пункт_доставки, "Id", "Название_пункта", пункты_рейса.Пункт_доставкиID);
-            ViewBag.РейсID = new SelectList(db.Рейс, "Id", "Номер_путевого_листа", пункты_рейса.РейсID);
+            //ViewBag.РейсID = new SelectList(db.Рейс, "Id", "Номер_путевого_листа", пункты_рейса.РейсID);
             return View(пункты_рейса);
         }
 
         // GET: Пункты_рейса/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id, int? РейсID)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            ViewBag.РейсID = РейсID;
             Пункты_рейса пункты_рейса = db.Пункты_рейса.Find(id);
             if (пункты_рейса == null)
             {
@@ -124,12 +150,13 @@ namespace Putilin2018.Controllers
         // POST: Пункты_рейса/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, int? РейсID)
         {
+            ViewBag.РейсID = РейсID;
             Пункты_рейса пункты_рейса = db.Пункты_рейса.Find(id);
             db.Пункты_рейса.Remove(пункты_рейса);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { РейсID = @ViewBag.РейсID });
         }
 
         protected override void Dispose(bool disposing)
