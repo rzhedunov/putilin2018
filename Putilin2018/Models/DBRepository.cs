@@ -892,5 +892,76 @@ namespace Putilin2018.Models
         }
         #endregion
 
+        #region Пункты_рейса
+        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        public List<Пункты_рейса> GetПункты_рейса()
+        {
+            var res = new List<Пункты_рейса>();
+            var key = "b_Пункты_рейса";
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (List<Пункты_рейса>)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Пункты_рейса.ToList();
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public Пункты_рейса GetПункты_рейса(int ID)
+        {
+            var res = new Пункты_рейса();
+            var key = "b_Пункты_рейса_Пункты_рейса" + ID;
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (Пункты_рейса)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Пункты_рейса.SingleOrDefault(x => x.Id == ID);
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public int SaveПункты_рейса(Пункты_рейса item)
+        {
+            item.Примечание = item.Примечание.Trim();
+            if (item.Id == 0)
+            {
+                db.SaveChanges();
+            }
+            else
+            {
+                db.Пункты_рейса.Attach(db.Пункты_рейса.Single(x => x.Id == item.Id));
+                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            CacheManager.PurgeCacheItems("b_Пункты_рейса");
+            return item.Id;
+        }
+
+        public bool DeleteПункты_рейса(int id)
+        {
+            bool res = false;
+            var item = db.Пункты_рейса.FirstOrDefault(x => x.Id == id);
+            if (item == null)
+            {
+                db.Пункты_рейса.Remove(item);
+                db.SaveChanges();
+                res = true;
+            }
+            CacheManager.PurgeCacheItems("b_Пункты_рейса");
+            return res;
+        }
+        #endregion
+
+
     }
 }

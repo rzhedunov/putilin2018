@@ -181,6 +181,7 @@
     <Compile Include="Controllers\ПолучательController.cs" />
     <Compile Include="Controllers\Пункт_доставкиController.cs" />
     <Compile Include="Controllers\Пункты_регулярного_маршрутаController.cs" />
+    <Compile Include="Controllers\Пункты_рейсаController.cs" />
     <Compile Include="Controllers\РейсController.cs" />
     <Compile Include="Controllers\РемонтController.cs" />
     <Compile Include="Controllers\Тип_ТСController.cs" />
@@ -231,6 +232,9 @@
     <Compile Include="Models\Пункты_регулярного_маршрута.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Пункты_рейса.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Рейс.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -247,6 +251,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-Putilin2018-20180519104203.mdf" />
+    <Content Include="App_Data\aspnet-Putilin2018-20180519104203_log.ldf">
+      <DependentUpon>aspnet-Putilin2018-20180519104203.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\MyDatabase.mdf" />
     <Content Include="App_Data\MyDatabase_log.ldf">
       <DependentUpon>MyDatabase.mdf</DependentUpon>
@@ -379,6 +387,11 @@
     <Content Include="Views\Ремонт\Details.cshtml" />
     <Content Include="Views\Ремонт\Edit.cshtml" />
     <Content Include="Views\Ремонт\Index.cshtml" />
+    <Content Include="Views\Пункты_рейса\Create.cshtml" />
+    <Content Include="Views\Пункты_рейса\Delete.cshtml" />
+    <Content Include="Views\Пункты_рейса\Details.cshtml" />
+    <Content Include="Views\Пункты_рейса\Edit.cshtml" />
+    <Content Include="Views\Пункты_рейса\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

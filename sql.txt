@@ -91,3 +91,15 @@ CREATE TABLE [dbo].[Ремонт] (
     [Стоимость ремонта] int not null default 0,
     [Примечание] NCHAR (100) NOT NULL default '-'
 );
+
+CREATE TABLE [dbo].[Пункты рейса] (
+    [Id] INT IDENTITY (1, 1) NOT NULL PRIMARY KEY,
+    [РейсID] INT  NOT NULL REFERENCES [dbo].[Рейс],
+    [Пункт доставкиID] INT NOT NULL REFERENCES [dbo].[Пункт доставки],
+    [ПолучательID] INT NOT NULL REFERENCES [dbo].[Получатель],	
+    [ЗадачаID] INT NOT NULL REFERENCES [dbo].[Задача], 
+    [Время плановое] time not null default '09:00',    
+    [УсловныйКод] INT NOT NULL default round(rand()*1000,0),
+	[Время фактическое] time not null default '09:00',	
+    [Примечание] NCHAR (100) NOT NULL default '-'     
+);

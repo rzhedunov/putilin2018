@@ -12,18 +12,21 @@ namespace Putilin2018.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Ремонт
+    public partial class Пункты_рейса
     {
         public int Id { get; set; }
-        public System.DateTime Дата_заявки { get; set; }
-        public int АвтомобильID { get; set; }
-        public string Содержание { get; set; }
-        public System.DateTime Дата_выполнения { get; set; }
-        public int Статус_заявкиID { get; set; }
-        public int Стоимость_ремонта { get; set; }
+        public int РейсID { get; set; }
+        public int Пункт_доставкиID { get; set; }
+        public int ПолучательID { get; set; }
+        public int ЗадачаID { get; set; }
+        public System.TimeSpan Время_плановое { get; set; }
+        public int УсловныйКод { get; set; }
+        public System.TimeSpan Время_фактическое { get; set; }
         public string Примечание { get; set; }
     
-        public virtual Автомобиль Автомобиль { get; set; }
-        public virtual Статус_заявки Статус_заявки { get; set; }
+        public virtual Задача Задача { get; set; }
+        public virtual Получатель Получатель { get; set; }
+        public virtual Пункт_доставки Пункт_доставки { get; set; }
+        public virtual Рейс Рейс { get; set; }
     }
 }

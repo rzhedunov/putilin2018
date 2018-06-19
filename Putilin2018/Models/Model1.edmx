@@ -79,6 +79,20 @@
           <Property Name="Время плановое" Type="time" Precision="7" />
           <Property Name="Примечание" Type="nchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="Пункты рейса">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="РейсID" Type="int" Nullable="false" />
+          <Property Name="Пункт доставкиID" Type="int" Nullable="false" />
+          <Property Name="ПолучательID" Type="int" Nullable="false" />
+          <Property Name="ЗадачаID" Type="int" Nullable="false" />
+          <Property Name="Время плановое" Type="time" Precision="7" Nullable="false" />
+          <Property Name="УсловныйКод" Type="int" Nullable="false" />
+          <Property Name="Время фактическое" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Примечание" Type="nchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="Рейс">
           <Key>
             <PropertyRef Name="Id" />
@@ -160,6 +174,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Пункты ре__Задач__2BC97F7C">
+          <End Role="Задача" Type="Self.Задача" Multiplicity="1" />
+          <End Role="Пункты рейса" Type="Self.Пункты рейса" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Задача">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Пункты рейса">
+              <PropertyRef Name="ЗадачаID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Пункты ре__Задач__5D95E53A">
           <End Role="Задача" Type="Self.Задача" Multiplicity="1" />
           <End Role="Пункты регулярного маршрута" Type="Self.Пункты регулярного маршрута" Multiplicity="*" />
@@ -184,6 +210,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Пункты ре__Получ__2AD55B43">
+          <End Role="Получатель" Type="Self.Получатель" Multiplicity="1" />
+          <End Role="Пункты рейса" Type="Self.Пункты рейса" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Получатель">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Пункты рейса">
+              <PropertyRef Name="ПолучательID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Пункты ре__Пункт__29E1370A">
+          <End Role="Пункт доставки" Type="Self.Пункт доставки" Multiplicity="1" />
+          <End Role="Пункты рейса" Type="Self.Пункты рейса" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пункт доставки">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Пункты рейса">
+              <PropertyRef Name="Пункт доставкиID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Пункты ре__Пункт__5CA1C101">
           <End Role="Пункт доставки" Type="Self.Пункт доставки" Multiplicity="1" />
           <End Role="Пункты регулярного маршрута" Type="Self.Пункты регулярного маршрута" Multiplicity="*" />
@@ -193,6 +243,18 @@
             </Principal>
             <Dependent Role="Пункты регулярного маршрута">
               <PropertyRef Name="Пункт доставкиID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Пункты ре__РейсI__28ED12D1">
+          <End Role="Рейс" Type="Self.Рейс" Multiplicity="1" />
+          <End Role="Пункты рейса" Type="Self.Пункты рейса" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Рейс">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Пункты рейса">
+              <PropertyRef Name="РейсID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -265,6 +327,7 @@
           <EntitySet Name="Получатель" EntityType="Self.Получатель" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Пункт доставки" EntityType="Self.Пункт доставки" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Пункты регулярного маршрута" EntityType="Self.Пункты регулярного маршрута" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Пункты рейса" EntityType="Self.Пункты рейса" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Рейс" EntityType="Self.Рейс" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ремонт" EntityType="Self.Ремонт" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Статус заявки" EntityType="Self.Статус заявки" Schema="dbo" store:Type="Tables" />
@@ -281,6 +344,10 @@
             <End Role="Пункт доставки" EntitySet="Пункт доставки" />
             <End Role="Получатель" EntitySet="Получатель" />
           </AssociationSet>
+          <AssociationSet Name="FK__Пункты ре__Задач__2BC97F7C" Association="Self.FK__Пункты ре__Задач__2BC97F7C">
+            <End Role="Задача" EntitySet="Задача" />
+            <End Role="Пункты рейса" EntitySet="Пункты рейса" />
+          </AssociationSet>
           <AssociationSet Name="FK__Пункты ре__Задач__5D95E53A" Association="Self.FK__Пункты ре__Задач__5D95E53A">
             <End Role="Задача" EntitySet="Задача" />
             <End Role="Пункты регулярного маршрута" EntitySet="Пункты регулярного маршрута" />
@@ -289,9 +356,21 @@
             <End Role="Маршрут" EntitySet="Маршрут" />
             <End Role="Пункты регулярного маршрута" EntitySet="Пункты регулярного маршрута" />
           </AssociationSet>
+          <AssociationSet Name="FK__Пункты ре__Получ__2AD55B43" Association="Self.FK__Пункты ре__Получ__2AD55B43">
+            <End Role="Получатель" EntitySet="Получатель" />
+            <End Role="Пункты рейса" EntitySet="Пункты рейса" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Пункты ре__Пункт__29E1370A" Association="Self.FK__Пункты ре__Пункт__29E1370A">
+            <End Role="Пункт доставки" EntitySet="Пункт доставки" />
+            <End Role="Пункты рейса" EntitySet="Пункты рейса" />
+          </AssociationSet>
           <AssociationSet Name="FK__Пункты ре__Пункт__5CA1C101" Association="Self.FK__Пункты ре__Пункт__5CA1C101">
             <End Role="Пункт доставки" EntitySet="Пункт доставки" />
             <End Role="Пункты регулярного маршрута" EntitySet="Пункты регулярного маршрута" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Пункты ре__РейсI__28ED12D1" Association="Self.FK__Пункты ре__РейсI__28ED12D1">
+            <End Role="Рейс" EntitySet="Рейс" />
+            <End Role="Пункты рейса" EntitySet="Пункты рейса" />
           </AssociationSet>
           <AssociationSet Name="FK__Рейс__Автомобиль__7C1A6C5A" Association="Self.FK__Рейс__Автомобиль__7C1A6C5A">
             <End Role="Автомобиль" EntitySet="Автомобиль" />
@@ -347,6 +426,7 @@
           <Property Name="Телефон" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Пункт_доставкиID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Пункт_доставки" Relationship="Self.FK__Получател__Пункт__45BE5BA9" FromRole="Получатель" ToRole="Пункт_доставки" />
+          <NavigationProperty Name="Пункты_рейса" Relationship="zhedunov_v50caModel.FK__Пункты_ре__Получ__2AD55B43" FromRole="Получатель" ToRole="Пункты_рейса" />
         </EntityType>
         <EntityType Name="Пункт_доставки">
           <Key>
@@ -358,6 +438,7 @@
           <Property Name="Регулярность" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Получатель" Relationship="Self.FK__Получател__Пункт__45BE5BA9" FromRole="Пункт_доставки" ToRole="Получатель" />
           <NavigationProperty Name="Пункты_регулярного_маршрута" Relationship="zhedunov_v50caModel.FK__Пункты_ре__Пункт__5CA1C101" FromRole="Пункт_доставки" ToRole="Пункты_регулярного_маршрута" />
+          <NavigationProperty Name="Пункты_рейса" Relationship="zhedunov_v50caModel.FK__Пункты_ре__Пункт__29E1370A" FromRole="Пункт_доставки" ToRole="Пункты_рейса" />
         </EntityType>
         <EntityType Name="Тип_ТС">
           <Key>
@@ -436,7 +517,24 @@
             <End Role="Статус_заявки" EntitySet="Статус_заявки" />
             <End Role="Ремонт" EntitySet="Ремонт" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="Пункты_рейса" EntityType="zhedunov_v50caModel.Пункты_рейса" />
+          <AssociationSet Name="FK__Пункты_ре__Задач__2BC97F7C" Association="zhedunov_v50caModel.FK__Пункты_ре__Задач__2BC97F7C">
+            <End Role="Задача" EntitySet="Задача" />
+            <End Role="Пункты_рейса" EntitySet="Пункты_рейса" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Пункты_ре__Получ__2AD55B43" Association="zhedunov_v50caModel.FK__Пункты_ре__Получ__2AD55B43">
+            <End Role="Получатель" EntitySet="Получатель" />
+            <End Role="Пункты_рейса" EntitySet="Пункты_рейса" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Пункты_ре__Пункт__29E1370A" Association="zhedunov_v50caModel.FK__Пункты_ре__Пункт__29E1370A">
+            <End Role="Пункт_доставки" EntitySet="Пункт_доставки" />
+            <End Role="Пункты_рейса" EntitySet="Пункты_рейса" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Пункты_ре__РейсI__28ED12D1" Association="zhedunov_v50caModel.FK__Пункты_ре__РейсI__28ED12D1">
+            <End Role="Рейс" EntitySet="Рейс" />
+            <End Role="Пункты_рейса" EntitySet="Пункты_рейса" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Задача">
           <Key>
             <PropertyRef Name="Id" />
@@ -448,6 +546,7 @@
           <NavigationProperty Name="Группы_задач" Relationship="zhedunov_v50caModel.FK__Задача__Группа_з__540C7B00" FromRole="Задача" ToRole="Группы_задач" />
           <NavigationProperty Name="Пункты_регулярного_маршрута" Relationship="zhedunov_v50caModel.FK__Пункты_ре__Задач__5D95E53A" FromRole="Задача" ToRole="Пункты_регулярного_маршрута" />
           <NavigationProperty Name="Рейс" Relationship="zhedunov_v50caModel.FK__Рейс__ЗадачаID__6DCC4D03" FromRole="Задача" ToRole="Рейс" />
+          <NavigationProperty Name="Пункты_рейса" Relationship="zhedunov_v50caModel.FK__Пункты_ре__Задач__2BC97F7C" FromRole="Задача" ToRole="Пункты_рейса" />
         </EntityType>
         <Association Name="FK__Задача__Группа_з__540C7B00">
           <End Type="zhedunov_v50caModel.Группы_задач" Role="Группы_задач" Multiplicity="1" />
@@ -565,6 +664,7 @@
           <NavigationProperty Name="Voditel" Relationship="zhedunov_v50caModel.FK__Рейс__ВодительID__6CD828CA" FromRole="Рейс" ToRole="Voditel" />
           <NavigationProperty Name="Автомобиль" Relationship="zhedunov_v50caModel.FK__Рейс__Автомобиль__6EC0713C" FromRole="Рейс" ToRole="Автомобиль" />
           <NavigationProperty Name="Задача" Relationship="zhedunov_v50caModel.FK__Рейс__ЗадачаID__6DCC4D03" FromRole="Рейс" ToRole="Задача" />
+          <NavigationProperty Name="Пункты_рейса" Relationship="zhedunov_v50caModel.FK__Пункты_ре__РейсI__28ED12D1" FromRole="Рейс" ToRole="Пункты_рейса" />
         </EntityType>
         <Association Name="FK__Рейс__ВодительID__6CD828CA">
           <End Type="zhedunov_v50caModel.Voditel" Role="Voditel" Multiplicity="1" />
@@ -649,7 +749,73 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="Пункты_рейса">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="РейсID" Type="Int32" Nullable="false" />
+          <Property Name="Пункт_доставкиID" Type="Int32" Nullable="false" />
+          <Property Name="ПолучательID" Type="Int32" Nullable="false" />
+          <Property Name="ЗадачаID" Type="Int32" Nullable="false" />
+          <Property Name="Время_плановое" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="УсловныйКод" Type="Int32" Nullable="false" />
+          <Property Name="Время_фактическое" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Примечание" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Задача" Relationship="zhedunov_v50caModel.FK__Пункты_ре__Задач__2BC97F7C" FromRole="Пункты_рейса" ToRole="Задача" />
+          <NavigationProperty Name="Получатель" Relationship="zhedunov_v50caModel.FK__Пункты_ре__Получ__2AD55B43" FromRole="Пункты_рейса" ToRole="Получатель" />
+          <NavigationProperty Name="Пункт_доставки" Relationship="zhedunov_v50caModel.FK__Пункты_ре__Пункт__29E1370A" FromRole="Пункты_рейса" ToRole="Пункт_доставки" />
+          <NavigationProperty Name="Рейс" Relationship="zhedunov_v50caModel.FK__Пункты_ре__РейсI__28ED12D1" FromRole="Пункты_рейса" ToRole="Рейс" />
+        </EntityType>
+        <Association Name="FK__Пункты_ре__Задач__2BC97F7C">
+          <End Type="zhedunov_v50caModel.Задача" Role="Задача" Multiplicity="1" />
+          <End Type="zhedunov_v50caModel.Пункты_рейса" Role="Пункты_рейса" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Задача">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Пункты_рейса">
+              <PropertyRef Name="ЗадачаID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Пункты_ре__Получ__2AD55B43">
+          <End Type="zhedunov_v50caModel.Получатель" Role="Получатель" Multiplicity="1" />
+          <End Type="zhedunov_v50caModel.Пункты_рейса" Role="Пункты_рейса" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Получатель">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Пункты_рейса">
+              <PropertyRef Name="ПолучательID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Пункты_ре__Пункт__29E1370A">
+          <End Type="zhedunov_v50caModel.Пункт_доставки" Role="Пункт_доставки" Multiplicity="1" />
+          <End Type="zhedunov_v50caModel.Пункты_рейса" Role="Пункты_рейса" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пункт_доставки">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Пункты_рейса">
+              <PropertyRef Name="Пункт_доставкиID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Пункты_ре__РейсI__28ED12D1">
+          <End Type="zhedunov_v50caModel.Рейс" Role="Рейс" Multiplicity="1" />
+          <End Type="zhedunov_v50caModel.Пункты_рейса" Role="Пункты_рейса" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Рейс">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Пункты_рейса">
+              <PropertyRef Name="РейсID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -782,6 +948,21 @@
             <EntityTypeMapping TypeName="zhedunov_v50caModel.Статус_заявки">
               <MappingFragment StoreEntitySet="Статус заявки">
                 <ScalarProperty Name="Статус" ColumnName="Статус" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Пункты_рейса">
+            <EntityTypeMapping TypeName="zhedunov_v50caModel.Пункты_рейса">
+              <MappingFragment StoreEntitySet="Пункты рейса">
+                <ScalarProperty Name="Примечание" ColumnName="Примечание" />
+                <ScalarProperty Name="Время_фактическое" ColumnName="Время фактическое" />
+                <ScalarProperty Name="УсловныйКод" ColumnName="УсловныйКод" />
+                <ScalarProperty Name="Время_плановое" ColumnName="Время плановое" />
+                <ScalarProperty Name="ЗадачаID" ColumnName="ЗадачаID" />
+                <ScalarProperty Name="ПолучательID" ColumnName="ПолучательID" />
+                <ScalarProperty Name="Пункт_доставкиID" ColumnName="Пункт доставкиID" />
+                <ScalarProperty Name="РейсID" ColumnName="РейсID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

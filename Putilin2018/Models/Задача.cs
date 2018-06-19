@@ -19,6 +19,7 @@ namespace Putilin2018.Models
         {
             this.Пункты_регулярного_маршрута = new HashSet<Пункты_регулярного_маршрута>();
             this.Рейс = new HashSet<Рейс>();
+            this.Пункты_рейса = new HashSet<Пункты_рейса>();
         }
     
         public int Id { get; set; }
@@ -31,5 +32,7 @@ namespace Putilin2018.Models
         public virtual ICollection<Пункты_регулярного_маршрута> Пункты_регулярного_маршрута { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Рейс> Рейс { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Пункты_рейса> Пункты_рейса { get; set; }
     }
 }

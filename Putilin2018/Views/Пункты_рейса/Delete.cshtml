@@ -1,0 +1,88 @@
+﻿@model Putilin2018.Models.Пункты_рейса
+
+@{
+    ViewBag.Title = "Удалить";
+}
+
+<h2>Удалить</h2>
+
+<h3>Вы уверены, что хотите удалить запись?</h3>
+<div>
+    <h4>Пункты_рейса</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Время_плановое)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Время_плановое)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.УсловныйКод)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.УсловныйКод)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Время_фактическое)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Время_фактическое)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Примечание)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Примечание)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Задача.Название_задачи)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Задача.Название_задачи)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Получатель.ФИО)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Получатель.ФИО)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Пункт_доставки.Название_пункта)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Пункт_доставки.Название_пункта)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Рейс.Номер_путевого_листа)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Рейс.Номер_путевого_листа)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Вернуться к списку", "Index")
+        </div>
+    }
+</div>

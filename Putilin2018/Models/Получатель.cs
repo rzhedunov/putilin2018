@@ -14,6 +14,12 @@ namespace Putilin2018.Models
     
     public partial class Получатель
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Получатель()
+        {
+            this.Пункты_рейса = new HashSet<Пункты_рейса>();
+        }
+    
         public int Id { get; set; }
         public string ФИО { get; set; }
         public string E_mail { get; set; }
@@ -21,5 +27,7 @@ namespace Putilin2018.Models
         public int Пункт_доставкиID { get; set; }
     
         public virtual Пункт_доставки Пункт_доставки { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Пункты_рейса> Пункты_рейса { get; set; }
     }
 }

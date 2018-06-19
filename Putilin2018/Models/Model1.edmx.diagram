@@ -29,6 +29,11 @@
         <EntityTypeShape EntityType="zhedunov_v50caModel.Статус_заявки" Width="1.5" PointX="11.25" PointY="6.375" />
         <AssociationConnector Association="zhedunov_v50caModel.FK__Ремонт__Автомоби__2057CCD0" />
         <AssociationConnector Association="zhedunov_v50caModel.FK__Ремонт__Статус_з__24285DB4" />
+        <EntityTypeShape EntityType="zhedunov_v50caModel.Пункты_рейса" Width="2" PointX="15.375" PointY="1.25" />
+        <AssociationConnector Association="zhedunov_v50caModel.FK__Пункты_ре__Задач__2BC97F7C" />
+        <AssociationConnector Association="zhedunov_v50caModel.FK__Пункты_ре__Получ__2AD55B43" />
+        <AssociationConnector Association="zhedunov_v50caModel.FK__Пункты_ре__Пункт__29E1370A" />
+        <AssociationConnector Association="zhedunov_v50caModel.FK__Пункты_ре__РейсI__28ED12D1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

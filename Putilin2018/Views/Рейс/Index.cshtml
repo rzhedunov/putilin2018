@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Putilin2018.Models.Рейс>
 
 @{
-    ViewBag.Title = "Список";
+    ViewBag.Title = "Список рейсов";
 }
 
-<h2>Список</h2>
+<h2>Список рейсов</h2>
 
 <p>
     @Html.ActionLink("Добавить", "Create")
@@ -91,7 +91,8 @@
         <td>
             @Html.ActionLink("Изменить", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Данные", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Удалить", "Delete", new { id=item.Id })
+            @Html.ActionLink("Удалить", "Delete", new { id = item.Id }) |
+            @Html.ActionLink("Маршрут", "Index", "Пункты_рейса", new { РейсID = item.Id }, new { target = "_blank" })
         </td>
     </tr>
 }

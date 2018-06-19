@@ -14,6 +14,12 @@ namespace Putilin2018.Models
     
     public partial class Рейс
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Рейс()
+        {
+            this.Пункты_рейса = new HashSet<Пункты_рейса>();
+        }
+    
         public int Id { get; set; }
         public string Номер_путевого_листа { get; set; }
         public System.DateTime Дата_рейса { get; set; }
@@ -31,5 +37,7 @@ namespace Putilin2018.Models
         public virtual Voditel Voditel { get; set; }
         public virtual Автомобиль Автомобиль { get; set; }
         public virtual Задача Задача { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Пункты_рейса> Пункты_рейса { get; set; }
     }
 }

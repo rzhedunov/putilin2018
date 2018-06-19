@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Putilin2018.Models.Пункты_рейса>
+
+@{
+    ViewBag.Title = "Список пунктов";
+}
+
+<h2>Список пунктов</h2>
+
+<p>
+    @Html.ActionLink("Добавить", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Время_плановое)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.УсловныйКод)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Время_фактическое)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Примечание)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Задача.Название_задачи)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Получатель.ФИО)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Пункт_доставки.Название_пункта)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Рейс.Номер_путевого_листа)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Время_плановое)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.УсловныйКод)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Время_фактическое)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Примечание)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Задача.Название_задачи)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Получатель.ФИО)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Пункт_доставки.Название_пункта)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Рейс.Номер_путевого_листа)
+        </td>
+        <td>
+            @Html.ActionLink("Изменить", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Данные", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
