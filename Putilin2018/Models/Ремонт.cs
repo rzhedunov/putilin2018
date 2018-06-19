@@ -11,25 +11,33 @@ namespace Putilin2018.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Рейс
+    using System.ComponentModel.DataAnnotations;
+
+    public partial class Ремонт
     {
         public int Id { get; set; }
-        public string Номер_путевого_листа { get; set; }
-        public System.DateTime Дата_рейса { get; set; }
-        public int Остаток_ГСМ_на_въезде { get; set; }
-        public int Выдано_ГСМ { get; set; }
-        public int Нач_спидометр { get; set; }
-        public int Норма { get; set; }
-        public int Пробег { get; set; }
-        public int Расход_ГСМ { get; set; }
-        public int ВодительID { get; set; }
-        public int ЗадачаID { get; set; }
+
+        [Display(Name = "Дата заявки")]
+        [DataType(DataType.Date)]
+        public System.DateTime Дата_заявки { get; set; }
         public int АвтомобильID { get; set; }
+        public string Содержание { get; set; }
+
+        [Display(Name = "Дата выполнения")]
+        [DataType(DataType.Date)]
+        public System.DateTime Дата_выполнения { get; set; }
+
+        [Display(Name = "Статус заявки")]
+        public int Статус_заявкиID { get; set; }
+
+        [Display(Name = "Стоимость")]
+        public int Стоимость_ремонта { get; set; }
         public string Примечание { get; set; }
-    
-        public virtual Voditel Voditel { get; set; }
+
+        [Display(Name = "Автомобиль")]
         public virtual Автомобиль Автомобиль { get; set; }
-        public virtual Задача Задача { get; set; }
+
+        [Display(Name = "Статус заявки")]
+        public virtual Статус_заявки Статус_заявки { get; set; }
     }
 }

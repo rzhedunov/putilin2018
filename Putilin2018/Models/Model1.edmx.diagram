@@ -25,6 +25,10 @@
         <AssociationConnector Association="zhedunov_v50caModel.FK__Рейс__ВодительID__6CD828CA" />
         <AssociationConnector Association="zhedunov_v50caModel.FK__Рейс__Автомобиль__6EC0713C" />
         <AssociationConnector Association="zhedunov_v50caModel.FK__Рейс__ЗадачаID__6DCC4D03" />
+        <EntityTypeShape EntityType="zhedunov_v50caModel.Ремонт" Width="1.5" PointX="8.875" PointY="6.375" />
+        <EntityTypeShape EntityType="zhedunov_v50caModel.Статус_заявки" Width="1.5" PointX="11.25" PointY="6.375" />
+        <AssociationConnector Association="zhedunov_v50caModel.FK__Ремонт__Автомоби__2057CCD0" />
+        <AssociationConnector Association="zhedunov_v50caModel.FK__Ремонт__Статус_з__24285DB4" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

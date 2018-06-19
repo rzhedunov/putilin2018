@@ -1,0 +1,80 @@
+﻿@model Putilin2018.Models.Ремонт
+
+@{
+    ViewBag.Title = "Удалить";
+}
+
+<h2>Удалить</h2>
+
+<h3>Вы уверены, что хотите удалить запись?</h3>
+<div>
+    <h4>Ремонт</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Дата_заявки)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Дата_заявки)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Содержание)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Содержание)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Дата_выполнения)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Дата_выполнения)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Стоимость_ремонта)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Стоимость_ремонта)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Примечание)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Примечание)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Автомобиль.Название_автомобиля)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Автомобиль.Название_автомобиля)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Статус_заявки.Статус)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Статус_заявки.Статус)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Вернуться к списку", "Index")
+        </div>
+    }
+</div>

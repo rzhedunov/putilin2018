@@ -76,3 +76,18 @@ CREATE TABLE [dbo].[Пункты регулярного маршрута] (
     PRIMARY KEY CLUSTERED ([Id] ASC)    
 );
 
+CREATE TABLE [dbo].[Статус заявки] (
+    [Id] INT IDENTITY (1, 1) NOT NULL PRIMARY KEY ,
+    [Статус] NCHAR (30) NOT NULL default '-'
+);
+
+CREATE TABLE [dbo].[Ремонт] (
+    [Id] INT IDENTITY (1, 1) NOT NULL PRIMARY KEY ,
+    [Дата заявки] date not null default getdate(),   
+	  [АвтомобильID] INT  NOT NULL REFERENCES [dbo].[Автомобиль],
+	  [Содержание] NCHAR (100) default '-',	
+    [Дата выполнения] date not null default getdate()+7,   
+    [Статус заявкиID] int not null default 0 REFERENCES [dbo].[Статус заявки],
+    [Стоимость ремонта] int not null default 0,
+    [Примечание] NCHAR (100) NOT NULL default '-'
+);

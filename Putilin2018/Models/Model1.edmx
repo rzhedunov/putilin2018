@@ -97,6 +97,26 @@
           <Property Name="АвтомобильID" Type="int" Nullable="false" />
           <Property Name="Примечание" Type="nchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="Ремонт">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Дата заявки" Type="date" Nullable="false" />
+          <Property Name="АвтомобильID" Type="int" Nullable="false" />
+          <Property Name="Содержание" Type="nchar" MaxLength="100" />
+          <Property Name="Дата выполнения" Type="date" Nullable="false" />
+          <Property Name="Статус заявкиID" Type="int" Nullable="false" />
+          <Property Name="Стоимость ремонта" Type="int" Nullable="false" />
+          <Property Name="Примечание" Type="nchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Статус заявки">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Статус" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
         <EntityType Name="Тип ТС">
           <Key>
             <PropertyRef Name="Id" />
@@ -212,6 +232,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Ремонт__Автомоби__2057CCD0">
+          <End Role="Автомобиль" Type="Self.Автомобиль" Multiplicity="1" />
+          <End Role="Ремонт" Type="Self.Ремонт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Автомобиль">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ремонт">
+              <PropertyRef Name="АвтомобильID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ремонт__Статус з__24285DB4">
+          <End Role="Статус заявки" Type="Self.Статус заявки" Multiplicity="1" />
+          <End Role="Ремонт" Type="Self.Ремонт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Статус заявки">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ремонт">
+              <PropertyRef Name="Статус заявкиID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище zhedunov_v50caModelContainer">
           <EntitySet Name="Voditel" EntityType="Self.Voditel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Автомобиль" EntityType="Self.Автомобиль" Schema="dbo" store:Type="Tables" />
@@ -222,6 +266,8 @@
           <EntitySet Name="Пункт доставки" EntityType="Self.Пункт доставки" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Пункты регулярного маршрута" EntityType="Self.Пункты регулярного маршрута" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Рейс" EntityType="Self.Рейс" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ремонт" EntityType="Self.Ремонт" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Статус заявки" EntityType="Self.Статус заявки" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Тип ТС" EntityType="Self.Тип ТС" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Автомобил__Тип Т__56E8E7AB" Association="Self.FK__Автомобил__Тип Т__56E8E7AB">
             <End Role="Тип ТС" EntitySet="Тип ТС" />
@@ -258,6 +304,14 @@
           <AssociationSet Name="FK__Рейс__ЗадачаID__7B264821" Association="Self.FK__Рейс__ЗадачаID__7B264821">
             <End Role="Задача" EntitySet="Задача" />
             <End Role="Рейс" EntitySet="Рейс" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ремонт__Автомоби__2057CCD0" Association="Self.FK__Ремонт__Автомоби__2057CCD0">
+            <End Role="Автомобиль" EntitySet="Автомобиль" />
+            <End Role="Ремонт" EntitySet="Ремонт" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ремонт__Статус з__24285DB4" Association="Self.FK__Ремонт__Статус з__24285DB4">
+            <End Role="Статус заявки" EntitySet="Статус заявки" />
+            <End Role="Ремонт" EntitySet="Ремонт" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -372,6 +426,16 @@
             <End Role="Задача" EntitySet="Задача" />
             <End Role="Рейс" EntitySet="Рейс" />
           </AssociationSet>
+          <EntitySet Name="Ремонт" EntityType="zhedunov_v50caModel.Ремонт" />
+          <EntitySet Name="Статус_заявки" EntityType="zhedunov_v50caModel.Статус_заявки" />
+          <AssociationSet Name="FK__Ремонт__Автомоби__2057CCD0" Association="zhedunov_v50caModel.FK__Ремонт__Автомоби__2057CCD0">
+            <End Role="Автомобиль" EntitySet="Автомобиль" />
+            <End Role="Ремонт" EntitySet="Ремонт" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ремонт__Статус_з__24285DB4" Association="zhedunov_v50caModel.FK__Ремонт__Статус_з__24285DB4">
+            <End Role="Статус_заявки" EntitySet="Статус_заявки" />
+            <End Role="Ремонт" EntitySet="Ремонт" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Задача">
           <Key>
@@ -408,6 +472,7 @@
           <Property Name="Тип_ТСID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Тип_ТС" Relationship="zhedunov_v50caModel.FK__Автомобил__Тип_Т__56E8E7AB" FromRole="Автомобиль" ToRole="Тип_ТС" />
           <NavigationProperty Name="Рейс" Relationship="zhedunov_v50caModel.FK__Рейс__Автомобиль__6EC0713C" FromRole="Автомобиль" ToRole="Рейс" />
+          <NavigationProperty Name="Ремонт" Relationship="zhedunov_v50caModel.FK__Ремонт__Автомоби__2057CCD0" FromRole="Автомобиль" ToRole="Ремонт" />
         </EntityType>
         <Association Name="FK__Автомобил__Тип_Т__56E8E7AB">
           <End Type="zhedunov_v50caModel.Тип_ТС" Role="Тип_ТС" Multiplicity="1" />
@@ -537,6 +602,53 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Ремонт">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Дата_заявки" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="АвтомобильID" Type="Int32" Nullable="false" />
+          <Property Name="Содержание" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Дата_выполнения" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Статус_заявкиID" Type="Int32" Nullable="false" />
+          <Property Name="Стоимость_ремонта" Type="Int32" Nullable="false" />
+          <Property Name="Примечание" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Автомобиль" Relationship="zhedunov_v50caModel.FK__Ремонт__Автомоби__2057CCD0" FromRole="Ремонт" ToRole="Автомобиль" />
+          <NavigationProperty Name="Статус_заявки" Relationship="zhedunov_v50caModel.FK__Ремонт__Статус_з__24285DB4" FromRole="Ремонт" ToRole="Статус_заявки" />
+        </EntityType>
+        <EntityType Name="Статус_заявки">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Статус" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Ремонт" Relationship="zhedunov_v50caModel.FK__Ремонт__Статус_з__24285DB4" FromRole="Статус_заявки" ToRole="Ремонт" />
+        </EntityType>
+        <Association Name="FK__Ремонт__Автомоби__2057CCD0">
+          <End Type="zhedunov_v50caModel.Автомобиль" Role="Автомобиль" Multiplicity="1" />
+          <End Type="zhedunov_v50caModel.Ремонт" Role="Ремонт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Автомобиль">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ремонт">
+              <PropertyRef Name="АвтомобильID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ремонт__Статус_з__24285DB4">
+          <End Type="zhedunov_v50caModel.Статус_заявки" Role="Статус_заявки" Multiplicity="1" />
+          <End Type="zhedunov_v50caModel.Ремонт" Role="Ремонт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Статус_заявки">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ремонт">
+              <PropertyRef Name="Статус_заявкиID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -648,6 +760,28 @@
                 <ScalarProperty Name="Остаток_ГСМ_на_въезде" ColumnName="Остаток ГСМ на въезде" />
                 <ScalarProperty Name="Дата_рейса" ColumnName="Дата рейса" />
                 <ScalarProperty Name="Номер_путевого_листа" ColumnName="Номер путевого листа" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ремонт">
+            <EntityTypeMapping TypeName="zhedunov_v50caModel.Ремонт">
+              <MappingFragment StoreEntitySet="Ремонт">
+                <ScalarProperty Name="Примечание" ColumnName="Примечание" />
+                <ScalarProperty Name="Стоимость_ремонта" ColumnName="Стоимость ремонта" />
+                <ScalarProperty Name="Статус_заявкиID" ColumnName="Статус заявкиID" />
+                <ScalarProperty Name="Дата_выполнения" ColumnName="Дата выполнения" />
+                <ScalarProperty Name="Содержание" ColumnName="Содержание" />
+                <ScalarProperty Name="АвтомобильID" ColumnName="АвтомобильID" />
+                <ScalarProperty Name="Дата_заявки" ColumnName="Дата заявки" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Статус_заявки">
+            <EntityTypeMapping TypeName="zhedunov_v50caModel.Статус_заявки">
+              <MappingFragment StoreEntitySet="Статус заявки">
+                <ScalarProperty Name="Статус" ColumnName="Статус" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

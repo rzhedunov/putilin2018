@@ -182,6 +182,7 @@
     <Compile Include="Controllers\Пункт_доставкиController.cs" />
     <Compile Include="Controllers\Пункты_регулярного_маршрутаController.cs" />
     <Compile Include="Controllers\РейсController.cs" />
+    <Compile Include="Controllers\РемонтController.cs" />
     <Compile Include="Controllers\Тип_ТСController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -231,6 +232,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Рейс.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ремонт.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Статус_заявки.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Тип_ТС.cs">
@@ -367,6 +374,11 @@
     <Content Include="Views\Рейс\Details.cshtml" />
     <Content Include="Views\Рейс\Edit.cshtml" />
     <Content Include="Views\Рейс\Index.cshtml" />
+    <Content Include="Views\Ремонт\Create.cshtml" />
+    <Content Include="Views\Ремонт\Delete.cshtml" />
+    <Content Include="Views\Ремонт\Details.cshtml" />
+    <Content Include="Views\Ремонт\Edit.cshtml" />
+    <Content Include="Views\Ремонт\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

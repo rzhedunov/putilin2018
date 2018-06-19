@@ -750,7 +750,147 @@ namespace Putilin2018.Models
         }
         #endregion
 
+        #region Статус_заявки
+        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        public List<Статус_заявки> GetСтатус_заявки()
+        {
+            var res = new List<Статус_заявки>();
+            var key = "b_Статус_заявки";
 
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (List<Статус_заявки>)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Статус_заявки.ToList();
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public Статус_заявки GetСтатус_заявки(int ID)
+        {
+            var res = new Статус_заявки();
+            var key = "b_Статус_заявки_Статус_заявки" + ID;
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (Статус_заявки)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Статус_заявки.SingleOrDefault(x => x.Id == ID);
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public int SaveСтатус_заявки(Статус_заявки item)
+        {
+            item.Статус= item.Статус.Trim();
+            if (item.Id == 0)
+            {
+                db.SaveChanges();
+            }
+            else
+            {
+                db.Статус_заявки.Attach(db.Статус_заявки.Single(x => x.Id == item.Id));
+                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            CacheManager.PurgeCacheItems("b_Статус_заявки");
+            return item.Id;
+        }
+
+        public bool DeleteСтатус_заявки(int id)
+        {
+            bool res = false;
+            var item = db.Статус_заявки.FirstOrDefault(x => x.Id == id);
+            if (item == null)
+            {
+                db.Статус_заявки.Remove(item);
+                db.SaveChanges();
+                res = true;
+            }
+            CacheManager.PurgeCacheItems("b_Статус_заявки");
+            return res;
+        }
+        #endregion
+
+        #region Ремонт
+        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        public List<Ремонт> GetРемонт()
+        {
+            var res = new List<Ремонт>();
+            var key = "b_Ремонт";
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (List<Ремонт>)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Ремонт.ToList();
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public Ремонт GetРемонт(int ID)
+        {
+            var res = new Ремонт();
+            var key = "b_Ремонт_Ремонт" + ID;
+
+            if (CacheManager.EnableCaching && CacheManager.Cache[key] != null)
+            {
+                res = (Ремонт)CacheManager.Cache[key];
+            }
+            else
+            {
+                res = db.Ремонт.SingleOrDefault(x => x.Id == ID);
+                CacheManager.CacheData(key, res);
+            }
+
+            return res;
+        }
+
+        public int SaveРемонт(Ремонт item)
+        {
+            item.Содержание= item.Содержание.Trim();
+            item.Примечание = item.Примечание.Trim();
+
+            if (item.Id == 0)
+            {
+                db.SaveChanges();
+            }
+            else
+            {
+                db.Ремонт.Attach(db.Ремонт.Single(x => x.Id == item.Id));
+                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            CacheManager.PurgeCacheItems("b_Ремонт");
+            return item.Id;
+        }
+
+        public bool DeleteРемонт(int id)
+        {
+            bool res = false;
+            var item = db.Ремонт.FirstOrDefault(x => x.Id == id);
+            if (item == null)
+            {
+                db.Ремонт.Remove(item);
+                db.SaveChanges();
+                res = true;
+            }
+            CacheManager.PurgeCacheItems("b_Ремонт");
+            return res;
+        }
+        #endregion
 
     }
 }
