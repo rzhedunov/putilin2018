@@ -80,6 +80,13 @@ namespace Putilin2018.Controllers
             {
                 db.Пункты_рейса.Add(пункты_рейса);
                 db.SaveChanges();
+
+                var sender = new SenderOfConfirmationCode();
+                if (sender.hasEMail(пункты_рейса.ПолучательID))
+                {
+                    sender.sendEMail(пункты_рейса.ПолучательID, пункты_рейса.Id, пункты_рейса.УсловныйКод);
+                }
+
                 return RedirectToAction("Index", new { РейсID = @ViewBag.РейсID });
             }
 
@@ -122,6 +129,14 @@ namespace Putilin2018.Controllers
             {
                 db.Entry(пункты_рейса).State = EntityState.Modified;
                 db.SaveChanges();
+
+                var sender = new SenderOfConfirmationCode();
+                if (sender.hasEMail(пункты_рейса.ПолучательID))
+                {
+                    sender.sendEMail(пункты_рейса.ПолучательID, пункты_рейса.Id, пункты_рейса.УсловныйКод);
+                }
+
+
                 return RedirectToAction("Index", new { РейсID = @ViewBag.РейсID });
             }
             ViewBag.ЗадачаID = new SelectList(db.Задача, "Id", "Название_задачи", пункты_рейса.ЗадачаID);
