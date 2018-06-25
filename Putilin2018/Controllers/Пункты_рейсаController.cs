@@ -167,5 +167,14 @@ namespace Putilin2018.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult ConfirmPoint()
+        {
+            ViewBag.Message = "Подтверждение прибытия";
+
+            return View();
+        }
+
+
     }
 }

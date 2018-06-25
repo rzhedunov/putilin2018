@@ -318,6 +318,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="update_arrival_time" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="point_of_race_ID" Type="int" Mode="In" />
+          <Parameter Name="confirmation_code" Type="int" Mode="In" />
+          <Parameter Name="confirmation_time" Type="time" Mode="In" />
+        </Function>
         <EntityContainer Name="Хранилище zhedunov_v50caModelContainer">
           <EntitySet Name="Voditel" EntityType="Self.Voditel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Автомобиль" EntityType="Self.Автомобиль" Schema="dbo" store:Type="Tables" />
@@ -534,6 +539,11 @@
             <End Role="Рейс" EntitySet="Рейс" />
             <End Role="Пункты_рейса" EntitySet="Пункты_рейса" />
           </AssociationSet>
+          <FunctionImport Name="update_arrival_time">
+            <Parameter Name="point_of_race_ID" Mode="In" Type="Int32" />
+            <Parameter Name="confirmation_code" Mode="In" Type="Int32" />
+            <Parameter Name="confirmation_time" Mode="In" Type="Time" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Задача">
           <Key>
@@ -967,6 +977,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="update_arrival_time" FunctionName="Хранилище zhedunov_v50caModel.update_arrival_time" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

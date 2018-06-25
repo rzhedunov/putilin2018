@@ -12,6 +12,8 @@ namespace Putilin2018.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class MyDatabaseEntities : DbContext
     {
@@ -38,5 +40,22 @@ namespace Putilin2018.Models
         public virtual DbSet<Ремонт> Ремонт { get; set; }
         public virtual DbSet<Статус_заявки> Статус_заявки { get; set; }
         public virtual DbSet<Пункты_рейса> Пункты_рейса { get; set; }
+    
+        public virtual int update_arrival_time(Nullable<int> point_of_race_ID, Nullable<int> confirmation_code, Nullable<System.TimeSpan> confirmation_time)
+        {
+            var point_of_race_IDParameter = point_of_race_ID.HasValue ?
+                new ObjectParameter("point_of_race_ID", point_of_race_ID) :
+                new ObjectParameter("point_of_race_ID", typeof(int));
+    
+            var confirmation_codeParameter = confirmation_code.HasValue ?
+                new ObjectParameter("confirmation_code", confirmation_code) :
+                new ObjectParameter("confirmation_code", typeof(int));
+    
+            var confirmation_timeParameter = confirmation_time.HasValue ?
+                new ObjectParameter("confirmation_time", confirmation_time) :
+                new ObjectParameter("confirmation_time", typeof(System.TimeSpan));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("update_arrival_time", point_of_race_IDParameter, confirmation_codeParameter, confirmation_timeParameter);
+        }
     }
 }
