@@ -168,13 +168,23 @@ namespace Putilin2018.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult ConfirmPoint()
+        // GET: Пункты_рейса/SendMark
+        public ActionResult SendMark()
         {
-            ViewBag.Message = "Подтверждение прибытия";
-
             return View();
         }
 
+        // GET: Пункты_рейса/ApplyMark
+        public ActionResult ApplyMark(FormCollection collection)
+        {
+            int id = Convert.ToInt32(collection.Get("markid"));
+            int code = Convert.ToInt32(collection.Get("markcode"));
+
+            var res = db.Database.ExecuteSqlCommand("execute update_arrival_time "+id.ToString() + ", "+ code.ToString());
+
+
+            return View();
+        }
 
     }
 }

@@ -1,0 +1,37 @@
+﻿@*@model Putilin2018.Models.Пункты_рейса*@
+
+@{
+    ViewBag.Title = "SendMark";
+}
+
+<h2>Отправка подтверждения</h2>
+
+@using (Html.BeginForm("ApplyMark", "Пункты_рейса"))
+{
+    <div class="form-horizontal">
+        <h4>Отправить отметку о посещении</h4>
+
+        <div class="form-group">
+            @Html.Label("Номер посещения", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("markid","0")
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Код посещения", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("markcode", "0")
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Отправить" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("На главную", "Home", "Index")
+</div>

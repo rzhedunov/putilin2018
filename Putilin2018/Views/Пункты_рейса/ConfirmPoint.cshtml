@@ -5,9 +5,30 @@
 
 <h2>Подтверждение прибытия</h2>
 
-<form action="/" method="post">
-    <input type="text" name="racepointid" value="0" />
-    <input type="text" name="racepointcode" value="0" />
-    <input type="button" name="submit" />
+<form action="Пункты_рейса/CheckPoint/" method="post">
+    <table>
+        <tr>
+            <td>
+                Код пункта
+            </td>
+            <td>
+                <input type="text" name="racepointid" value="0" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Код подтверждения
+            </td>
+            <td>
+                <input type="text" name="racepointcode" value="0" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" name="submit" value="Отправить" />
+            </td>
+        </tr>
+        
+    </table>
 </form>
 

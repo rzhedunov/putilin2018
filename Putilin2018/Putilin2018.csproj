@@ -394,6 +394,9 @@
     <Content Include="Views\Пункты_рейса\Index.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Пункты_рейса\ConfirmPoint.cshtml" />
+    <Content Include="Views\Пункты_рейса\CheckPoint.cshtml" />
+    <Content Include="Views\Пункты_рейса\SendMark.cshtml" />
+    <Content Include="Views\Пункты_рейса\ApplyMark.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
