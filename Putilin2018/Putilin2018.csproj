@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ViewРасходГСМController.cs" />
     <Compile Include="Controllers\VoditelsController.cs" />
     <Compile Include="Controllers\АвтомобильController.cs" />
     <Compile Include="Controllers\Группы_задачController.cs" />
@@ -209,6 +210,9 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\SendConfirmationCode.cs" />
+    <Compile Include="Models\ViewРасходГСМ.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Voditel.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -398,6 +402,8 @@
     <Content Include="Views\Пункты_рейса\CheckPoint.cshtml" />
     <Content Include="Views\Пункты_рейса\SendMark.cshtml" />
     <Content Include="Views\Пункты_рейса\ApplyMark.cshtml" />
+    <Content Include="Views\ViewРасходГСМ\Index.cshtml" />
+    <Content Include="Views\Home\Reports.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

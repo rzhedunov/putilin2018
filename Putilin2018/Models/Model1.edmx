@@ -138,6 +138,26 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Название типа" Type="nchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "zhedunov_v50ca.dbo.ViewРасходГСМ" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ViewРасходГСМ">
+          <Key>
+            <PropertyRef Name="Название группы" />
+            <PropertyRef Name="Название задачи" />
+            <PropertyRef Name="Дата рейса" />
+            <PropertyRef Name="Расход ГСМ" />
+            <PropertyRef Name="Группа задачID" />
+            <PropertyRef Name="РейсID" />
+            <PropertyRef Name="ЗадачаID" />
+          </Key>
+          <Property Name="Название группы" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Название задачи" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Дата рейса" Type="date" Nullable="false" />
+          <Property Name="Расход ГСМ" Type="int" Nullable="false" />
+          <Property Name="Группа задачID" Type="int" Nullable="false" />
+          <Property Name="РейсID" Type="int" Nullable="false" />
+          <Property Name="ЗадачаID" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK__Автомобил__Тип Т__56E8E7AB">
           <End Role="Тип ТС" Type="Self.Тип ТС" Multiplicity="1" />
           <End Role="Автомобиль" Type="Self.Автомобиль" Multiplicity="*" />
@@ -321,7 +341,6 @@
         <Function Name="update_arrival_time" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="point_of_race_ID" Type="int" Mode="In" />
           <Parameter Name="confirmation_code" Type="int" Mode="In" />
-          <Parameter Name="confirmation_time" Type="time" Mode="In" />
         </Function>
         <EntityContainer Name="Хранилище zhedunov_v50caModelContainer">
           <EntitySet Name="Voditel" EntityType="Self.Voditel" Schema="dbo" store:Type="Tables" />
@@ -337,6 +356,17 @@
           <EntitySet Name="Ремонт" EntityType="Self.Ремонт" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Статус заявки" EntityType="Self.Статус заявки" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Тип ТС" EntityType="Self.Тип ТС" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ViewРасходГСМ" EntityType="Self.ViewРасходГСМ" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewРасходГСМ].[Название группы] AS [Название группы], 
+    [ViewРасходГСМ].[Название задачи] AS [Название задачи], 
+    [ViewРасходГСМ].[Дата рейса] AS [Дата рейса], 
+    [ViewРасходГСМ].[Расход ГСМ] AS [Расход ГСМ], 
+    [ViewРасходГСМ].[Группа задачID] AS [Группа задачID], 
+    [ViewРасходГСМ].[РейсID] AS [РейсID], 
+    [ViewРасходГСМ].[ЗадачаID] AS [ЗадачаID]
+    FROM [dbo].[ViewРасходГСМ] AS [ViewРасходГСМ]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__Автомобил__Тип Т__56E8E7AB" Association="Self.FK__Автомобил__Тип Т__56E8E7AB">
             <End Role="Тип ТС" EntitySet="Тип ТС" />
             <End Role="Автомобиль" EntitySet="Автомобиль" />
@@ -542,8 +572,8 @@
           <FunctionImport Name="update_arrival_time">
             <Parameter Name="point_of_race_ID" Mode="In" Type="Int32" />
             <Parameter Name="confirmation_code" Mode="In" Type="Int32" />
-            <Parameter Name="confirmation_time" Mode="In" Type="Time" />
           </FunctionImport>
+          <EntitySet Name="ViewРасходГСМ" EntityType="zhedunov_v50caModel.ViewРасходГСМ" />
           </EntityContainer>
         <EntityType Name="Задача">
           <Key>
@@ -825,6 +855,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ViewРасходГСМ">
+          <Key>
+            <PropertyRef Name="Название_группы" />
+            <PropertyRef Name="Название_задачи" />
+            <PropertyRef Name="Дата_рейса" />
+            <PropertyRef Name="Расход_ГСМ" />
+            <PropertyRef Name="Группа_задачID" />
+            <PropertyRef Name="РейсID" />
+            <PropertyRef Name="ЗадачаID" />
+          </Key>
+          <Property Name="Название_группы" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Название_задачи" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Дата_рейса" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Расход_ГСМ" Type="Int32" Nullable="false" />
+          <Property Name="Группа_задачID" Type="Int32" Nullable="false" />
+          <Property Name="РейсID" Type="Int32" Nullable="false" />
+          <Property Name="ЗадачаID" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -978,6 +1026,19 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="update_arrival_time" FunctionName="Хранилище zhedunov_v50caModel.update_arrival_time" />
+          <EntitySetMapping Name="ViewРасходГСМ">
+            <EntityTypeMapping TypeName="zhedunov_v50caModel.ViewРасходГСМ">
+              <MappingFragment StoreEntitySet="ViewРасходГСМ">
+                <ScalarProperty Name="ЗадачаID" ColumnName="ЗадачаID" />
+                <ScalarProperty Name="РейсID" ColumnName="РейсID" />
+                <ScalarProperty Name="Группа_задачID" ColumnName="Группа задачID" />
+                <ScalarProperty Name="Расход_ГСМ" ColumnName="Расход ГСМ" />
+                <ScalarProperty Name="Дата_рейса" ColumnName="Дата рейса" />
+                <ScalarProperty Name="Название_задачи" ColumnName="Название задачи" />
+                <ScalarProperty Name="Название_группы" ColumnName="Название группы" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

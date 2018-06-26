@@ -962,6 +962,14 @@ namespace Putilin2018.Models
         }
         #endregion
 
-
+        #region ViewРасходГСМ
+        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        public List<ViewРасходГСМ> GetViewРасходГСМs()
+        {
+            var res = new List<ViewРасходГСМ>();
+            res = db.ViewРасходГСМ.ToList();
+            return res;
+        }
+        #endregion
     }
 }

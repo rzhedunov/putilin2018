@@ -36,5 +36,13 @@ namespace Putilin2018.Controllers
             ViewBag.Message = "Контакты";
             return View();
         }
+
+        public ActionResult Reports()
+        {
+            ViewBag.Message = "Отчеты";
+            return View();
+        }
+
+
     }
 }

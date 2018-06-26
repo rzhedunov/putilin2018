@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Putilin2018.Models.ViewРасходГСМ>
+
+@{
+    ViewBag.Title = "Список рейсов";
+}
+
+<h2>Список рейсов</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<table class="table">
+    <tr>
+        <th>Дата_рейса</th><th>Название_задачи</th><th>Название_группы</th><th>Расход_ГСМ</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Дата_рейса)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Название_задачи)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Название_группы)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Расход_ГСМ)
+        </td>
+
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+        </td>
+    </tr>
+}
+
+</table>
+@Html.ActionLink("К списку отчетов", "Reports", "Home") <br>
