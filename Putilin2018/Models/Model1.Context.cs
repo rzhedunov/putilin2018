@@ -60,5 +60,19 @@ namespace Putilin2018.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Nullable<int>>("[MyDatabaseEntities].[get_last_racenumber]()");
         }
+    
+        [DbFunction("MyDatabaseEntities", "get_cost_report")]
+        public virtual IQueryable<get_cost_report_Result> get_cost_report(Nullable<System.DateTime> date_start, Nullable<System.DateTime> date_end)
+        {
+            var date_startParameter = date_start.HasValue ?
+                new ObjectParameter("date_start", date_start) :
+                new ObjectParameter("date_start", typeof(System.DateTime));
+    
+            var date_endParameter = date_end.HasValue ?
+                new ObjectParameter("date_end", date_end) :
+                new ObjectParameter("date_end", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<get_cost_report_Result>("[MyDatabaseEntities].[get_cost_report](@date_start, @date_end)", date_startParameter, date_endParameter);
+        }
     }
 }

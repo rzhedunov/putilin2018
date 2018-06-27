@@ -137,3 +137,22 @@ BEGIN	-- SET NOCOUNT ON added to prevent extra result sets from
 	return;
 END
 ---------------------------------------------
+create table fuel_cost (
+id int primary key,
+cost float default 0
+)
+insert into fuel_cost values(1, 40);
+select dbo.get_last_fuel_cost()
+----------------------
+create function [dbo].[get_cost_report](
+	@date_start date,
+	@date_end date
+) RETURNS @returnList TABLE(groupname nvarchar(50), taskname nvarchar(50), fuel_paid float, repair_paid float, total_paid float)
+AS
+BEGIN
+insert into @returnList values (N'Группа 1а', N'Задача 1',12,13,14);
+insert into @returnList values (N'Группа 1б', N'Задача 2',22,23,24);
+return;
+END
+select * from dbo.get_cost_report(getdate(), getdate())
+-----------------------

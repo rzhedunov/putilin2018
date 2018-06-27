@@ -11,8 +11,7 @@ namespace Putilin2018.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Voditel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,7 +22,6 @@ namespace Putilin2018.Models
     
         public int Id { get; set; }
         public string fio { get; set; }
-        [DataType(DataType.Date)]
         public System.DateTime license_expire { get; set; }
         public string categories { get; set; }
     

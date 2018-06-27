@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Putilin2018.Models.get_cost_report_Result>
+
+@{
+    ViewBag.Title = "Сводный отчет по стоимости";
+}
+
+<h2>Сводный отчет по стоимости</h2>
+
+<table class="table">
+    @*<tr>
+        <th>
+            <label class="control-label col-md-2">Название автомобиля</label>
+        </th>
+        <th>
+            <label class="control-label col-md-2">Тип</label>
+        </th>
+        <th>
+            <label class="control-label col-md-2">Госномер</label>
+        </th>
+        <th>
+            <label class="control-label col-md-2">Примечание</label>
+        </th>
+
+        <th></th>
+    </tr>*@
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.groupname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.taskname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fuel_paid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.repair_paid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.total_paid)
+            </td>
+        </tr>
+    }
+
+</table>

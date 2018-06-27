@@ -338,6 +338,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="get_cost_report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="date_start" Type="date" Mode="In" />
+          <Parameter Name="date_end" Type="date" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="groupname" Type="nvarchar" MaxLength="50" />
+                <Property Name="taskname" Type="nvarchar" MaxLength="50" />
+                <Property Name="fuel_paid" Type="float" />
+                <Property Name="repair_paid" Type="float" />
+                <Property Name="total_paid" Type="float" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="get_last_racenumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <ReturnType>
             <CollectionType>
@@ -584,6 +599,10 @@
           </FunctionImport>
           <EntitySet Name="ViewРасходГСМ" EntityType="zhedunov_v50caModel.ViewРасходГСМ" />
           <FunctionImport Name="get_last_racenumber" IsComposable="true" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="get_cost_report" IsComposable="true" ReturnType="Collection(zhedunov_v50caModel.get_cost_report_Result)">
+            <Parameter Name="date_start" Mode="In" Type="DateTime" />
+            <Parameter Name="date_end" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Задача">
           <Key>
@@ -883,6 +902,13 @@
           <Property Name="РейсID" Type="Int32" Nullable="false" />
           <Property Name="ЗадачаID" Type="Int32" Nullable="false" />
         </EntityType>
+        <ComplexType Name="get_cost_report_Result">
+          <Property Type="String" Name="groupname" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="taskname" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="fuel_paid" Nullable="true" />
+          <Property Type="Double" Name="repair_paid" Nullable="true" />
+          <Property Type="Double" Name="total_paid" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1050,6 +1076,17 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="get_last_racenumber" FunctionName="Хранилище zhedunov_v50caModel.get_last_racenumber" />
+          <FunctionImportMapping FunctionImportName="get_cost_report" FunctionName="Хранилище zhedunov_v50caModel.get_cost_report">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="zhedunov_v50caModel.get_cost_report_Result">
+                <ScalarProperty Name="groupname" ColumnName="groupname" />
+                <ScalarProperty Name="taskname" ColumnName="taskname" />
+                <ScalarProperty Name="fuel_paid" ColumnName="fuel_paid" />
+                <ScalarProperty Name="repair_paid" ColumnName="repair_paid" />
+                <ScalarProperty Name="total_paid" ColumnName="total_paid" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
