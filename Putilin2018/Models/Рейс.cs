@@ -11,7 +11,8 @@ namespace Putilin2018.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Рейс
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,6 +23,7 @@ namespace Putilin2018.Models
     
         public int Id { get; set; }
         public string Номер_путевого_листа { get; set; }
+        [DataType(DataType.Date)]
         public System.DateTime Дата_рейса { get; set; }
         public int Остаток_ГСМ_на_въезде { get; set; }
         public int Выдано_ГСМ { get; set; }

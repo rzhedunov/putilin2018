@@ -39,6 +39,9 @@ namespace Putilin2018.Controllers
         // GET: Voditels/Create
         public ActionResult Create()
         {
+            ViewBag.RaceDate = "" + DateTime.Now.Year + "-" + (DateTime.Now.Month < 10 ? "0" : "") + DateTime.Now.Month + "-" + (DateTime.Now.Day < 10 ? "0" : "") + DateTime.Now.Day;
+            ViewBag.RaceDate2 = "" + (DateTime.Now.Day < 10 ? "0" : "") + DateTime.Now.Day + "." + (DateTime.Now.Month < 10 ? "0" : "") + DateTime.Now.Month + "." + DateTime.Now.Year;
+
             return View();
         }
 
@@ -71,6 +74,9 @@ namespace Putilin2018.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.RaceDate = "" + voditel.license_expire.Year + "-" + (voditel.license_expire.Month < 10 ? "0" : "") + voditel.license_expire.Month + "-" + (voditel.license_expire.Day < 10 ? "0" : "") + voditel.license_expire.Day;
+            ViewBag.RaceDate2 = "" + (voditel.license_expire.Day < 10 ? "0" : "") + voditel.license_expire.Day + "." + (voditel.license_expire.Month < 10 ? "0" : "") + voditel.license_expire.Month + "." + voditel.license_expire.Year;
+
             return View(voditel);
         }
 

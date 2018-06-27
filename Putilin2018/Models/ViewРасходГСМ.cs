@@ -6,7 +6,6 @@
 //     Изменения, вносимые в этот файл вручную, будут перезаписаны при повторном создании кода.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
 
 namespace Putilin2018.Models
 {
@@ -17,7 +16,6 @@ namespace Putilin2018.Models
     {
         public string Название_группы { get; set; }
         public string Название_задачи { get; set; }
-        [DataType(DataType.Date)]
         public System.DateTime Дата_рейса { get; set; }
         public int Расход_ГСМ { get; set; }
         public int Группа_задачID { get; set; }

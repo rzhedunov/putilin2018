@@ -6,6 +6,26 @@
 
 <h2>Добавить водителя</h2>
 
+<script language="javascript">
+    var options = {
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric'
+    }
+
+    function getDate(str) {
+        var date = new Date(str);
+        return date.toLocaleString('ru', options)
+    }
+
+    function ChangeDate() {
+        var elem = document.getElementById('racedate');
+        var elem2 = document.getElementById('dp1');
+        //elem.textContent = elem2.value;
+        elem.textContent = getDate(elem2.value);
+        //alert(textContent);
+    }
+</script>
 
 @using (Html.BeginForm()) 
 {
@@ -27,7 +47,18 @@
             <label class="control-label col-md-2">Срок действия прав</label>
             <div class="col-md-10">
                 @*@Html.EditorFor(model => model.license_expire, new { htmlAttributes = new { @class = "form-control" } })*@
-                @Html.EditorFor(model => model.license_expire, "{0:dd/MM/yyyy}", new { @class = "form-control", @type = "date" })
+
+                <table border="0">
+                    <tr>
+                        <td width="40"><div id="racedate">@ViewBag.RaceDate2</div></td>
+                        <td>
+                            @Html.EditorFor(model => model.license_expire, new { htmlAttributes = new { @id = "dp1", @class = "form-control", style = "width:70px;", @Value = ViewBag.RaceDate, @onChange = "ChangeDate();" } })
+                        </td>
+                    </tr>
+                </table>
+
+
+                @*@Html.EditorFor(model => model.license_expire, "{0:dd/MM/yyyy}", new { @class = "form-control", @type = "date" })*@
                 @Html.ValidationMessageFor(model => model.license_expire, "", new { @class = "text-danger" })
             </div>
         </div>
