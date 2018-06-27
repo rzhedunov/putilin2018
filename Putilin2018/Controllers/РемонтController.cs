@@ -18,6 +18,7 @@ namespace Putilin2018.Controllers
         public ActionResult Index()
         {
             var ремонт = db.Ремонт.Include(р => р.Автомобиль).Include(р => р.Статус_заявки);
+            ремонт = ремонт.OrderByDescending(s => s.Дата_заявки);
             return View(ремонт.ToList());
         }
 
@@ -54,6 +55,8 @@ namespace Putilin2018.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Дата_заявки,АвтомобильID,Содержание,Дата_выполнения,Статус_заявкиID,Стоимость_ремонта,Примечание")] Ремонт ремонт)
         {
+            ремонт.Содержание = ремонт.Содержание.Trim();
+            ремонт.Примечание = ремонт.Примечание.Trim();
             if (ModelState.IsValid)
             {
                 db.Ремонт.Add(ремонт);
@@ -95,6 +98,8 @@ namespace Putilin2018.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Дата_заявки,АвтомобильID,Содержание,Дата_выполнения,Статус_заявкиID,Стоимость_ремонта,Примечание")] Ремонт ремонт)
         {
+            ремонт.Содержание = ремонт.Содержание.Trim();
+            ремонт.Примечание = ремонт.Примечание.Trim();
             if (ModelState.IsValid)
             {
                 db.Entry(ремонт).State = EntityState.Modified;

@@ -65,6 +65,7 @@ namespace Putilin2018.Controllers
         // GET: Получатель/Edit/5
         public ActionResult Edit(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -85,6 +86,8 @@ namespace Putilin2018.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,ФИО,E_mail,Телефон,Пункт_доставкиID")] Получатель получатель)
         {
+            получатель.Телефон = получатель.Телефон.Trim();
+            получатель.ФИО = получатель.ФИО.Trim();
             if (ModelState.IsValid)
             {
                 db.Entry(получатель).State = EntityState.Modified;

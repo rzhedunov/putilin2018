@@ -117,3 +117,23 @@ BEGIN	-- SET NOCOUNT ON added to prevent extra result sets from
     -- Insert statements for procedure here
 	Update [Пункты рейса] set [Время фактическое]=convert(time(0), getdate()) WHERE [Id]=@point_of_race_ID and [УсловныйКод]=@confirmation_code;
 END
+
+
+-------------------------------------
+USE [zhedunov_v50ca]
+GO
+/****** Object:  UserDefinedFunction [dbo].[get_last_racenumber]    Script Date: 27.06.2018 9:18:43 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER function [dbo].[get_last_racenumber] ()
+
+RETURNS @returnList TABLE(maxval int)
+AS
+BEGIN	-- SET NOCOUNT ON added to prevent extra result sets from
+	insert into @returnList
+	select max(id) from [Рейс];
+	return;
+END
+---------------------------------------------

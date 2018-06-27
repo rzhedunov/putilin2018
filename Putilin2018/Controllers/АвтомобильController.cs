@@ -84,6 +84,10 @@ namespace Putilin2018.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Название_автомобиля,Госномер,Примечание,Тип_ТСID")] Автомобиль автомобиль)
         {
+            автомобиль.Госномер.Trim();
+            автомобиль.Название_автомобиля.Trim();
+            автомобиль.Примечание.Trim();
+
             if (ModelState.IsValid)
             {
                 db.Entry(автомобиль).State = EntityState.Modified;

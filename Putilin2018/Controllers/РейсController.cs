@@ -18,6 +18,7 @@ namespace Putilin2018.Controllers
         public ActionResult Index()
         {
             var рейс = db.Рейс.Include(р => р.Voditel).Include(р => р.Автомобиль).Include(р => р.Задача);
+            рейс = рейс.OrderByDescending(s => s.Номер_путевого_листа);
             return View(рейс.ToList());
         }
 
@@ -104,6 +105,9 @@ namespace Putilin2018.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Номер_путевого_листа,Дата_рейса,Остаток_ГСМ_на_въезде,Выдано_ГСМ,Нач_спидометр,Норма,Пробег,Расход_ГСМ,ВодительID,ЗадачаID,АвтомобильID,Примечание")] Рейс рейс)
         {
+            рейс.Номер_путевого_листа = рейс.Номер_путевого_листа.Trim();
+            рейс.Примечание = рейс.Примечание.Trim();
+
             if (ModelState.IsValid)
             {
                 db.Entry(рейс).State = EntityState.Modified;
