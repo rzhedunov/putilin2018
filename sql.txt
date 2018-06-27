@@ -3,7 +3,7 @@ C:\Users\R20171220\Downloads\SQLEXPRADV_x64_RUS\
 CREATE TABLE [dbo].[Voditel] (
     [Id]             INT        IDENTITY (1, 1) NOT NULL,
     [fio]            NCHAR (50) NOT NULL,
-    [license_expire] DATETIME   NULL,
+    [license_expire] DATE   NULL,
     [categories]     NCHAR (10) DEFAULT ('ABCD') NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
@@ -103,3 +103,17 @@ CREATE TABLE [dbo].[Пункты рейса] (
 	[Время фактическое] time not null default '09:00',	
     [Примечание] NCHAR (100) NOT NULL default '-'     
 );
+
+
+ALTER procedure [dbo].[update_arrival_time] (
+    @point_of_race_ID int,
+    @confirmation_code int
+) 
+AS
+BEGIN	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	Update [Пункты рейса] set [Время фактическое]=convert(time(0), getdate()) WHERE [Id]=@point_of_race_ID and [УсловныйКод]=@confirmation_code;
+END

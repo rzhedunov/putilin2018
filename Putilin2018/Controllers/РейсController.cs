@@ -42,6 +42,15 @@ namespace Putilin2018.Controllers
             ViewBag.RaceDate = "" + DateTime.Now.Year + "-" + (DateTime.Now.Month < 10 ? "0" : "") + DateTime.Now.Month + "-" + (DateTime.Now.Day < 10 ? "0" : "") + DateTime.Now.Day;
             ViewBag.RaceDate2 = "" + (DateTime.Now.Day < 10 ? "0" : "") + DateTime.Now.Day + "." + (DateTime.Now.Month < 10 ? "0" : "") + DateTime.Now.Month + "." + DateTime.Now.Year;
 
+            var maxlist = db.get_last_racenumber();
+
+            int numPL = (int)maxlist.First() + 1;
+            
+            if (numPL<10) ViewBag.NewListNumber = "ПЛ0000" + numPL.ToString();
+            else if (numPL<100) ViewBag.NewListNumber = "ПЛ000" + numPL.ToString();
+            else if (numPL<1000) ViewBag.NewListNumber = "ПЛ00" + numPL.ToString();
+            else if (numPL<10000) ViewBag.NewListNumber = "ПЛ0" + numPL.ToString();
+
             ViewBag.ВодительID = new SelectList(db.Voditel, "Id", "fio");
             ViewBag.АвтомобильID = new SelectList(db.Автомобиль, "Id", "Название_автомобиля");
             ViewBag.ЗадачаID = new SelectList(db.Задача, "Id", "Название_задачи");

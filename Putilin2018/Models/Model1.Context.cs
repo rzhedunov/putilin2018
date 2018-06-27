@@ -54,5 +54,11 @@ namespace Putilin2018.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("update_arrival_time", point_of_race_IDParameter, confirmation_codeParameter);
         }
+    
+        [DbFunction("MyDatabaseEntities", "get_last_racenumber")]
+        public virtual IQueryable<Nullable<int>> get_last_racenumber()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Nullable<int>>("[MyDatabaseEntities].[get_last_racenumber]()");
+        }
     }
 }

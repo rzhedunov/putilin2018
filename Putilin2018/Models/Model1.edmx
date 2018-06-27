@@ -11,7 +11,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fio" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="license_expire" Type="date" />
+          <Property Name="license_expire" Type="date" Nullable="false" />
           <Property Name="categories" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Автомобиль">
@@ -338,6 +338,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="get_last_racenumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="maxval" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="update_arrival_time" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="point_of_race_ID" Type="int" Mode="In" />
           <Parameter Name="confirmation_code" Type="int" Mode="In" />
@@ -438,7 +447,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="fio" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="license_expire" Type="DateTime" Precision="0" />
+          <Property Name="license_expire" Type="DateTime" Precision="0" Nullable="false" />
           <Property Name="categories" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Рейс" Relationship="zhedunov_v50caModel.FK__Рейс__ВодительID__6CD828CA" FromRole="Voditel" ToRole="Рейс" />
         </EntityType>
@@ -574,6 +583,7 @@
             <Parameter Name="confirmation_code" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="ViewРасходГСМ" EntityType="zhedunov_v50caModel.ViewРасходГСМ" />
+          <FunctionImport Name="get_last_racenumber" IsComposable="true" ReturnType="Collection(Int32)" />
           </EntityContainer>
         <EntityType Name="Задача">
           <Key>
@@ -1039,6 +1049,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="get_last_racenumber" FunctionName="Хранилище zhedunov_v50caModel.get_last_racenumber" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

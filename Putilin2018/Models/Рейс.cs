@@ -23,6 +23,7 @@ namespace Putilin2018.Models
     
         public int Id { get; set; }
         public string Номер_путевого_листа { get; set; }
+
         [DataType(DataType.Date)]
         public System.DateTime Дата_рейса { get; set; }
         public int Остаток_ГСМ_на_въезде { get; set; }
