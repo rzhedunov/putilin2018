@@ -4,7 +4,7 @@
     ViewBag.Title = "Список рейсов";
 }
 
-<h2>Список рейсов</h2>
+<h2>Список рейсов c @ViewBag.date_start по @ViewBag.date_start</h2>
 
 <p>
     @*@Html.ActionLink("Create New", "Create")*@
@@ -36,6 +36,13 @@
         </td>
     </tr>
 }
-
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>@ViewBag.sum</th>
+    </tr>
 </table>
 @Html.ActionLink("К списку отчетов", "Reports", "Home") <br>
+
+

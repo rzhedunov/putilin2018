@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Выбор  периода";
+}
+
+<h2>Выбор  периода</h2>
+
+@using (Html.BeginForm("Index", "ViewРасходГСМ", FormMethod.Post))
+{
+    @*<input type="hidden" value="@ViewBag.BookId" name="BookId" />*@
+    <table>
+        <tr>
+            <td><p>Начало периода: </p></td>
+            <td><input type="date" name="date_start" value="@ViewBag.date_start"/> </td>
+        </tr>
+        <tr>
+            <td><p>Окончание периода:</p></td>
+            <td><input type="date" name="date_end" value="@ViewBag.date_end"/> </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Вывести отчет" /> </td>
+            <td></td>
+        </tr>
+    </table>
+}
+
