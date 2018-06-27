@@ -5,8 +5,15 @@
 }
 
 <h2>Удалить водителя</h2>
-
+@if (ViewBag.AllowDelete == 1)
+{
 <h3>Вы уверены, что хотите удалить запись?</h3>
+}
+else
+{
+    <h3>Нельзя удалить запись! У водителя есть рейсы. </h3>
+}
+
 <div>
     <h4>Водитель</h4>
     <hr />
@@ -41,7 +48,10 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @if (ViewBag.AllowDelete == 1) {
+            <input type="submit" value="Удалить" class="btn btn-default" />
+            } 
+
             @Html.ActionLink("Вернуться к списку", "Index")
         </div>
     }

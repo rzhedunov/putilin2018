@@ -101,6 +101,9 @@ namespace Putilin2018.Controllers
         // GET: Voditels/Delete/5
         public ActionResult Delete(int? id)
         {
+
+            
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -110,6 +113,11 @@ namespace Putilin2018.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.AllowDelete = 1;
+            var РейсыВодителя = db.Рейс.Where(x =>(x.ВодительID == (int)id));
+            if (РейсыВодителя.Count() > 0) { ViewBag.AllowDelete = 0; }
+
             return View(voditel);
         }
 
