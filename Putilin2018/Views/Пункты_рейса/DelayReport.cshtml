@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Putilin2018.Models.Пункты_рейса>
+
+@{
+    ViewBag.Title = "Список отклонений от графика рейса";
+}
+
+<h2>Список отклонений от графика рейса</h2>
+
+<p>№ путевого листа: @ViewBag.ПЛ</p>
+<p>Дата рейса: @ViewBag.ДатаРейса</p>
+<p>Водитель: @ViewBag.Водитель</p>
+<p>Автомобиль: @ViewBag.Автомобиль</p>
+<p>Госномер: @ViewBag.Госномер</p>
+
+
+
+<p>
+    @*@Html.ActionLink("Добавить", "Create", new { РейсID = @ViewBag.РейсID })*@
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Время_плановое)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.УсловныйКод)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Время_фактическое)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Примечание)
+        </th>
+        <th>
+            <label class="control-label col-md-2">Получатель</label>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Пункт_доставки.Название_пункта)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Время_плановое)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.УсловныйКод)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Время_фактическое)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Примечание)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Получатель.ФИО)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Пункт_доставки.Название_пункта)
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+<p>@ViewBag.Message2</p>
+
+<p>
+    @Html.ActionLink("Вернуться к списку рейсов", "Index", "Рейс")
+</p>

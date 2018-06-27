@@ -201,5 +201,37 @@ namespace Putilin2018.Controllers
             return View();
         }
 
+        // GET: Пункты_рейса
+        public ActionResult DelayReport(int? РейсID, DateTime ДатаРейса, String Водитель, String Автомобиль, String ПЛ, String Госномер)
+        {
+            var пункты_рейса = db.Пункты_рейса.Include(п => п.Задача).Include(п => п.Получатель).Include(п => п.Пункт_доставки).Include(п => п.Рейс);
+            if (РейсID != null && РейсID != 0)
+            {
+                пункты_рейса = пункты_рейса.Where(p => p.РейсID == РейсID);
+                ViewBag.РейсID = РейсID;
+            }
+            else
+            {
+                пункты_рейса = пункты_рейса.Where(p => p.РейсID == -1);
+            }
+
+            if (пункты_рейса.Count() > 0)
+            {
+                ViewBag.Message2 = "Всего пунктов в рейсе: " + пункты_рейса.Count().ToString();
+            }
+            else
+            {
+                ViewBag.Message2 = "Нет пунктов рейса! ";
+            }
+
+            ViewBag.ДатаРейса = ДатаРейса.ToShortDateString();
+            ViewBag.Водитель = Водитель;
+            ViewBag.Автомобиль = Автомобиль;
+            ViewBag.ПЛ = ПЛ;
+            ViewBag.Госномер = Госномер;
+
+            return View(пункты_рейса.ToList());
+        }
+
     }
 }

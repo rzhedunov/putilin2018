@@ -92,7 +92,8 @@
             @Html.ActionLink("Изменить", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Данные", "Details", new { id=item.Id }) |
             @Html.ActionLink("Удалить", "Delete", new { id = item.Id }) |
-            @Html.ActionLink("Маршрут", "Index", "Пункты_рейса", new { РейсID = item.Id }, new { target = "_blank" })
+            @Html.ActionLink("Маршрут", "Index", "Пункты_рейса", new { РейсID = item.Id }, new { target = "_blank" }) |
+            @Html.ActionLink("Задержки", "DelayReport", "Пункты_рейса", new { РейсID = item.Id, ДатаРейса = item.Дата_рейса, Водитель = item.Voditel.fio, Автомобиль = item.Автомобиль.Название_автомобиля, ПЛ = item.Номер_путевого_листа, Госномер = item.Автомобиль.Госномер }, new { target = "_blank" }) 
         </td>
     </tr>
 }

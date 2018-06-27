@@ -411,6 +411,8 @@
     <Content Include="Views\Home\Reports.cshtml" />
     <Content Include="Views\CostReport\Index.cshtml" />
     <Content Include="Views\ViewРасходГСМ\ChoosePeriod.cshtml" />
+    <Content Include="Views\CostReport\ChoosePeriod.cshtml" />
+    <Content Include="Views\Пункты_рейса\DelayReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

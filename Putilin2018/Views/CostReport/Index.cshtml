@@ -4,25 +4,27 @@
     ViewBag.Title = "Сводный отчет по стоимости";
 }
 
-<h2>Сводный отчет по стоимости</h2>
+<h2>Сводный отчет по стоимости c @ViewBag.date_start по @ViewBag.date_start</h2>
 
 <table class="table">
-    @*<tr>
-        <th>
-            <label class="control-label col-md-2">Название автомобиля</label>
-        </th>
-        <th>
-            <label class="control-label col-md-2">Тип</label>
-        </th>
-        <th>
-            <label class="control-label col-md-2">Госномер</label>
-        </th>
-        <th>
-            <label class="control-label col-md-2">Примечание</label>
-        </th>
-
-        <th></th>
-    </tr>*@
+        <tr>
+            <th>
+                <label class="control-label col-md-2">Группа задач</label>
+            </th>
+            <th>
+                <label class="control-label col-md-2">Задача</label>
+            </th>
+            <th>
+                <label class="control-label col-md-2">Стоимость ГСМ</label>
+            </th>
+            <th>
+                <label class="control-label col-md-2">Стоимость ремонтов</label>
+            </th>
+            <th>
+                <label class="control-label col-md-2">Общая стоимость</label>
+            </th>
+            <th></th>
+        </tr>
 
     @foreach (var item in Model)
     {
@@ -43,6 +45,14 @@
                 @Html.DisplayFor(modelItem => item.total_paid)
             </td>
         </tr>
-    }
 
+
+    }
+    <tr>
+        <th></th>
+        <th></th>
+        <th>@ViewBag.sum3</th>
+        <th>@ViewBag.sum4</th>
+        <th>@ViewBag.sum5</th>
+    </tr>
 </table>
