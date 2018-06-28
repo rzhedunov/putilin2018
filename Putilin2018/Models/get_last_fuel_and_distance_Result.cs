@@ -10,18 +10,11 @@
 namespace Putilin2018.Models
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class ViewРасходГСМ
+    
+    public partial class get_last_fuel_and_distance_Result
     {
-        public string Название_группы { get; set; }
-        public string Название_задачи { get; set; }
-        [DataType(DataType.Date)]
-        public System.DateTime Дата_рейса { get; set; }
-        public int Расход_ГСМ { get; set; }
-        public int Группа_задачID { get; set; }
-        public int РейсID { get; set; }
-        public int ЗадачаID { get; set; }
+        public Nullable<int> autoid { get; set; }
+        public Nullable<double> fuel { get; set; }
+        public Nullable<int> distance { get; set; }
     }
 }

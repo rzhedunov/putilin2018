@@ -25,7 +25,61 @@
         elem.textContent = getDate(elem2.value);
         //alert(textContent);
     }
+
+    function GetFuel(autoid) {
+        var array1 = [];
+        var array2 = [];
+        n = 0;
+        @{
+            foreach (var item in ViewBag.autos)
+            {
+                //<text> alert("@item.fuel"); </text>
+                <text> array1[n] = @item.autoid; array2[n++] = @item.fuel; </text>
+            }
+        }
+
+        for (i=0; i<n; i++)
+            if (array1[i] == autoid){
+                return array2[i];
+            }
+        return -1;
+    }
+
+    function GetDistance(autoid) {
+        var array1 = [];
+        var array2 = [];
+        n = 0;
+        @{
+            foreach (var item in ViewBag.autos)
+            {
+                //<text> alert("@item.fuel"); </text>
+                <text> array1[n] = @item.autoid; array2[n++] = @item.distance; </text>
+            }
+        }
+
+        for (i=0; i<n; i++)
+            if (array1[i] == autoid){
+                return array2[i];
+            }
+        return -1;
+    }
+
+    function SetFuelAndDistance() {
+        var elem = document.getElementById('autolist');
+        var autoid = elem.value;
+
+        var elem2 = document.getElementById('fuel');
+        var elem3 = document.getElementById('distance');
+
+        elem2.value = GetFuel(autoid);
+        elem3.value = GetDistance(autoid);
+    }
 </script>
+
+
+
+
+
 
 @using (Html.BeginForm()) 
 {
@@ -42,15 +96,6 @@
                 @Html.ValidationMessageFor(model => model.Номер_путевого_листа, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Дата_рейса, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Дата_рейса, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Дата_рейса, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
 
         <div class="form-group">
             @Html.LabelFor(model => model.Дата_рейса, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -70,7 +115,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Остаток_ГСМ_на_въезде, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Остаток_ГСМ_на_въезде, new { htmlAttributes = new { @class = "form-control", @Value = "0" } })
+                @Html.EditorFor(model => model.Остаток_ГСМ_на_въезде, new { htmlAttributes = new { @id = "fuel", @class = "form-control"} })
                 @Html.ValidationMessageFor(model => model.Остаток_ГСМ_на_въезде, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -86,7 +131,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Нач_спидометр, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Нач_спидометр, new { htmlAttributes = new { @class = "form-control", @Value = "0" } })
+                @Html.EditorFor(model => model.Нач_спидометр, new { htmlAttributes = new { @id = "distance", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Нач_спидометр, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -134,7 +179,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.АвтомобильID, "АвтомобильID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("АвтомобильID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("АвтомобильID", null, htmlAttributes: new { @id = "autolist", @class = "form-control", @onChange = "SetFuelAndDistance();" })
                 @Html.ValidationMessageFor(model => model.АвтомобильID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -158,6 +203,11 @@
 <div>
     @Html.ActionLink("Вернуться к списку", "Index")
 </div>
+
+
+
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

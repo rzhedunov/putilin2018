@@ -74,5 +74,11 @@ namespace Putilin2018.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<get_cost_report_Result>("[MyDatabaseEntities].[get_cost_report](@date_start, @date_end)", date_startParameter, date_endParameter);
         }
+    
+        [DbFunction("MyDatabaseEntities", "get_last_fuel_and_distance")]
+        public virtual IQueryable<get_last_fuel_and_distance_Result> get_last_fuel_and_distance()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<get_last_fuel_and_distance_Result>("[MyDatabaseEntities].[get_last_fuel_and_distance]()");
+        }
     }
 }

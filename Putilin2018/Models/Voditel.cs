@@ -23,7 +23,6 @@ namespace Putilin2018.Models
     
         public int Id { get; set; }
         public string fio { get; set; }
-
         [DataType(DataType.Date)]
         public System.DateTime license_expire { get; set; }
         public string categories { get; set; }

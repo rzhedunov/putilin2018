@@ -353,6 +353,17 @@
             </CollectionType>
           </ReturnType>
         </Function>
+        <Function Name="get_last_fuel_and_distance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="autoid" Type="int" />
+                <Property Name="fuel" Type="float" />
+                <Property Name="distance" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="get_last_racenumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <ReturnType>
             <CollectionType>
@@ -603,6 +614,7 @@
             <Parameter Name="date_start" Mode="In" Type="DateTime" />
             <Parameter Name="date_end" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="get_last_fuel_and_distance" IsComposable="true" ReturnType="Collection(zhedunov_v50caModel.get_last_fuel_and_distance_Result)" />
           </EntityContainer>
         <EntityType Name="Задача">
           <Key>
@@ -909,6 +921,11 @@
           <Property Type="Double" Name="repair_paid" Nullable="true" />
           <Property Type="Double" Name="total_paid" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="get_last_fuel_and_distance_Result">
+          <Property Type="Int32" Name="autoid" Nullable="true" />
+          <Property Type="Double" Name="fuel" Nullable="true" />
+          <Property Type="Int32" Name="distance" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1084,6 +1101,15 @@
                 <ScalarProperty Name="fuel_paid" ColumnName="fuel_paid" />
                 <ScalarProperty Name="repair_paid" ColumnName="repair_paid" />
                 <ScalarProperty Name="total_paid" ColumnName="total_paid" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="get_last_fuel_and_distance" FunctionName="Хранилище zhedunov_v50caModel.get_last_fuel_and_distance">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="zhedunov_v50caModel.get_last_fuel_and_distance_Result">
+                <ScalarProperty Name="autoid" ColumnName="autoid" />
+                <ScalarProperty Name="fuel" ColumnName="fuel" />
+                <ScalarProperty Name="distance" ColumnName="distance" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -16,16 +16,11 @@ namespace Putilin2018.Models
     public partial class Ремонт
     {
         public int Id { get; set; }
-
         [DataType(DataType.Date)]
-
         public System.DateTime Дата_заявки { get; set; }
         public int АвтомобильID { get; set; }
         public string Содержание { get; set; }
-
-
         [DataType(DataType.Date)]
-
         public System.DateTime Дата_выполнения { get; set; }
         public int Статус_заявкиID { get; set; }
         public int Стоимость_ремонта { get; set; }

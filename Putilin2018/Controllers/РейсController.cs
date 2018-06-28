@@ -42,8 +42,10 @@ namespace Putilin2018.Controllers
         {
             ViewBag.RaceDate = "" + DateTime.Now.Year + "-" + (DateTime.Now.Month < 10 ? "0" : "") + DateTime.Now.Month + "-" + (DateTime.Now.Day < 10 ? "0" : "") + DateTime.Now.Day;
             ViewBag.RaceDate2 = "" + (DateTime.Now.Day < 10 ? "0" : "") + DateTime.Now.Day + "." + (DateTime.Now.Month < 10 ? "0" : "") + DateTime.Now.Month + "." + DateTime.Now.Year;
-
+            
             var maxlist = db.get_last_racenumber();
+            var autos = db.get_last_fuel_and_distance();
+            ViewBag.autos = autos;
 
             int numPL = (int)maxlist.First() + 1;
             
