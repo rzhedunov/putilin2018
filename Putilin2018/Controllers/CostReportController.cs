@@ -39,11 +39,9 @@ namespace Putilin2018.Controllers
             ViewBag.sum3 = sum3;
             ViewBag.sum4 = sum4;
             ViewBag.sum5 = sum5;
+            reportdata.OrderBy(x =>x.groupname);
 
-
-            
-
-            return View(reportdata.ToList());
+            return View(reportdata.ToList().OrderBy(x => x.groupname));
         }
 
         public ActionResult ChoosePeriod()

@@ -17,7 +17,7 @@ namespace Putilin2018.Controllers
             return View();
         }
 
-        [Authorize(Users = "admin@mail.ru")]
+        [Authorize(Users = "admin@mail.ru, boss@mail.ru")]
         public ActionResult Menu()
         {
             ViewBag.Message = "Меню приложения";
@@ -37,6 +37,7 @@ namespace Putilin2018.Controllers
             return View();
         }
 
+        [Authorize(Users = "admin@mail.ru, boss@mail.ru")]
         public ActionResult Reports()
         {
             ViewBag.Message = "Отчеты";

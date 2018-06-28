@@ -35,13 +35,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.taskname)
             </td>
-            <td>
+            <td align="right">
                 @Html.DisplayFor(modelItem => item.fuel_paid)
             </td>
-            <td>
+            <td align="right">
                 @Html.DisplayFor(modelItem => item.repair_paid)
             </td>
-            <td>
+            <td align="right">
                 @Html.DisplayFor(modelItem => item.total_paid)
             </td>
         </tr>
@@ -49,10 +49,12 @@
 
     }
     <tr>
-        <th></th>
-        <th></th>
-        <th>@ViewBag.sum3</th>
-        <th>@ViewBag.sum4</th>
-        <th>@ViewBag.sum5</th>
+        
+        <td></td>
+        <td></td>
+        <td align="right"><strong>@ViewBag.sum3 </strong></td>
+        <td align="right"><strong>@ViewBag.sum4 </strong></td>
+        <td align="right"><strong>@ViewBag.sum5 </strong></td>
+        
     </tr>
 </table>

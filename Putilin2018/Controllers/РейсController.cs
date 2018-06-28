@@ -52,6 +52,8 @@ namespace Putilin2018.Controllers
             else if (numPL<1000) ViewBag.NewListNumber = "ПЛ00" + numPL.ToString();
             else if (numPL<10000) ViewBag.NewListNumber = "ПЛ0" + numPL.ToString();
 
+
+
             ViewBag.ВодительID = new SelectList(db.Voditel, "Id", "fio");
             ViewBag.АвтомобильID = new SelectList(db.Автомобиль, "Id", "Название_автомобиля");
             ViewBag.ЗадачаID = new SelectList(db.Задача, "Id", "Название_задачи");

@@ -104,7 +104,7 @@ CREATE TABLE [dbo].[Пункты рейса] (
     [Примечание] NCHAR (100) NOT NULL default '-'     
 );
 
-
+-------------------------------------
 ALTER procedure [dbo].[update_arrival_time] (
     @point_of_race_ID int,
     @confirmation_code int
@@ -115,8 +115,9 @@ BEGIN	-- SET NOCOUNT ON added to prevent extra result sets from
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	Update [Пункты рейса] set [Время фактическое]=convert(time(0), getdate()) WHERE [Id]=@point_of_race_ID and [УсловныйКод]=@confirmation_code;
+	Update [Пункты рейса] set [Время фактическое]=convert(time(0), dateadd(hour,1, getdate())) WHERE [Id]=@point_of_race_ID and [УсловныйКод]=@confirmation_code;
 END
+--------------------------
 
 
 -------------------------------------
@@ -156,3 +157,66 @@ return;
 END
 select * from dbo.get_cost_report(getdate(), getdate())
 -----------------------
+Новая версия
+USE [zhedunov_v50ca]
+GO
+/****** Object:  UserDefinedFunction [dbo].[get_cost_report]    Script Date: 28.06.2018 10:08:31 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER function [dbo].[get_cost_report](
+	@date_start date,
+	@date_end date
+) RETURNS @returnList TABLE(groupname nvarchar(50), taskname nvarchar(50), fuel_paid float, repair_paid float, total_paid float)
+AS
+BEGIN
+	set @date_end = dateadd(day, 1, @date_end);
+	
+	--составляем таблицу стоимости ГСМ и ремонтов по рейсам	
+	declare @racetable TABLE(raceid int, autoid int, taskid int, racefuelcost float, raceautocnt int, autorepaircost float, racerepaircost float);
+	insert into @racetable
+	select р.Id, 
+		р.АвтомобильID, 
+		р.ЗадачаID, 
+		0.0 + р.[Расход ГСМ] * dbo.get_last_fuel_cost(),
+		(select count(*) from Рейс р2 where р2.[Дата рейса]>@date_start and р2.[Дата рейса]<@date_end and р2.АвтомобильID = р.АвтомобильID),
+		0.0 + isnull((select sum(рм.[Стоимость ремонта]) from [Ремонт] рм where рм.[Дата выполнения]>@date_start and рм.[Дата выполнения]<@date_end and рм.АвтомобильID = р.АвтомобильID), 0.0),
+		(0.0 + isnull((select sum(рм.[Стоимость ремонта]) from [Ремонт] рм where рм.[Дата выполнения]>@date_start and рм.[Дата выполнения]<@date_end and рм.АвтомобильID = р.АвтомобильID), 0.0))/(select count(*) from Рейс р2 where р2.[Дата рейса]>@date_start and р2.[Дата рейса]<@date_end and р2.АвтомобильID = р.АвтомобильID)
+	from [Рейс] р
+	where р.[Дата рейса]>@date_start and р.[Дата рейса]<@date_end
+
+	--Основная таблица отчета - заполнение и длина
+	declare @reporttable TABLE(groupname nvarchar(50), taskname nvarchar(50), fuelcost float, repaircost float, totalcost float);
+	insert into @reporttable
+	select г.[Название группы], 
+		з.[Название задачи], 
+		round(isnull((select sum(racefuelcost) from @racetable r2 where r2.taskid = з.Id),0.0),2)   'fuelcost',
+		round(isnull((select sum(racerepaircost) from @racetable r2 where r2.taskid = з.Id),0.0),2) 'repaircost',
+		round(isnull((select sum(racefuelcost) from @racetable r2 where r2.taskid = з.Id),0.0) + isnull((select sum(racerepaircost) from @racetable r2 where r2.taskid = з.Id),0.0),2) 'totalcost'
+	from [Группы задач] г, Задача з
+	where г.Id = з.[Группа задачID] order by г.[Название группы], з.[Название задачи]
+
+	insert into @returnList 
+	select * from @reporttable order by groupname, taskname;
+
+return;
+END
+------------------------
+
+create function [dbo].[get_last_fuel_and distance]() 
+RETURNS @returnList TABLE(autoid int, fuel float, distance int)
+AS
+BEGIN
+
+insert into @returnList
+select  
+a.id,
+isnull((select sum(р1.[Остаток ГСМ на въезде]+р1.[Выдано ГСМ]-р1.[Расход ГСМ]) from Рейс р1 
+	where р1.АвтомобильID = a.Id and р1.id in (select max(р2.id) from Рейс р2 where р1.АвтомобильID=р2.АвтомобильID)),0),
+isnull((select sum(р1.Пробег) from Рейс р1 
+	where р1.АвтомобильID = a.Id and р1.id in (select max(р2.id) from Рейс р2 where р1.АвтомобильID=р2.АвтомобильID)),-1)
+from [Автомобиль] a;
+return;
+END
+------------------------------------------------------

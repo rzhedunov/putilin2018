@@ -1,34 +1,116 @@
 ﻿@{
-    ViewBag.Title = "Интернет-система логистических процессов автопарка администрации муниципального образования";
+    Layout = "";
 }
 
-@*<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>*@
-<h2>Назначение информационной системы: </h2>
-<div class="row">
-    <div class="col-md-4">
-        
-        <p>
-            1)	снижение объема рутинных и трудоемких операций по обработке данных, связанных с учетом и анализом 
-            перевозок автопарка администрации муниципального образования.
-        </p>
-        
-    </div>
-    <div class="col-md-4">
 
-        <p>2)	повышение уровня информационной культуры органа управления муниципального образования</p>
-        
-    </div>
-    
- 
-</div>
 
-<div class="row">
-    @*<p><a href="http://localhost:61820/Home/Menu" class="btn btn-primary btn-lg">Перейти к использованию системы &raquo;</a></p>*@
-    <p><a href="/Home/Menu" class="btn btn-primary btn-lg">Перейти к использованию системы &raquo;</a></p>
-    <p><a href="/Пункты_рейса/SendMark" class="btn btn-primary btn-lg">Ввести код прибытия &raquo;</a></p>
-    
-</div>
+
+@{
+    ViewBag.Title = "Интернет-система логистических процессов автопарка администрации муниципального образования";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title – приложение ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        body {
+            background-image: url(images/auto.jpg); /* Путь к фоновому изображению */
+            background-size: cover; /* РАстянуть  по   ширине */
+            background-position: top center;
+            background-color: #928B85; /* Цвет фона #c7b39b;*/
+            background-repeat: no-repeat;
+        }
+        h2,p{
+            color: white;
+            font: bold;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("На главную", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Меню", "Menu", "Home")</li>
+                    <li>@Html.ActionLink("О программе", "About", "Home")</li>
+                    <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+
+
+
+
+    @*<div class="jumbotron">
+            <h1>ASP.NET</h1>
+            <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+            <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+        </div>*@
+
+
+    @*<div class="row">
+            <div class="col-md-4">
+
+                <p>
+                    1)	снижение объема рутинных и трудоемких операций по обработке данных, связанных с учетом и анализом
+                    перевозок автопарка администрации муниципального образования.
+                </p>
+
+            </div>
+            <div class="col-md-4">
+
+                <p>2)	повышение уровня информационной культуры органа управления муниципального образования</p>
+
+            </div>
+
+
+        </div>*@
+
+
+
+
+
+
+
+
+
+
+    <div class="container body-content">
+
+        <h2 >Интернет-система логистических процессов автопарка администрации муниципального образования. </h2>
+        <div class="row">
+            @*<p><a href="http://localhost:61820/Home/Menu" class="btn btn-primary btn-lg">Перейти к использованию системы &raquo;</a></p>*@
+            <p><a href="/Home/Menu" class="btn btn-primary btn-lg">Перейти к использованию системы &raquo;</a></p>
+            <p><a href="/Пункты_рейса/SendMark" class="btn btn-primary btn-lg">Ввести код прибытия &raquo;</a></p>
+
+        </div>
+
+        <hr />
+        <footer>
+            <p >&copy;Интернет-система логистических процессов автопарка администрации муниципального образования. @DateTime.Now.Year</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @*@RenderSection("scripts", required: false)*@
+</body>
+</html>
